@@ -1,10 +1,39 @@
 {% extends "_base.html" %}
- 
+ {% load static %}
 {% block content %}
-      <h1 class="text-3xl text-primary-950">
-          GeeksforGeeks
-    </h1>
-      <h3 class="text-xl text-secondary bg-primary-900">
-          GeeksforGeeks
-    </h3>
+     <div class="h-screen w-screen" style="background: rgb(3,140,87); background: linear-gradient(15deg, rgba(3,140,87,0.8) 0%, rgba(241,241,241,1) 60%);">
+        <header class="flex items-center justify-around py-3 font-bold border-b-2 border-solid ">
+            <div>
+                <a href="#" class="flex items-center text-2xl font-bold ">
+                    <img src="{% static 'src/images/logo.png' %}" alt="greendigit" class="w-12 h-12">
+                    Green<span class="text-primary-900">Digit</span>
+                </a>
+            </div>
+            <div>
+                <nav>
+                    <ul>
+                        <li></li>
+                    </ul>
+                </nav>
+            </div>
+            <div>
+                <a href="#" class="bg-primary-700 text-center p-3 rounded-lg text-white">Se Connecter</a>
+            </div>
+        </header>
+        <div class="mx-4">
+            <section class="absolute text-center top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
+                <img src="{% static 'src/images/logo.png' %}" alt="Logo Greendigit" class="max-w-sm">
+                <h1 class="text-6xl font-black w-screen flex flex-col gap-x-5">
+                    <div>Connectons</div>
+                    <div>
+                        <span class="text-primary-800">Agriculteurs </span><span>&</span><span class="text-primary-800"> Consommateurs</span>
+                    </div>
+                </h1>
+                <p class="font-bold my-6">Achetez des produits agricoles frais et authentiques</p>
+                <div>
+                    <a href="#" class="bg-primary-800 text-white font-bold p-3 rounded-lg">Aller sur GreenMarket</a>
+                </div>
+            </section>
+        </div>
+     </div>
 {% endblock content %}
