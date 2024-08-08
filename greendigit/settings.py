@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    'users',
 
     'compressor',
     'livereload',
@@ -45,6 +47,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    
 ]
 
 MIDDLEWARE = [
@@ -144,6 +147,8 @@ STATICFILES_FINDERS = ('compressor.finders.CompressorFinder',)
 
 
 # Auth with Allauth
+AUTH_USER_MODEL = 'users.CustomUser'
+
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`
     'django.contrib.auth.backends.ModelBackend',
@@ -151,10 +156,15 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
+ACCOUNT_FORMS = {
+    'signup': 'users.forms.CustomSignupForm',
+}
 
 LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL='index'
-ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
@@ -164,8 +174,6 @@ ACCOUNT_LOGIN_ON_PASSWORD_RESET = True
 ACCOUNT_LOGOUT_REDIRECT_URL = '/accounts/login/'
 ACCOUNT_PRESERVE_USERNAME_CASING = False
 ACCOUNT_SESSION_REMEMBER = None
-ACCOUNT_USERNAME_BLACKLIST = ['admin', 'rudex', 'roirude','god', 'administrator']
-ACCOUNT_USERNAME_MIN_LENGTH = 3
 
 
 # Email configuration
