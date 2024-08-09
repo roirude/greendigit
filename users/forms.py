@@ -35,7 +35,7 @@ class CustomSignupForm(SignupForm):
         if 'user_type' in request.session:
             del request.session['user_type']
             
-        user.group.add(group)   
+        user.groups.add(group)   
         user.save()
         return user
     

@@ -15,7 +15,7 @@ def set_user_type_on_signup(request, user, **kwargs):
         user.is_farmer = False
         group = Group.objects.get_or_create(name='Consumers')
         
-    user.group.add(group)
+    user.groups.add(group)
     user.save()
     
     if 'user_type' in request.session:
