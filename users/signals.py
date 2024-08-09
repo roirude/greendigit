@@ -1,4 +1,5 @@
 from allauth.account.signals import user_signed_up
+from allauth.socialaccount.signals import pre_social_login
 from django.dispatch import receiver
 from django.contrib.auth.models import Group
 
@@ -20,3 +21,5 @@ def set_user_type_on_signup(request, user, **kwargs):
     
     if 'user_type' in request.session:
         del request.session['user_type']
+        
+        

@@ -2,7 +2,8 @@ from django import forms
 from django.contrib.auth.models import Group
 from django.urls import reverse_lazy
 
-from allauth.account.forms import SignupForm, LoginForm
+from allauth.account.forms import SignupForm
+from allauth.socialaccount.forms import SignupForm as SocialSignupForm
 
 
 USER_COUNTRY_CHOICES = [

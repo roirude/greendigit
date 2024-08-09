@@ -200,5 +200,9 @@ SOCIALACCOUNT_PROVIDERS = {
             'access_type': 'online',
         },
         'OAUTH_PKCE_ENABLED': True,
+        'EMAIL_AUTHENTICATION': True,
     }
 }
+
+SOCIALACCOUNT_REQUESTS_TIMEOUT = 1
+SOCIALACCOUNT_ADAPTER = 'users.adapter.CustomSocialAccountAdapter'
