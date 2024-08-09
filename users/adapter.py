@@ -27,16 +27,17 @@ class CustomSocialAccountAdapter(DefaultSocialAccountAdapter):
         else:
             return super().get_connect_redirect_url(request, socialaccount)
         
-    def pre_social_login(self, request, sociallogin):
-        if sociallogin.is_existing:
-            return
-        email = sociallogin.user.email
+    # def pre_social_login(self, request, sociallogin):
+    #     if sociallogin.is_existing:
+    #         return super().pre_social_login(request, sociallogin)
         
-        try:
-            user = CustomUser.objects.get(email=email)
-            sociallogin.connect(request, user) 
-            raise ImmediateHttpResponse(redirect(reverse('index'))) 
-        except CustomUser.DoesNotExist:
-            request.session['socialaccount_sociallogin'] = sociallogin.serialize()
-            raise ImmediateHttpResponse(redirect(reverse('choose_user_type')))
-        # return super().pre_social_login(request, sociallogin)
+    #     email = sociallogin.user.email
+        
+    #     try:
+    #         user = CustomUser.objects.get(email=email)
+    #         sociallogin.connect(request, user) 
+    #         raise ImmediateHttpResponse(redirect(reverse('index'))) 
+    #     except CustomUser.DoesNotExist:
+    #         request.session['socialaccount_sociallogin'] = sociallogin.serialize()
+    #         raise ImmediateHttpResponse(redirect(reverse('choose_user_type')))
+        

@@ -18,11 +18,12 @@ class ChooseUserTypeView(TemplateView):
 class SetUserTypeView(View):
     def post(self, *args, **kwargs):
         user_type = self.request.POST.get('user_type')
-        sociallogin_data = self.request.session.pop('socialaccount_sociallogin', None)
-        
-        if sociallogin_data:
-            sociallogin = SocialLogin.deserialize(sociallogin_data)
-            user = sociallogin.user
+        # sociallogin_data = self.request.session.pop('socialaccount_sociallogin', None)
+        user = self.request.user
+        # if sociallogin_data:
+        if user.is_authenticated:
+            # sociallogin = SocialLogin.deserialize(sociallogin_data)
+            # user = sociallogin.user
             if user_type == 'farmer':
                 user.is_farmer = True
                 user.is_consumer = False
@@ -32,16 +33,15 @@ class SetUserTypeView(View):
                 user.is_consumer = True
                 group = Group.objects.get(name='Consumers')
                 
-            user.save()  
+            # user.save()  
             user.groups.add(group)
             user.save()  
-                
-            complete_social_login(self.request, sociallogin)
             
+            # complete_social_login(self.request, sociallogin)
             if  user_type == 'farmer':
-                return redirect(reverse('farmer_dashboard'))
+                return redirect('farmer_dashboard')
             elif user_type == 'consumer':
-                return redirect(reverse('consumer_dashboard'))   
+                return redirect('consumer_dashboard')   
         else: 
             
             if user_type in ['farmer', 'consumer']:
@@ -49,6 +49,7 @@ class SetUserTypeView(View):
                 return redirect('account_signup')
             else:
                 return HttpResponseBadRequest("User type is not valid.")
+            
         
 class ConsumerDashboardView(GroupRequiredMixin, TemplateView):
     template_name = 'users/consumers/dashboard.html'

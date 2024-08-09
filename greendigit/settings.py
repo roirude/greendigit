@@ -62,6 +62,8 @@ MIDDLEWARE = [
     'livereload.middleware.LiveReloadScript',
     
     "allauth.account.middleware.AccountMiddleware",
+    
+    'users.middleware.UserTypeCheckMiddleware',
 ]
 
 ROOT_URLCONF = 'greendigit.urls'
@@ -204,5 +206,5 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-SOCIALACCOUNT_REQUESTS_TIMEOUT = 1
+SOCIALACCOUNT_REQUESTS_TIMEOUT = 5
 SOCIALACCOUNT_ADAPTER = 'users.adapter.CustomSocialAccountAdapter'

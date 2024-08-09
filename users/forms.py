@@ -27,11 +27,11 @@ class CustomSignupForm(SignupForm):
         if user_type == 'farmer':
             user.is_farmer = True
             user.is_consumer = False
-            group = Group.objects.get_or_create(name='Farmers')
+            group = Group.objects.get(name='Farmers')
         elif user_type == 'consumer':
             user.is_farmer = False
             user.is_consumer = True
-            group = Group.objects.get_or_create(name='Consumers')
+            group = Group.objects.get(name='Consumers')
         
         if 'user_type' in request.session:
             del request.session['user_type']
