@@ -1,6 +1,8 @@
 from django import forms
+from django.contrib.auth.models import Group
+from django.urls import reverse_lazy
 
-from allauth.account.forms import SignupForm
+from allauth.account.forms import SignupForm, LoginForm
 
 
 USER_COUNTRY_CHOICES = [
@@ -24,12 +26,16 @@ class CustomSignupForm(SignupForm):
         if user_type == 'farmer':
             user.is_farmer = True
             user.is_consumer = False
+            group = Group.objects.get_or_create(name='Farmers')
         elif user_type == 'consumer':
             user.is_farmer = False
             user.is_consumer = True
+            group = Group.objects.get_or_create(name='Consumers')
         
         if 'user_type' in request.session:
             del request.session['user_type']
             
+        user.group.add(group)   
         user.save()
         return user
+    

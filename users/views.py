@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 from django.http import HttpResponseBadRequest
 
+from users.mixins import GroupRequiredMixin
+
 
 class ChooseUserTypeView(TemplateView):
     template_name = 'users/choose_user_type.html'
@@ -16,3 +18,12 @@ class SetUserTypeView(TemplateView):
             return redirect('account_signup')
         else:
             return HttpResponseBadRequest("User type is not valid.")
+        
+class ConsumerDashboardView(GroupRequiredMixin, TemplateView):
+    template_name = 'users/consumers/dashboard.html'
+    group_required = 'Consumers'
+    
+
+class FarmerDashboardView(GroupRequiredMixin, TemplateView):
+    template_name = 'users/farmers/dashboard.html'
+    group_required = 'Farmers'
