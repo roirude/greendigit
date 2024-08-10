@@ -145,7 +145,8 @@ COMPRESS_ROOT = BASE_DIR / 'static'
  
 COMPRESS_ENABLED = True
  
-STATICFILES_FINDERS = ('compressor.finders.CompressorFinder',) 
+STATICFILES_FINDERS = ('compressor.finders.CompressorFinder',"django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",) 
 
 
 # Auth with Allauth
@@ -208,3 +209,4 @@ SOCIALACCOUNT_PROVIDERS = {
 
 SOCIALACCOUNT_REQUESTS_TIMEOUT = 5
 SOCIALACCOUNT_ADAPTER = 'users.adapter.CustomSocialAccountAdapter'
+
