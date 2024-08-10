@@ -40,3 +40,27 @@ class CustomSignupForm(SignupForm):
         user.save()
         return user
     
+
+# class CustomSocialSignupForm(SocialSignupForm):
+    
+#     def save(self, request):
+#         user = super(CustomSocialSignupForm, self).save(request)
+#         user_type = request.session.get('user_type')
+        
+#         if user_type:
+#             if user_type == 'farmer':
+#                 user.is_farmer = True
+#                 user.is_consumer = False
+#                 group = Group.objects.get(name='Farmers')
+#             elif user_type == 'consumer':
+#                 user.is_farmer = False
+#                 user.is_consumer = True
+#                 group = Group.objects.get(name='Consumers')
+            
+#             if 'user_type' in request.session:
+#                 del request.session['user_type']
+                
+#             user.groups.add(group)   
+#             user.save()
+#         return user
+    
