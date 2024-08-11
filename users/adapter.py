@@ -1,7 +1,7 @@
 from django.conf import settings
 from allauth.account.adapter import DefaultAccountAdapter
 from allauth.socialaccount.adapter import DefaultSocialAccountAdapter
-from allauth.exceptions import ImmediateHttpResponse
+from allauth.core.exceptions import ImmediateHttpResponse
 
 from django.urls import reverse_lazy, reverse
 from django.shortcuts import redirect
@@ -29,19 +29,20 @@ class CustomSocialAccountAdapter(DefaultSocialAccountAdapter):
         else:
             return super().get_connect_redirect_url(request, socialaccount)
         
-    # def pre_social_login(self, request, sociallogin):
-    #     if sociallogin.is_existing:
-    #         return super().pre_social_login(request, sociallogin)
         
-    #     email = sociallogin.user.email
+    def pre_social_login(self, request, sociallogin):
+        if sociallogin.is_existing:
+            return super().pre_social_login(request, sociallogin)
         
-    #     try:
-    #         user = CustomUser.objects.get(email=email)
-    #         sociallogin.connect(request, user) 
-    #         raise ImmediateHttpResponse(redirect(reverse('index'))) 
-    #     except CustomUser.DoesNotExist:
-    #         request.session['socialaccount_sociallogin'] = sociallogin.serialize()
-    #         raise ImmediateHttpResponse(redirect(reverse('choose_user_type')))
+        email = sociallogin.user.email
+        
+        try:
+            user = CustomUser.objects.get(email=email)
+            sociallogin.connect(request, user) 
+            raise ImmediateHttpResponse(redirect(reverse('index'))) 
+        except CustomUser.DoesNotExist:
+            request.session['socialaccount_sociallogin'] = sociallogin.serialize()
+            raise ImmediateHttpResponse(redirect(reverse('choose_user_type')))
     
     def save_user(self, request, sociallogin, form=None):
         user = super().save_user(request, sociallogin, form)

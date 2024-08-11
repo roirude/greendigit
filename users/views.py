@@ -9,6 +9,7 @@ from allauth.socialaccount.models import SocialLogin
 from allauth.socialaccount.helpers import complete_social_login
 
 from users.mixins import GroupRequiredMixin
+from users.models import CustomUser
 
 
 class ChooseUserTypeView(TemplateView):
@@ -18,12 +19,13 @@ class ChooseUserTypeView(TemplateView):
 class SetUserTypeView(View):
     def post(self, *args, **kwargs):
         user_type = self.request.POST.get('user_type')
-        # sociallogin_data = self.request.session.pop('socialaccount_sociallogin', None)
         user = self.request.user
-        # if sociallogin_data:
-        if user.is_authenticated:
-            # sociallogin = SocialLogin.deserialize(sociallogin_data)
-            # user = sociallogin.user
+        
+        if 'socialaccount_sociallogin' in self.request.session:
+            sociallogin_data = self.request.session.pop('socialaccount_sociallogin')
+            sociallogin = SocialLogin.deserialize(sociallogin_data)
+            user = sociallogin.user
+            
             if user_type == 'farmer':
                 user.is_farmer = True
                 user.is_consumer = False
@@ -33,22 +35,24 @@ class SetUserTypeView(View):
                 user.is_consumer = True
                 group = Group.objects.get(name='Consumers')
                 
-            # user.save()  
+            user.save()  
             user.groups.add(group)
             user.save()  
-            
-            # complete_social_login(self.request, sociallogin)
+                # Reprise du processus d'authentification
+            complete_social_login(self.request, sociallogin)   
+                   
             if  user_type == 'farmer':
                 return redirect('farmer_dashboard')
             elif user_type == 'consumer':
-                return redirect('consumer_dashboard')   
+                return redirect('consumer_dashboard')  
+ 
         else: 
             
             if user_type in ['farmer', 'consumer']:
                 self.request.session['user_type'] = user_type
                 return redirect('account_signup')
             else:
-                return HttpResponseBadRequest("User type is not valid.")
+                return redirect('choose_user_type')
             
         
 class ConsumerDashboardView(GroupRequiredMixin, TemplateView):

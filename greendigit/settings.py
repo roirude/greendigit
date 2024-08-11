@@ -61,9 +61,10 @@ MIDDLEWARE = [
     
     'livereload.middleware.LiveReloadScript',
     
+    # 'users.middleware.UserTypeCheckMiddleware',
+    
     "allauth.account.middleware.AccountMiddleware",
     
-    'users.middleware.UserTypeCheckMiddleware',
 ]
 
 ROOT_URLCONF = 'greendigit.urls'

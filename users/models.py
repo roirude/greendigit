@@ -18,7 +18,7 @@ def create_user_groups(sender, **kwargs):
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
-    code = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True)
+    code = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     slug = models.SlugField(unique=True, editable=False)
     avatar = models.ImageField(upload_to="Users/avatars/", blank=True, null=True)
     first_name = models.CharField(max_length=100, blank=True, null=True)

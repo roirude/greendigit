@@ -40,3 +40,4 @@ def set_user_type_on_signup_for_social_account(request, sociallogin, **kwargs):
         
     user.save()
                
+
