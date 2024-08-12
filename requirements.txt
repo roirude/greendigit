@@ -5,3 +5,4 @@ python-slugify==8.0.4
 django-compressor==4.5.1
 django-livereload-server==0.5.1
 django-allauth[socialaccount]==64.0.0
+django-allauth-ui==1.4.0

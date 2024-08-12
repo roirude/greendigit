@@ -31,6 +31,12 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "allauth_ui",
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,13 +47,10 @@ INSTALLED_APPS = [
     'users',
 
     'compressor',
-    'livereload',
+    'livereload',    
     
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.google',
-    
+    "widget_tweaks",
+    "slippers",
 ]
 
 MIDDLEWARE = [
@@ -211,3 +214,6 @@ SOCIALACCOUNT_PROVIDERS = {
 SOCIALACCOUNT_REQUESTS_TIMEOUT = 5
 SOCIALACCOUNT_ADAPTER = 'users.adapter.CustomSocialAccountAdapter'
 
+
+# Allauth CSS style with Allauth-ui
+ALLAUTH_UI_THEME = "light"
