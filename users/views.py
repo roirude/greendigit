@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
-from django.http import HttpResponseBadRequest
 from django.contrib.auth.models import Group
 from django.urls import reverse
 from django.views import View
@@ -58,8 +57,34 @@ class SetUserTypeView(View):
 class ConsumerDashboardView(GroupRequiredMixin, TemplateView):
     template_name = 'users/consumers/dashboard.html'
     group_required = 'Consumers'
-    
+
 
 class FarmerDashboardView(GroupRequiredMixin, TemplateView):
     template_name = 'users/farmers/dashboard.html'
     group_required = 'Farmers'
+    
+
+
+def choose_user_type(request):
+    if request.method == 'POST':
+        user_type = request.POST.get('user_type')
+        
+        # Récupérer le sociallogin de la session
+        sociallogin = SocialLogin.deserialize(request.session.pop('socialaccount_sociallogin'))
+        user = sociallogin.user
+        user.user_type = user_type  # Mettre à jour le type d'utilisateur
+        user.save()
+        
+        # Ajouter l'utilisateur au bon groupe
+        if user_type == 'farmer':
+            user.is_farmer = True
+            user.groups.add(Group.objects.get(name='Farmers'))
+        elif user_type == 'consumer':
+            user.is_consumer = True
+            user.groups.add(Group.objects.get(name='Consumer'))
+
+        # Finaliser l'authentification
+        sociallogin.save(request)
+        return redirect('/')  # Redirigez vers la page souhaitée
+
+    return render(request, 'choose_user_social_type.html')
