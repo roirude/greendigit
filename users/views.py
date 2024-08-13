@@ -43,8 +43,8 @@ class SetUserTypeView(View):
             user.save()  
             user.groups.add(group)
             user.save()  
-                # Reprise du processus d'authentification
-            complete_social_login(self.request, sociallogin)   
+            
+            # complete_social_login(self.request, sociallogin)   
                    
             if  user_type == 'farmer':
                 return redirect('farmer_dashboard')
@@ -91,6 +91,6 @@ def choose_user_type(request):
 
         # Finaliser l'authentification
         sociallogin.save(request)
-        return redirect('/')  # Redirigez vers la page souhaitée
+        return redirect(reverse('account_login'))  # Redirigez vers la page souhaitée
 
     return render(request, 'choose_user_social_type.html')
