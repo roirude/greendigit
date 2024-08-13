@@ -5,7 +5,7 @@
 <div class="h-screen w-screen" style="background: rgb(3,140,87); background: linear-gradient(15deg, rgba(3,140,87,0.3) 0%, rgba(241,241,241,1) 60%);">
     <header class="flex items-center justify-start py-3 font-bold border-b-2 border-solid px-10 md:px-32">
         <div>
-            <a href="#" class="flex items-center text-2xl font-bold ">
+            <a href="{% url 'index' %}" class="flex items-center text-2xl font-bold ">
                 <img src="{% static 'src/images/logo.png' %}" alt="greendigit" class="w-12 h-12">
                 Green<span class="text-primary-900">Digit</span>
             </a>
@@ -21,8 +21,8 @@
             <div class="mt-10 flex items-center justify-center gap-x-6">
                 <form action="{% url 'set_user_type' %}" method="post">
                     {% csrf_token %}
-                    <button type="submit" name="user_type" value="farmer" class="bg-primary-700 text-center p-3 rounded-lg text-white font-bold hover:bg-gray-800 hover:text-primary-700">I am Farmer</button>
-                    <button type="submit" name="user_type" value="consumer" class="bg-primary-700 text-center p-3 rounded-lg text-white font-bold hover:bg-gray-800 hover:text-primary-700">I am Consumer</button>
+                    <button type="submit" name="user_type" value="farmer" class="btn btn-primary">I am Farmer</button>
+                    <button type="submit" name="user_type" value="consumer" class="btn btn-primary">I am Consumer</button>
                 </form>
             </div>
           </div>

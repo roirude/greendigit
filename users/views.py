@@ -1,7 +1,8 @@
+from typing import Any
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 from django.contrib.auth.models import Group
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.views import View
 
 from allauth.socialaccount.models import SocialLogin
@@ -13,6 +14,11 @@ from users.models import CustomUser
 
 class ChooseUserTypeView(TemplateView):
     template_name = 'users/choose_user_type.html'
+    
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context['user_type_url'] = reverse_lazy('choose_user_type')
+        return context
 
 
 class SetUserTypeView(View):

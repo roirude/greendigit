@@ -4,7 +4,7 @@
      <div class="h-screen w-screen" style="background: rgb(3,140,87); background: linear-gradient(15deg, rgba(3,140,87,0.8) 0%, rgba(241,241,241,1) 60%);">
         <header class="flex items-center justify-around py-3 font-bold border-b-2 border-solid ">
             <div>
-                <a href="#" class="flex items-center text-2xl font-bold ">
+                <a href="{% url 'index' %}" class="flex items-center text-2xl font-bold ">
                     <img src="{% static 'src/images/logo.png' %}" alt="greendigit" class="w-12 h-12">
                     Green<span class="text-primary-900">Digit</span>
                 </a>
@@ -17,7 +17,7 @@
                 </nav>
             </div>
             <div>
-                <a href="{% url 'account_login' %}" class="bg-primary-700 text-center p-3 rounded-lg text-white">Sign In</a>
+                <a href="{% url 'account_login' %}" class="btn btn-primary">Sign In</a>
             </div>
         </header>
         <div class="mx-4">
@@ -31,7 +31,7 @@
                 </h1>
                 <p class="font-bold my-6">Buy fresh and authentic agricultural products.</p>
                 <div>
-                    <a href="#" class="bg-primary-800 text-white font-bold p-3 rounded-lg mt-2">Go to GreenMarket</a>
+                    <a href="#" class="btn btn-primary mt-2">Go to GreenMarket</a>
                 </div>
             </section>
         </div>

@@ -17,8 +17,18 @@
 .btn {
     padding: 0.75rem;
     border-radius: 0.5rem;
-    font-weight: 700;
+    font-weight: bold;
     border: none;
+    text-align: center;
+}
+
+.btn-small {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+}
+
+.btn:hover {
+    transition: all ease-in-out 100ms; 
 }
 
 .btn-primary {
@@ -28,7 +38,6 @@
 
 .btn-primary:hover {
     --tw-bg-opacity: 1;
-    background-color: rgb(55 65 81 / var(--tw-bg-opacity));
-    color: #038C57;
-    transition: all ease-in-out 200ms; 
+    background-color: rgb(31 41 55 / var(--tw-bg-opacity));
+    color: white;
 }

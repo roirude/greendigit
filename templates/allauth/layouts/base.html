@@ -19,11 +19,37 @@
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     </head>
     <body class="min-h-screen" style="background: rgb(3,140,87); background: linear-gradient(15deg, rgba(3,140,87,0.3) 0%, rgba(241,241,241,1) 60%);">
+        <header class="flex items-center justify-between py-3 font-bold border-b-2 border-solid px-10 md:px-32">
+            <div>
+                <a href="{% url 'index' %}" class="flex items-center text-2xl font-bold ">
+                    <img src="{% static 'src/images/logo.png' %}" alt="greendigit" class="w-12 h-12">
+                    Green<span class="text-primary-900">Digit</span>
+                </a>
+            </div>
+            <div class="gap-x-1">
+                {% if user.is_authenticated %}
+                {% url 'account_logout' as logout_url %}
+                    {% if logout_url %}
+                        <a href="{{ logout_url }}" class="text-sm btn btn-primary">{% trans "Sign Out" %}</a>
+                    {% endif %}
+                {% else %}
+                    {% url 'account_login' as login_url %}
+                    {% if login_url %}
+                        <a href="{{ login_url }}" class="text-sm btn btn-primary">{% trans "Sign In" %}</a>
+                    {% endif %}
+                    {% url 'account_signup' as signup_url %}
+                    {% if signup_url %}
+                    {% url 'choose_user_type' as user_type_url %}
+                        <a href="{{ user_type_url }}" class="text-sm btn bg-gray-800 text-white hover:text-gray-800">{% trans "Sign Up" %}</a>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </header>
         {% block body %}
             {% if messages %}
                 {% for message in messages %}
                     <div role="alert"
-                         class="text-sm md:text-base alert alert-{{ message.tags }}">
+                         class="text-xs md:text-base alert rounded-lg alert-{{ message.tags }}">
                         <span><strong>{{ message }}</strong></span>
                     </div>
                 {% endfor %}
@@ -32,10 +58,10 @@
             {% endblock content %}
             <div class="mx-auto [&_a]:link text-sm flex flex-col md:flex-row items-center justify-center gap-3 mt-3">
                 {% if user.is_authenticated %}
-                    {% url 'account_email' as email_url %}
+                    {% comment %} {% url 'account_email' as email_url %}
                     {% if email_url %}
                         <a href="{{ email_url }}">{% trans "Change Email" %}</a>
-                    {% endif %}
+                    {% endif %} {% endcomment %}
                     {% url 'account_change_password' as change_password_url %}
                     {% if change_password_url %}
                         <a href="{{ change_password_url }}">{% trans "Change Password" %}</a>
@@ -47,19 +73,6 @@
                     {% url 'usersessions_list' as usersessions_list_url %}
                     {% if usersessions_list_url %}
                         <a href="{{ usersessions_list_url }}">{% trans "Sessions" %}</a>
-                    {% endif %}
-                    {% url 'account_logout' as logout_url %}
-                    {% if logout_url %}
-                        <a href="{{ logout_url }}">{% trans "Sign Out" %}</a>
-                    {% endif %}
-                {% else %}
-                    {% url 'account_login' as login_url %}
-                    {% if login_url %}
-                        <a href="{{ login_url }}">{% trans "Sign In" %}</a>
-                    {% endif %}
-                    {% url 'account_signup' as signup_url %}
-                    {% if signup_url %}
-                        <a href="{{ signup_url }}">{% trans "Sign Up" %}</a>
                     {% endif %}
                 {% endif %}
             </div>
