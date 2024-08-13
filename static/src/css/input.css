@@ -2,3 +2,33 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.link {
+    color: #038C57;
+    font-weight: bold;
+}
+
+.link:hover {
+    color: #9AC9AD;
+    transition: all ease-in-out 200ms;
+}
+
+.btn {
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    font-weight: 700;
+    border: none;
+}
+
+.btn-primary {
+    background-color: #038C57;
+    color: white;
+}
+
+.btn-primary:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(55 65 81 / var(--tw-bg-opacity));
+    color: #038C57;
+    transition: all ease-in-out 200ms; 
+}
