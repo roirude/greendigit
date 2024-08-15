@@ -2,7 +2,8 @@
 
 {% load static %}
 
-<header class="flex items-center justify-start py-3 font-bold border-b-2 border-solid px-10 md:px-32">
+{% block content %}
+<header class="flex bg-white before:items-center justify-start py-3 font-bold border-b-2 border-solid px-10 md:px-32 fixed z-10 w-screen">
     <div>
         <a href="#" class="flex items-center text-2xl font-bold ">
             <img src="{% static 'src/images/logo.png' %}" alt="greendigit" class="w-12 h-12">
@@ -10,4 +11,8 @@
         </a>
     </div>
 </header>
+<section class="container w-screen h-screen" style="background: rgb(3,140,87); background: linear-gradient(15deg, rgba(3,140,87,0.3) 0%, rgba(241,241,241,1) 60%);">
+    {% block section %}{% endblock section %}
+</section>
+{% endblock content %}
 

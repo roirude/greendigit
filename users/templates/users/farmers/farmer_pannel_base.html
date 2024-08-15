@@ -1,0 +1,53 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block section %}
+  <div class="relative top-[4.5rem]">
+    <div class="flex">
+      <nav class="bg-white max-w-[15rem] px-4 text-sm max-md:hidden min-h-full">
+        <div class="flex flex-col gap-y-4 py-4 border-solid border-b-2">
+          <a href="#" class="flex items-center gap-x-2 p-2 rounded-lg hover:bg-primary-800 font-bold hover:text-white transition ease-in-out delay-200">
+            <span class="material-symbols-outlined">dashboard_customize</span>
+            <p class="">Dashboard</p>
+          </a>
+        </div>
+        <div class="flex flex-col gap-y-4 py-4 border-solid border-b-2">
+          <a href="#" class="flex items-center gap-x-2 p-2 rounded-lg hover:bg-primary-800 font-bold hover:text-white transition-all ease-in-out delay-100">
+            <span class="material-symbols-outlined">inventory_2</span>
+            <p class="">Products</p>
+          </a>
+          <a href="#" class="flex items-center gap-x-2 p-2 rounded-lg hover:bg-primary-800 font-bold hover:text-white transition-all ease-in-out delay-100">
+            <span class="material-symbols-outlined">category</span>
+            <p class="">Categories</p>
+          </a>
+          <a href="#" class="flex items-center gap-x-2 p-2 rounded-lg hover:bg-primary-800 font-bold hover:text-white transition-all ease-in-out delay-100">
+            <span class="material-symbols-outlined">sell</span>
+            <p class="">Sell</p>
+          </a>
+        </div>
+        <div class="flex flex-col gap-y-4 py-4 border-solid border-b-2">
+          <a href="#" class="flex items-center gap-x-2 p-2 rounded-lg hover:bg-primary-800 font-bold hover:text-white transition-all ease-in-out delay-100">
+            <span class="material-symbols-outlined">contacts_product</span>
+            <p class="">Customers</p>
+          </a>
+          <a href="#" class="flex items-center gap-x-2 p-2 rounded-lg hover:bg-primary-800 font-bold hover:text-white transition-all ease-in-out delay-100">
+            <span class="material-symbols-outlined">chat</span>
+            <p class="">Chat</p>
+          </a>
+        </div>
+        <div class="flex flex-col gap-y-4 py-4 border-solid border-b-2">
+          <a href="#" class="flex items-center gap-x-2 p-2 rounded-lg hover:bg-primary-800 font-bold hover:text-white transition-all ease-in-out delay-100">
+            <span class="material-symbols-outlined">description</span>
+            <p class="">Documentation</p>
+          </a>
+          <a href="#" class="flex items-center gap-x-2 p-2 rounded-lg hover:bg-primary-800 font-bold hover:text-white transition-all ease-in-out delay-100">
+            <span class="material-symbols-outlined">contact_support</span>
+            <p class="">Contact Support</p>
+          </a>
+        </div>
+      </nav>
+      <section class="pt-8 px-8">
+        {% block pannel_section %}{% endblock pannel_section %}
+      </section>
+    </div>
+  </div>
+{% endblock %}
