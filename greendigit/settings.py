@@ -218,3 +218,8 @@ SOCIALACCOUNT_ADAPTER = 'users.adapter.CustomSocialAccountAdapter'
 
 # Allauth CSS style with Allauth-ui
 ALLAUTH_UI_THEME = "light"
+
+
+# Mediafiles
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'
