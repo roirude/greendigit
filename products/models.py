@@ -20,7 +20,7 @@ class Category(models.Model):
     
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
-        return super(Product, self).save(*args, **kwargs)
+        return super(Category, self).save(*args, **kwargs)
 
 
 class SubCategory(models.Model):
@@ -38,7 +38,7 @@ class SubCategory(models.Model):
         
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
-        return super(Product, self).save(*args, **kwargs)
+        return super(SubCategory, self).save(*args, **kwargs)
 
 
 class Product(models.Model):
