@@ -10,6 +10,7 @@ from allauth.socialaccount.helpers import complete_social_login
 
 from users.mixins import GroupRequiredMixin
 from users.models import CustomUser
+from products.models import Product
 
 
 class ChooseUserTypeView(TemplateView):
@@ -68,6 +69,12 @@ class ConsumerDashboardView(GroupRequiredMixin, TemplateView):
 class FarmerDashboardView(GroupRequiredMixin, TemplateView):
     template_name = 'users/farmers/dashboard.html'
     group_required = 'Farmers'
+    
+    def get_context_data(self, **kwargs) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context["last_products"] = Product.objects.filter(is_delete=False).order_by('-created_at')[:5]
+        return context
+    
     
 
 
