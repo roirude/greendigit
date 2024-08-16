@@ -35,7 +35,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     is_farmer = models.BooleanField(default=False)
     is_consumer = models.BooleanField(default=False)
-    date_joined = models.DateTimeField(_("date joined"), default=timezone.now)
+    date_joined = models.DateTimeField(_("date joined"), auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     
     objects = CustomUserManager()
     
