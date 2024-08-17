@@ -3,12 +3,14 @@
 {% block pannel_section %}
   <div class="">
     <div class="">
+      {% comment %}heading{% endcomment %}
       <div class="flex items-center justify-between">
         <h1 class="font-medium text-xl text-gray-800">Overview</h1>
         <p class="text-sm">Accessibility</p>
       </div>
+      {% comment %}Overview{% endcomment %}
       <div class="pt-5 grid gap-5 grid-cols-2 lg:grid-cols-4">
-        <div class="bg-white p-5 flex justify-between w-full rounded-lg">
+        <div class="bg-white p-5 flex justify-between w-full rounded-lg shadow-lg">
           <div class="">
             <h3 class="text-sm mb-5">Revenue</h3>
             <p class="font-semibold text-2xl">XAF 350K</p>
@@ -17,7 +19,7 @@
             <span class="material-symbols-outlined bg-gray-300 p-2 rounded-lg">payments</span>
           </div>
         </div>
-        <div class="bg-white p-5 flex justify-between w-full rounded-lg">
+        <div class="bg-white p-5 flex justify-between w-full rounded-lg shadow-lg">
           <div class="">
             <h3 class="text-sm mb-5">Orders</h3>
             <p class="font-semibold text-2xl">300</p>
@@ -26,7 +28,7 @@
             <span class="material-symbols-outlined bg-gray-300 p-2 rounded-lg">storefront</span>
           </div>
         </div>
-        <div class="bg-white p-5 flex justify-between w-full rounded-lg">
+        <div class="bg-white p-5 flex justify-between w-full rounded-lg shadow-lg">
           <div class="">
             <h3 class="text-sm mb-5">Customers</h3>
             <p class="font-semibold text-2xl">10</p>
@@ -35,7 +37,7 @@
             <span class="material-symbols-outlined bg-gray-300 p-2 rounded-lg">group_add</span>
           </div>
         </div>
-        <div class="bg-white p-5 flex justify-between w-full rounded-lg">
+        <div class="bg-white p-5 flex justify-between w-full rounded-lg shadow-lg">
           <div class="">
             <h3 class="text-sm mb-5">Products</h3>
             <p class="font-semibold text-2xl">100</p>
@@ -44,6 +46,52 @@
             <span class="material-symbols-outlined bg-gray-300 p-2 rounded-lg">inventory</span>
           </div>
         </div>
+      </div>
+
+      {% comment %}Lastest products{% endcomment %}
+      <div class="mt-8 bg-white shadow-lg p-5 h-96 rounded-lg">
+        <div class="flex items-center justify-between">
+          <h3>Recent Products</h3>
+          <div>
+            <span class="material-symbols-outlined bg-gray-300 p-2 rounded-lg">add_box</span>
+          </div>
+        </div>
+        {% if last_products %}
+        <div class="pt-1 overflow-x-auto">
+            <div class="inline-block min-w-full">
+              <div class="border-b-2 py-5 flex justify-between">
+                <p class="w-72">Product</p>
+                <p class="w-24">Quantity</p>
+                <p class="w-40">Price</p>
+                <p class="w-44">Update_at</p>
+                <ul class="flex gap-x-3">
+                  actions
+                </ul>
+              </div>
+            </div>
+              {% for product in last_products %}
+              <div class="inline-block min-w-full">
+                <div class="border-b-2 py-5 flex justify-between">
+                  <p class="w-72 flex items-center gap-x-4">
+                    <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'src/images/products/product_icon.svg' %}{% endif %}" alt="{{ product.name }}" class="w-12 h-12 bg-primary-700 rounded-full">
+                    <span>{{ product.name }}</span>
+                  </p>
+                  <p class="w-24"> {{ product.quantity }} </p>
+                  <p class="w-40">XAF {{ product.price }} </p>
+                  <p class="w-44"> {{ product.update_at.date }} </p>
+                  <ul class="flex gap-x-3">
+                    <li>
+                      <a href="#"><span class="material-symbols-outlined text-blue-500 font-light">update</span></a>
+                    </li>
+                    <li>
+                      <a href="#"><span class="material-symbols-outlined text-red-500 font-light">delete</span></a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              {% endfor %}
+          </div>
+        {% endif %}
       </div>
     </div>
   </div>
