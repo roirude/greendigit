@@ -11,7 +11,7 @@
           </a>
         </div>
         <div class="flex flex-col gap-y-4 py-4 border-solid border-b-2">
-          <a href="{% url 'farmer_products' %}" class="flex items-center gap-x-2 py-4 px-2 rounded-lg hover:bg-primary-800 font-bold hover:text-white transition-all ease-in-out delay-100">
+          <a href="{% url 'farmer_products' request.user.slug  %}" class="flex items-center gap-x-2 py-4 px-2 rounded-lg hover:bg-primary-800 font-bold hover:text-white transition-all ease-in-out delay-100">
             <span class="material-symbols-outlined">inventory_2</span>
             <p class="">Products</p>
           </a>

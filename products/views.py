@@ -10,14 +10,15 @@ from django.core.paginator import Paginator
 
 from products.models import Product, Category, SubCategory
 from users.models import CustomUser
-# from users.mixins import FarmerRequiredMixin
+from users.mixins import GroupRequiredMixin
 from products.forms import ProductForm
     
     
-class FarmerProductListView(ListView):
+class FarmerProductListView(GroupRequiredMixin, ListView):
     template_name = 'products/farmer/product_list.html'
     context_object_name = 'products'
     model = Product
+    group_required = 'Farmers'
     
     
     def get_queryset(self):
@@ -32,6 +33,24 @@ class FarmerProductListView(ListView):
             category.last_products = category.product_set.filter(is_delete=False).order_by('-created_at')[:3]
         context['categories'] = categories
         return context
+    
+
+class ProductCreateView(GroupRequiredMixin, CreateView):
+    template_name = 'products/product_create.html'
+    form_class = ProductForm
+    group_required = 'Farmers'
+    
+    def form_valid(self, form):
+        form.instance.farmer = self.request.user
+        form.save()
+        messages.success(self.request, f"Product '{form.instance.name}' added successfully!")
+        return super(ProductCreateView, self).form_valid(form)
+    
+    def get_success_url(self):
+        slug = self.request.user.slug
+        redirect_url = reverse('farmer_products', kwargs={'slug':slug})
+        return redirect_url
+        
     
 
 # class SubCategoryProductListView(ListView):
@@ -71,24 +90,6 @@ class FarmerProductListView(ListView):
 
 #     def get_object(self, queryset=None):
 #         return get_object_or_404(Product, slug=self.kwargs['slug'])
-
-
-# class ProductCreateView(FarmerRequiredMixin, CreateView):
-#     template_name = 'product/product_create.html'
-#     context_object_name = 'form'
-#     form_class = ProductForm
-    
-#     def form_valid(self, form):
-#         form.instance.farmer = self.request.user
-#         form.save()
-#         messages.success(self.request, f"Product '{form.instance.name}' added successfully!")
-#         return super(ProductCreateView, self).form_valid(form)
-    
-#     def get_success_url(self):
-#         slug = self.request.user.slug
-#         redirect_url = reverse('farmer_product_list', kwargs={'slug':slug})
-#         return redirect_url
-    
 
 
 # class ProductUpdateView(FarmerRequiredMixin, UpdateView):

@@ -1,0 +1,21 @@
+{% extends 'users/farmers/farmer_pannel_base.html' %}
+{% load static %}
+{% load i18n %}
+{% load allauth_ui %}
+{% load widget_tweaks %}
+
+{% block pannel_section %}
+<div class="">
+    <div class="">
+        {% trans "Add Product" as heading %}
+        {% #container heading=heading  %}
+            {% url 'account_login' as action_url %}
+            {% #form form=form url="" button_text=heading %}
+            {{ redirect_field }}
+            {% csrf_token %}
+            {% /form %}
+            <div class="divider divider-neutral"></div>
+        {% /container %}
+    </div>
+</div>
+{% endblock pannel_section %}
