@@ -9,27 +9,27 @@ from django.core.paginator import Paginator
 
 
 from products.models import Product, Category, SubCategory
-from users.models import User
-from users.mixins import FarmerRequiredMixin
+from users.models import CustomUser
+# from users.mixins import FarmerRequiredMixin
 from products.forms import ProductForm
     
     
-# class ProductListView(ListView):
-#     template_name = 'product/product_list.html'
-#     context_object_name = 'product_list'
-#     model = Product
+class ProductListView(ListView):
+    template_name = 'products/farmer/product_list.html'
+    context_object_name = 'products'
+    model = Product
     
-#     def get_queryset(self):
-#         products = Product.objects.filter(is_delete=False).order_by('-created_at')
-#         return products
+    def get_queryset(self):
+        products = Product.objects.filter(is_delete=False).order_by('-created_at')
+        return products
     
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         categories = SubCategory.objects.all()
-#         for category in categories:
-#             category.last_products = category.product_set.filter(is_delete=False).order_by('-created_at')[:3]
-#         context['categories'] = categories
-#         return context
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        categories = SubCategory.objects.all()
+        for category in categories:
+            category.last_products = category.product_set.filter(is_delete=False).order_by('-created_at')[:3]
+        context['categories'] = categories
+        return context
     
 
 # class SubCategoryProductListView(ListView):

@@ -1,0 +1,10 @@
+{% extends 'users/farmers/farmer_pannel_base.html' %}
+{% load static %}
+{% load products %}
+
+{% block pannel_section %}
+{% for product in products %}
+    {% #product_card product=product%}
+    {% /product_card %}
+{% endfor %}
+{% endblock pannel_section %}

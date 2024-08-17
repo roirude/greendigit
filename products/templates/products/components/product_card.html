@@ -1,0 +1,8 @@
+{% load static %}
+
+<div class=" bg-white shadow p-4">
+    <img src="" alt="{{ product.name }}" class="w-full h-48 object-cover">
+    <h3 class="text-lg font-semibold mt-4">{{ product.name }}</h3>
+    <p class="text-gray-500">{{ product.description }}</p>
+    <p class="text-blue-500 font-bold mt-2">${{ product.price }}</p>
+</div>
