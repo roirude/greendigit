@@ -8632,6 +8632,10 @@ html:has(.drawer-open.drawer-open) {
   margin-top: 2rem;
 }
 
+.mr-5 {
+  margin-right: 1.25rem;
+}
+
 .box-border {
   box-sizing: border-box;
 }
@@ -8745,6 +8749,30 @@ html:has(.drawer-open.drawer-open) {
 
 .h-screen {
   height: 100vh;
+}
+
+.max-h-60 {
+  max-height: 15rem;
+}
+
+.max-h-\[16rem\] {
+  max-height: 16rem;
+}
+
+.max-h-\[17rem\] {
+  max-height: 17rem;
+}
+
+.max-h-\[18rem\] {
+  max-height: 18rem;
+}
+
+.max-h-\[20rem\] {
+  max-height: 20rem;
+}
+
+.max-h-\[19rem\] {
+  max-height: 19rem;
 }
 
 .min-h-screen {
@@ -9890,6 +9918,11 @@ html:has(.drawer-open.drawer-open) {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
+.bg-yellow-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(234 179 8 / var(--tw-bg-opacity));
+}
+
 .decoration-slice {
   -webkit-box-decoration-break: slice;
           box-decoration-break: slice;
@@ -10098,6 +10131,10 @@ html:has(.drawer-open.drawer-open) {
 
 .pt-\[4\.5rem\] {
   padding-top: 4.5rem;
+}
+
+.pr-5 {
+  padding-right: 1.25rem;
 }
 
 .text-left {
