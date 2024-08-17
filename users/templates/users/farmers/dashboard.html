@@ -75,7 +75,7 @@
               <div class="inline-block min-w-full pr-5 ">
                 <div class="border-b-2 py-5 flex justify-between">
                   <p class="w-72 flex items-center gap-x-4">
-                    <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'src/images/products/product_icon.svg' %}{% endif %}" alt="{{ product.name }}" class="w-12 h-12 bg-primary-700 rounded-full">
+                    <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'src/images/products/product_icon.svg' %}{% endif %}" alt="{{ product.name }}" class="w-12 h-12 bg-primary-700 object-cover rounded-full">
                     <span>{{ product.name }}</span>
                   </p>
                   <p class="w-24"> {{ product.quantity }} </p>

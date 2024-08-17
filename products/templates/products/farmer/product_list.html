@@ -3,8 +3,26 @@
 {% load products %}
 
 {% block pannel_section %}
-{% for product in products %}
-    {% #product_card product=product%}
-    {% /product_card %}
-{% endfor %}
-{% endblock pannel_section %}
+<div class="mb-5 flex justify-between items-center">
+    <div class="flex items-center gap-2 bg-white rounded-md py-1 px-2">
+        <div><input type="search" name="search" id="search" class="bg-white  max-w-72 input input-bordered"></div>
+        <button type="submit">
+            <span class="material-symbols-outlined text-white bg-primary-700 font-bold p-2 rounded-md hover:bg-primary-990 transition-colors ease-linear">
+                search
+            </span>
+        </button>
+    </div>
+    <a href="#" class="btn btn-primary">
+        <span class="material-symbols-outlined">add_box</span>
+        <span>Add products</span>
+    </a>
+</div>
+  <div class="gap-5 grid md:grid-cols-2 lg:grid-cols-4 h-full">
+    {% for product in products %}
+      <div class="">
+        {% #product_card product=product%}
+        {% /product_card %}
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

@@ -14,13 +14,15 @@ from users.models import CustomUser
 from products.forms import ProductForm
     
     
-class ProductListView(ListView):
+class FarmerProductListView(ListView):
     template_name = 'products/farmer/product_list.html'
     context_object_name = 'products'
     model = Product
     
+    
     def get_queryset(self):
-        products = Product.objects.filter(is_delete=False).order_by('-created_at')
+        user = self.request.user
+        products = Product.objects.filter(is_delete=False, farmer=user).order_by('-created_at')
         return products
     
     def get_context_data(self, **kwargs):

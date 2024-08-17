@@ -1,8 +1,45 @@
 {% load static %}
 
-<div class=" bg-white shadow p-4">
-    <img src="" alt="{{ product.name }}" class="w-full h-48 object-cover">
-    <h3 class="text-lg font-semibold mt-4">{{ product.name }}</h3>
-    <p class="text-gray-500">{{ product.description }}</p>
-    <p class="text-blue-500 font-bold mt-2">${{ product.price }}</p>
+<div class=" bg-white p-5 rounded-md relative hover:shadow-xl transition-shadow ease-linear">
+    <a href="" class="absolute bg-primary-800 p-2 text-sm font-semibold text-center rounded-sm text-white min-w-20 right-10 top-10 hover:bg-primary-700 transition-colors ease-linear ">
+        {{ product.sub_category.category }}
+    </a>
+    <a href="#">
+        <img src="{% if product.image %}{{ product.image.url }}{% else %}{% endif %}" alt="{{ product.name }}" class="w-full h-60 object-cover bg-yellow-500 rounded-lg">
+    </a>
+    <div>
+        <h3 class="text-lg font-semibold mt-4"><a href="#">{{ product.name }}</a></h3>
+        <div>
+            <a href="#" class="flex items-center">
+                <span class="material-symbols-outlined">
+                    grade
+                </span>
+                <span class="material-symbols-outlined">
+                    grade
+                </span>
+                <span class="material-symbols-outlined">
+                    grade
+                </span>
+                <span class="material-symbols-outlined">
+                    grade
+                </span>
+                <span class="material-symbols-outlined">
+                    grade
+                </span>
+                <span class="font-semibold ml-1 text-primary-800">(31)</span>
+            </a>
+        </div>
+    </div>
+    <p class="text-gray-500 mt-5">{{ product.description|truncatechars:100 }}</p>
+    <div class="flex items-center justify-between mt-5">
+        <a href="#" class="flex items-center gap-2">
+            <div>
+                <img src="{{ product.farmer.avatar }}" alt="{{ product.farmer.email }}" class="w-12 h-12 bg-primary-700 rounded-full object-cover">
+            </div>
+            {% comment %} <p class="text-xs font-semibold">
+                {{ product.farmer.email }}
+            </p> {% endcomment %}
+        </a>
+        <p class="font-bold text-lg md:text-base text-primary-900">XAF/KG {{ product.price }}</p>
+    </div>
 </div>
