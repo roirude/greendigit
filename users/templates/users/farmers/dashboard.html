@@ -52,7 +52,7 @@
       <div class="mt-8 bg-white shadow-lg p-5 h-96 rounded-lg">
         <div class="flex items-center justify-between pb-4">
           <h3>Recent Products</h3>
-          <a href="{% url 'add_product' %}" class="flex items-center gap-x-1">
+          <a href="{% url 'add_product' %}" class="flex items-center gap-x-1 hover:text-primary-800 transition-colors ease-linear">
             <p>Add Products</p>
             <span class="material-symbols-outlined bg-gray-300 p-2 rounded-lg">add_box</span>
           </a>
@@ -76,7 +76,7 @@
                 <div class="border-b-2 py-5 flex justify-between">
                   <p class="w-72 flex items-center gap-x-4">
                     <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'src/images/products/product_icon.svg' %}{% endif %}" alt="{{ product.name }}" class="w-12 h-12 bg-primary-700 object-cover rounded-full">
-                    <span>{{ product.name }}</span>
+                    <span class="capitalize">{{ product.name }}</span>
                   </p>
                   <p class="w-24"> {{ product.quantity }} </p>
                   <p class="w-40">XAF {{ product.price }} </p>
@@ -94,6 +94,15 @@
               {% endfor %}
             </div>
           </div>
+        {% else %}
+        <div class="flex flex-col items-center justify-center h-72">
+          <div class="text-center">
+            <h4>You haven't added any products yet.</h4>
+            <div class="mt-4">
+              <a href="{% url 'add_product' %}" class="btn btn-primary">Add products</a>
+            </div>
+          </div>
+        </div>
         {% endif %}
       </div>
     </div>

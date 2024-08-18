@@ -72,7 +72,7 @@ class FarmerDashboardView(GroupRequiredMixin, TemplateView):
     
     def get_context_data(self, **kwargs) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
-        context["last_products"] = Product.objects.filter(is_delete=False).order_by('-created_at')[:5]
+        context["last_products"] = Product.objects.filter(is_delete=False, farmer=self.request.user).order_by('-created_at')[:5]
         return context
     
     
