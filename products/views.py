@@ -50,8 +50,50 @@ class ProductCreateView(GroupRequiredMixin, CreateView):
         slug = self.request.user.slug
         redirect_url = reverse('farmer_products', kwargs={'slug':slug})
         return redirect_url
-        
+
+
+class ProductUpdateView(GroupRequiredMixin, UpdateView):
+    template_name = 'products/product_update.html'
+    form_class = ProductForm
+    model = Product
+    group_required = 'Farmers'
     
+    def form_valid(self, form):
+        messages.success(self.request, f"Product '{form.instance.name}' updated succesfully!")
+        return super(ProductUpdateView, self).form_valid(form)
+    
+    def get_success_url(self):
+        slug = self.request.user.slug
+        redirect_url = reverse('farmer_products', kwargs={'slug': slug})
+        return redirect_url
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["product"] = Product.objects.get(slug=self.kwargs['slug'])
+        return context
+    
+
+# class ProductDeleteView(FarmerRequiredMixin, RedirectView):
+#     pattern_name = 'farmer_product_list'
+
+#     def get_redirect_url(self, *args, **kwargs):
+#         product = get_object_or_404(Product, slug=self.kwargs['slug'])
+#         product.is_delete = True
+#         product.save()
+#         messages.success(self.request, f"Product '{product.name}' deleted succesfully!")
+#         slug = self.request.user.slug
+#         redirect_url = reverse(self.pattern_name, kwargs={'slug':slug})
+#         return redirect_url
+
+
+# class ProductDetailView(DetailView):
+#     template_name = 'product/product_detail.html'
+#     context_object_name = 'product'
+#     model = Product
+
+#     def get_object(self, queryset=None):
+#         return get_object_or_404(Product, slug=self.kwargs['slug'])
+
 
 # class SubCategoryProductListView(ListView):
 #     template_name = 'product/sub_category_product_list.html'
@@ -81,50 +123,6 @@ class ProductCreateView(GroupRequiredMixin, CreateView):
 #         farmer = User.objects.get(slug=self.kwargs['slug'])
 #         products = Product.objects.filter(is_delete=False, farmer=farmer).order_by('-created_at')
 #         return products
-
-
-# class ProductDetailView(DetailView):
-#     template_name = 'product/product_detail.html'
-#     context_object_name = 'product'
-#     model = Product
-
-#     def get_object(self, queryset=None):
-#         return get_object_or_404(Product, slug=self.kwargs['slug'])
-
-
-# class ProductUpdateView(FarmerRequiredMixin, UpdateView):
-#     template_name = 'product/product_update.html'
-#     context_object_name = 'form'
-#     form_class = ProductForm
-#     model = Product
-    
-#     def form_valid(self, form):
-#         messages.success(self.request, f"Product '{form.instance.name}' updated succesfully!")
-#         return super(ProductUpdateView, self).form_valid(form)
-    
-#     def get_success_url(self):
-#         slug = self.request.user.slug
-#         redirect_url = reverse('farmer_product_list', kwargs={'slug': slug})
-#         return redirect_url
-    
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context["product"] = Product.objects.get(slug=self.kwargs['slug'])
-#         return context
-    
-
-
-# class ProductDeleteView(FarmerRequiredMixin, RedirectView):
-#     pattern_name = 'farmer_product_list'
-
-#     def get_redirect_url(self, *args, **kwargs):
-#         product = get_object_or_404(Product, slug=self.kwargs['slug'])
-#         product.is_delete = True
-#         product.save()
-#         messages.success(self.request, f"Product '{product.name}' deleted succesfully!")
-#         slug = self.request.user.slug
-#         redirect_url = reverse(self.pattern_name, kwargs={'slug':slug})
-#         return redirect_url
 
 
 # class GetSubcategoriesView(View):
