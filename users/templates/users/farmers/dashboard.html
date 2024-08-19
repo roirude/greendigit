@@ -1,8 +1,15 @@
 {% extends 'users/farmers/farmer_pannel_base.html' %}
 {% load static %}
+{% load products %}
 {% block pannel_section %}
   <div class="">
     <div class="">
+      {% comment %} Delete form {% endcomment %}
+      <div>
+        {% url 'delete_product' product.slug as delete_product %}
+        {% #delete_form name=product.name delete_url=delete_product %}
+        {% /delete_form %}
+      </div>
       {% comment %}heading{% endcomment %}
       <div class="flex items-center justify-between">
         <h1 class="font-medium text-xl text-gray-800">Overview</h1>

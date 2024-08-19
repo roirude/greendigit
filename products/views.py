@@ -73,17 +73,18 @@ class ProductUpdateView(GroupRequiredMixin, UpdateView):
         return context
     
 
-# class ProductDeleteView(FarmerRequiredMixin, RedirectView):
-#     pattern_name = 'farmer_product_list'
+class ProductDeleteView(GroupRequiredMixin, RedirectView):
+    pattern_name = 'farmer_dashboard'
+    group_required = 'Farmers'
 
-#     def get_redirect_url(self, *args, **kwargs):
-#         product = get_object_or_404(Product, slug=self.kwargs['slug'])
-#         product.is_delete = True
-#         product.save()
-#         messages.success(self.request, f"Product '{product.name}' deleted succesfully!")
-#         slug = self.request.user.slug
-#         redirect_url = reverse(self.pattern_name, kwargs={'slug':slug})
-#         return redirect_url
+    def get_redirect_url(self, *args, **kwargs):
+        product = get_object_or_404(Product, slug=self.kwargs['slug'])
+        product.is_delete = True
+        product.save()
+        messages.success(self.request, f"Product '{product.name}' deleted succesfully!")
+        slug = self.request.user.slug
+        redirect_url = reverse(self.pattern_name, kwargs={'slug':slug})
+        return redirect_url
 
 
 # class ProductDetailView(DetailView):
