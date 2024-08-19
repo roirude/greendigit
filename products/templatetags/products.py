@@ -7,7 +7,7 @@ register = template.Library()
 register_components(
     {
         "product_card": "products/components/product_card.html",
-        "delete_form" : "products/components/delete_form.html",
+        "delete_confirmation" : "products/components/delete_form.html",
     },
     register,
 )

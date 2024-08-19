@@ -4,12 +4,6 @@
 {% block pannel_section %}
   <div class="">
     <div class="">
-      {% comment %} Delete form {% endcomment %}
-      <div>
-        {% url 'delete_product' product.slug as delete_product %}
-        {% #delete_form name=product.name delete_url=delete_product %}
-        {% /delete_form %}
-      </div>
       {% comment %}heading{% endcomment %}
       <div class="flex items-center justify-between">
         <h1 class="font-medium text-xl text-gray-800">Overview</h1>
@@ -79,6 +73,12 @@
             </div>
             <div class="">
               {% for product in last_products %}
+              {% comment %} Delete form {% endcomment %}
+              <div id="deleteModal" class="hidden">
+                {% comment %} {% url 'delete_product' product.slug as delete_product_url %} {% endcomment %}
+                {% #delete_confirmation name=product.name delete_url=delete_product_url %}
+                {% /delete_confirmation %}
+              </div>
               <div class="inline-block min-w-full pr-5 ">
                 <div class="border-b-2 py-5 flex justify-between">
                   <p class="w-72 flex items-center gap-x-4">
@@ -93,7 +93,7 @@
                       <a href="{% url 'update_product' product.slug %}"><span class="material-symbols-outlined text-blue-500 font-light">update</span></a>
                     </li>
                     <li>
-                      <a href="#"><span class="material-symbols-outlined text-red-500 font-light">delete</span></a>
+                      <a href="#" onclick="openPopup('{{ product.name }}', '{% url 'delete_product' product.slug %}')"><span class="material-symbols-outlined text-red-500 font-light">delete</span></a>
                     </li>
                   </ul>
                 </div>
@@ -114,4 +114,22 @@
       </div>
     </div>
   </div>
+
+
+  <script>
+    function openPopup(productName, deleteUrl) {
+      // Met à jour les paramètres du composant delete_confirmation
+      //document.querySelector('[component="delete_confirmation"]').querySelector('a[href^="/"]').href = deleteUrl;
+    
+      // Affiche le pop-up
+      document.getElementById('product_name').textContent = productName;
+      document.getElementById('product_delete_url').href = deleteUrl;
+      document.getElementById('deleteModal').classList.remove('hidden');
+    }
+    
+    function closePopup() {
+      // Cache le pop-up
+      document.getElementById('deleteModal').classList.add('hidden');
+    }
+  </script>
 {% endblock %}

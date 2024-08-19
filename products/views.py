@@ -83,7 +83,7 @@ class ProductDeleteView(GroupRequiredMixin, RedirectView):
         product.save()
         messages.success(self.request, f"Product '{product.name}' deleted succesfully!")
         slug = self.request.user.slug
-        redirect_url = reverse(self.pattern_name, kwargs={'slug':slug})
+        redirect_url = reverse(self.pattern_name)
         return redirect_url
 
 
