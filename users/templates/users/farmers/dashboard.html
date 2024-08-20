@@ -3,6 +3,18 @@
 {% load products %}
 {% block pannel_section %}
   <div class="">
+    {% if messages %}
+      {% for message in messages %}
+      <div id="message" class="bg-primary-600 py-3 px-5 mb-4 text-gray-800 font-medium rounded-md flex items-center justify-between">
+        <p class="text-white">{{ message }}</p>
+        <a href="" onclick="closeMessagePopUp()">
+          <span class="material-symbols-outlined text-red-700 text-3xl font-bold">
+            cancel
+          </span>
+        </a>
+      </div>
+      {% endfor %}
+    {% endif %}
     <div class="">
       {% comment %}heading{% endcomment %}
       <div class="flex items-center justify-between">
@@ -118,18 +130,17 @@
 
   <script>
     function openPopup(productName, deleteUrl) {
-      // Met à jour les paramètres du composant delete_confirmation
-      //document.querySelector('[component="delete_confirmation"]').querySelector('a[href^="/"]').href = deleteUrl;
-    
-      // Affiche le pop-up
       document.getElementById('product_name').textContent = productName;
       document.getElementById('product_delete_url').href = deleteUrl;
       document.getElementById('deleteModal').classList.remove('hidden');
     }
     
     function closePopup() {
-      // Cache le pop-up
       document.getElementById('deleteModal').classList.add('hidden');
+    }
+
+    function closeMessagePopUp() {
+      document.getElementById('message').classList.add('hidden');
     }
   </script>
 {% endblock %}
