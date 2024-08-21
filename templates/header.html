@@ -19,19 +19,29 @@
     </div>
     <div class="flex items-center gap-x-3">
         <div>
-            <span class="material-symbols-outlined text-2xl hover:bg-gray-300 p-2 rounded-md">
+            <span class="material-symbols-outlined text-2xl hover:cursor-pointer hover:bg-gray-300 p-2 rounded-md">
                 notifications
                 </span>
         </div>
-        <div>
+        <div class="relative text-center">
+            <nav id="profile" class="hidden absolute bg-white right-1 top-14 text-sm p-3 rounded-md shadow-2xl w-36">
+                <div class="border-b-2 pb-3 mb-3">
+                    <a href="#">Green<span class="text-primary-800">Profile</span></a>
+                </div>
+                <div class="text-red-500 text-center">
+                    <a href="{% url 'account_logout' %}" class="hover:underline">Logout</a>
+                </div>
+            </nav>
             {% if request.user.is_authenticated %}
+                <div onclick="profile()">
                 {% if request.user.avatar %}
-                <img src="{{ request.user.avatar.url }}" alt=""  class="object-cover w-12 h-12 rounded-full bg-primary-700">
+                <img src="{{ request.user.avatar.url }}" alt=""  class="hover:cursor-pointer object-cover w-12 h-12 rounded-full bg-primary-700">
                 {% else %}
-                <div class="uppercase bg-primary-500 w-12 h-12 flex items-center justify-center text-3xl rounded-full">
+                <div class=" hover:cursor-pointer uppercase bg-primary-500 hover:bg-primary-400 w-12 h-12 flex items-center justify-center text-3xl rounded-full">
                     {{ user.email|slice:"1" }}
                 </div>
                 {% endif %}
+                </div>
             {% endif %}
         </div>
     </div>
@@ -39,5 +49,11 @@
 <section class="w-full h-full pb-8" style="background: rgb(3,140,87); background: linear-gradient(15deg, rgba(3,140,87,0.3) 0%, rgba(241,241,241,1) 60%);">
     {% block section %}{% endblock section %}
 </section>
+
+<script>
+    function profile() {
+        document.getElementById('profile').classList.toggle('hidden');
+      }
+</script>
 {% endblock content %}
 
