@@ -8338,10 +8338,6 @@ html:has(.drawer-open.drawer-open) {
   isolation: auto;
 }
 
-.-z-20 {
-  z-index: -20;
-}
-
 .z-10 {
   z-index: 10;
 }
@@ -8441,6 +8437,10 @@ html:has(.drawer-open.drawer-open) {
   margin-bottom: 0.75rem;
 }
 
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
 .mb-5 {
   margin-bottom: 1.25rem;
 }
@@ -8483,10 +8483,6 @@ html:has(.drawer-open.drawer-open) {
 
 .mt-8 {
   margin-top: 2rem;
-}
-
-.mb-4 {
-  margin-bottom: 1rem;
 }
 
 .box-border {
@@ -9777,9 +9773,9 @@ html:has(.drawer-open.drawer-open) {
   background-color: rgb(31 41 55 / var(--tw-bg-opacity));
 }
 
-.bg-primary-500 {
+.bg-primary-600 {
   --tw-bg-opacity: 1;
-  background-color: rgb(154 201 173 / var(--tw-bg-opacity));
+  background-color: rgb(123 185 149 / var(--tw-bg-opacity));
 }
 
 .bg-primary-700 {
@@ -9807,14 +9803,14 @@ html:has(.drawer-open.drawer-open) {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
-.bg-primary-50 {
+.bg-yellow-500 {
   --tw-bg-opacity: 1;
-  background-color: rgb(236 239 237 / var(--tw-bg-opacity));
+  background-color: rgb(234 179 8 / var(--tw-bg-opacity));
 }
 
-.bg-primary-600 {
+.bg-primary-500 {
   --tw-bg-opacity: 1;
-  background-color: rgb(123 185 149 / var(--tw-bg-opacity));
+  background-color: rgb(154 201 173 / var(--tw-bg-opacity));
 }
 
 .bg-opacity-50 {
@@ -10311,24 +10307,14 @@ html:has(.drawer-open.drawer-open) {
   color: rgb(239 68 68 / var(--tw-text-opacity));
 }
 
-.text-white {
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.text-red-400 {
-  --tw-text-opacity: 1;
-  color: rgb(248 113 113 / var(--tw-text-opacity));
-}
-
-.text-red-800 {
-  --tw-text-opacity: 1;
-  color: rgb(153 27 27 / var(--tw-text-opacity));
-}
-
 .text-red-700 {
   --tw-text-opacity: 1;
   color: rgb(185 28 28 / var(--tw-text-opacity));
+}
+
+.text-white {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .underline {
@@ -10936,11 +10922,6 @@ html:has(.drawer-open.drawer-open) {
   outline-offset: 2px;
 }
 
-.before\:items-center::before {
-  content: var(--tw-content);
-  align-items: center;
-}
-
 .checked\:bg-primary-800:checked {
   --tw-bg-opacity: 1;
   background-color: rgb(3 140 87 / var(--tw-bg-opacity));
@@ -10959,6 +10940,11 @@ html:has(.drawer-open.drawer-open) {
 .hover\:bg-primary-990:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(29 59 42 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-gray-300:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(209 213 219 / var(--tw-bg-opacity));
 }
 
 .hover\:font-bold:hover {
