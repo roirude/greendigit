@@ -8423,11 +8423,6 @@ html:has(.drawer-open.drawer-open) {
   margin-bottom: 0.75rem;
 }
 
-.my-4 {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-}
-
 .my-5 {
   margin-top: 1.25rem;
   margin-bottom: 1.25rem;
@@ -8601,6 +8596,10 @@ html:has(.drawer-open.drawer-open) {
   height: 3rem;
 }
 
+.h-24 {
+  height: 6rem;
+}
+
 .h-40 {
   height: 10rem;
 }
@@ -8625,12 +8624,32 @@ html:has(.drawer-open.drawer-open) {
   height: 100vh;
 }
 
-.h-24 {
-  height: 6rem;
-}
-
 .max-h-\[19rem\] {
   max-height: 19rem;
+}
+
+.max-h-96 {
+  max-height: 24rem;
+}
+
+.max-h-80 {
+  max-height: 20rem;
+}
+
+.max-h-\[20rem\] {
+  max-height: 20rem;
+}
+
+.max-h-\[22rem\] {
+  max-height: 22rem;
+}
+
+.max-h-\[23rem\] {
+  max-height: 23rem;
+}
+
+.max-h-\[22\.5rem\] {
+  max-height: 22.5rem;
 }
 
 .min-h-screen {
@@ -9971,10 +9990,6 @@ html:has(.drawer-open.drawer-open) {
   padding: 1.25rem;
 }
 
-.p-4 {
-  padding: 1rem;
-}
-
 .px-1 {
   padding-left: 0.25rem;
   padding-right: 0.25rem;
@@ -10055,6 +10070,10 @@ html:has(.drawer-open.drawer-open) {
   padding-top: 0.25rem;
 }
 
+.pt-4 {
+  padding-top: 1rem;
+}
+
 .pt-5 {
   padding-top: 1.25rem;
 }
@@ -10065,10 +10084,6 @@ html:has(.drawer-open.drawer-open) {
 
 .pt-\[4\.5rem\] {
   padding-top: 4.5rem;
-}
-
-.pt-4 {
-  padding-top: 1rem;
 }
 
 .text-left {
@@ -11052,10 +11067,6 @@ html:has(.drawer-open.drawer-open) {
 }
 
 @media (min-width: 640px) {
-  .sm\:hidden {
-    display: none;
-  }
-
   .sm\:w-8\/12 {
     width: 66.666667%;
   }
@@ -11075,10 +11086,6 @@ html:has(.drawer-open.drawer-open) {
 }
 
 @media (min-width: 768px) {
-  .md\:hidden {
-    display: none;
-  }
-
   .md\:h-56 {
     height: 14rem;
   }
@@ -11141,6 +11148,18 @@ html:has(.drawer-open.drawer-open) {
 
   .lg\:grid-cols-4 {
     grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .lg\:gap-2 {
+    gap: 0.5rem;
+  }
+
+  .lg\:gap-20 {
+    gap: 5rem;
+  }
+
+  .lg\:gap-40 {
+    gap: 10rem;
   }
 }
 

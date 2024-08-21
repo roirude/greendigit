@@ -73,8 +73,9 @@
         {% if last_products %}
         <div class="pt-1 overflow-x-auto max-h-[19rem] ">
             <div class="inline-block min-w-full pr-5">
-              <div class="border-b-2 py-5 flex justify-between">
+              <div class="border-b-2 py-5 flex justify-between font-bold">
                 <p class="w-72">Product</p>
+                <p class="w-36">Category</p>
                 <p class="w-24">Quantity</p>
                 <p class="w-40">Price</p>
                 <p class="w-44">Last Update</p>
@@ -97,6 +98,7 @@
                     <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'src/images/products/product_icon.svg' %}{% endif %}" alt="{{ product.name }}" class="w-12 h-12 bg-primary-700 object-cover rounded-full">
                     <span class="capitalize">{{ product.name }}</span>
                   </p>
+                  <p class="w-36"> {{ product.sub_category.category }} </p>
                   <p class="w-24"> {{ product.quantity }} </p>
                   <p class="w-40">XAF {{ product.price }} </p>
                   <p class="w-44"> {{ product.update_at.date }} </p>
