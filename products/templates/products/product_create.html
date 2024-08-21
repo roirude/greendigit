@@ -9,7 +9,6 @@
     <div class="">
         {% trans "Add Product" as heading %}
         {% #container heading=heading  %}
-            {% url 'account_login' as action_url %}
             {% #form form=form url="" button_text=heading %}
             {{ redirect_field }}
             {% csrf_token %}

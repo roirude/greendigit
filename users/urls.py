@@ -8,4 +8,5 @@ urlpatterns = [
     path('fm/dashboard/', views.FarmerDashboardView.as_view(), name='farmer_dashboard'),
     path('csm/dashboard/', views.ConsumerDashboardView.as_view(), name='consumer_dashboard'),
     path("choose_your_profile/", views.choose_user_type, name="choose_your_social_profile"),
+    path('account/<slug:slug>/edit/', views.UserEditProfileView.as_view(), name='edit_profile'),
 ]

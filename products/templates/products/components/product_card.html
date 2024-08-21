@@ -34,11 +34,17 @@
     <div class="flex items-center justify-between mt-5">
         <a href="#" class="flex items-center gap-2">
             <div>
-                <img src="{{ product.farmer.avatar }}" alt="{{ product.farmer.email }}" class="w-12 h-12 bg-primary-700 rounded-full object-cover">
+                {% if product.farmer.avatar %}
+                <img src="{{ product.farmer.avatar.url }}" alt="{{ product.farmer.email }}" class="w-12 h-12 bg-primary-700 rounded-full object-cover">
+                {% else %}
+                <div class=" hover:cursor-pointer uppercase bg-primary-500 hover:bg-primary-400 w-12 h-12 flex items-center justify-center text-3xl rounded-full font-bold">
+                    {{ product.farmer.email|slice:"1" }}
+                </div>
+                {% endif %}
             </div>
-            {% comment %} <p class="text-xs font-semibold">
-                {{ product.farmer.email }}
-            </p> {% endcomment %}
+            <p class="text-sm font-bold italic capitalize">
+                {{ product.farmer.first_name }}
+            </p>
         </a>
         <p class="font-bold text-lg md:text-base text-primary-900">XAF/KG {{ product.price }}</p>
     </div>

@@ -1,9 +1,10 @@
 from typing import Any
 from django.shortcuts import render, redirect
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, UpdateView
 from django.contrib.auth.models import Group
 from django.urls import reverse, reverse_lazy
 from django.views import View
+from django.contrib import messages
 
 from allauth.socialaccount.models import SocialLogin
 from allauth.socialaccount.helpers import complete_social_login
@@ -76,8 +77,6 @@ class FarmerDashboardView(GroupRequiredMixin, TemplateView):
         return context
     
     
-
-
 def choose_user_type(request):
     if request.method == 'POST':
         user_type = request.POST.get('user_type')
@@ -101,3 +100,24 @@ def choose_user_type(request):
         return redirect(reverse('account_login'))  # Redirigez vers la page souhaitée
 
     return render(request, 'choose_user_social_type.html')
+
+
+class UserEditProfileView(UpdateView):
+    template_name = 'users/edit_profile.html'
+    model = CustomUser
+    fields = ['first_name','last_name', 'email', 'country', 'phone', 'address', 'city', 'state', 'date_of_birth', 'description', 'avatar']
+
+    def form_valid(self, form):
+        messages.success(self.request, f"{self.request.user.email}'s profile updated succesfully!")
+        return super(UserEditProfileView, self).form_valid(form)
+
+    def get_success_url(self):
+        slug = self.request.user.slug
+        redirect_url = reverse('edit_profile', kwargs={'slug': slug})
+        return redirect_url
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = CustomUser.objects.get(slug=self.kwargs['slug'])
+        context['user']=user
+        return context

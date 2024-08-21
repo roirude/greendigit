@@ -4,16 +4,16 @@
 
 {% block pannel_section %}
 
-<div class="mb-5 flex justify-between items-center">
-    <div class="flex items-center gap-2 bg-white rounded-md py-1 px-2">
-        <div><input type="search" name="search" id="search" class="bg-white  max-w-72 input input-bordered"></div>
+<div class="mb-5 flex justify-between items-center gap-4 flex-col md:flex-row">
+    <div class="flex flex-1 items-center justify-between gap-2 bg-white rounded-md py-1 px-2 w-full">
+        <div class="w-full"><input type="search" name="search" id="search" placeholder="search" class="bg-white  max-w-72 input input-bordered min-w-full"></div>
         <button type="submit">
             <span class="material-symbols-outlined text-white bg-primary-700 font-bold p-2 rounded-md hover:bg-primary-990 transition-colors ease-linear">
                 search
             </span>
         </button>
     </div>
-    <a href="{% url 'add_product' %}" class="btn btn-primary">
+    <a href="{% url 'add_product' %}" class="btn btn-primary w-full md:w-auto">
         <span class="material-symbols-outlined">add_box</span>
         <span>Add products</span>
     </a>

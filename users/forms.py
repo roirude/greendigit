@@ -5,6 +5,8 @@ from django.urls import reverse_lazy
 from allauth.account.forms import SignupForm
 from allauth.socialaccount.forms import SignupForm as SocialSignupForm
 
+from users.models import CustomUser
+
 
 USER_COUNTRY_CHOICES = [
     ('cameroon', 'Cameroon'),
@@ -40,6 +42,7 @@ class CustomSignupForm(SignupForm):
         user.save()
         return user
     
+
 
 # class CustomSocialSignupForm(SocialSignupForm):
     

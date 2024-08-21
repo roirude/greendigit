@@ -26,7 +26,7 @@
         <div class="relative text-center">
             <nav id="profile" class="hidden absolute bg-white right-1 top-14 text-sm p-3 rounded-md shadow-2xl w-36">
                 <div class="border-b-2 pb-3 mb-3">
-                    <a href="#">Green<span class="text-primary-800">Profile</span></a>
+                    <a href="{% url 'edit_profile' request.user.slug %}">Green<span class="text-primary-800">Profile</span></a>
                 </div>
                 <div class="text-red-500 text-center">
                     <a href="{% url 'account_logout' %}" class="hover:underline">Logout</a>
