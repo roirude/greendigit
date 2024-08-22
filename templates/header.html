@@ -22,6 +22,7 @@
             Green<span class="text-primary-900">Digit</span>
         </a>
     </div>
+    {% block navbar %}{% endblock navbar %}
     <div class="flex items-center gap-x-3">
         <div>
             <span class="material-symbols-outlined text-2xl hover:cursor-pointer hover:bg-gray-300 p-2 rounded-md">
@@ -51,7 +52,7 @@
         </div>
     </div>
 </header>
-<section class="w-full h-full pb-8" style="background: rgb(3,140,87); background: linear-gradient(15deg, rgba(3,140,87,0.3) 0%, rgba(241,241,241,1) 60%);">
+<section class="pb-8 w-full min-h-full">
     {% block section %}{% endblock section %}
 </section>
 
@@ -63,9 +64,14 @@
     function menuToggle() {
         let menubtn = document.getElementById('menu');
         let sidebar = document.getElementById('sidebar');
-        sidebar.classList.toggle('max-md:hidden')
-        sidebar.classList.add('shadow-2xl')
-        
+        let navbar = document.getElementById('navbar');
+        if (sidebar != null){
+            sidebar.classList.toggle('max-md:hidden');
+            sidebar.classList.add('shadow-2xl');
+        }
+        if (navbar != null){
+            navbar.classList.toggle('hidden');
+        }
     }
 </script>
 {% endblock content %}
