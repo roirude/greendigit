@@ -1,11 +1,12 @@
 from django.db.models.query import QuerySet
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, RedirectView, TemplateView
 from django.http import JsonResponse
 from django.views import View
 from django.contrib import messages
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 
 
 from products.models import Product, Category, SubCategory
@@ -16,7 +17,6 @@ from products.forms import ProductForm
     
 class FarmerProductListView(GroupRequiredMixin, ListView):
     template_name = 'products/farmer/product_list.html'
-    # context_object_name = 'products'
     model = Product
     group_required = 'Farmers'
     paginate_by = 10 
