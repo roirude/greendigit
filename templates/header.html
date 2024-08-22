@@ -4,7 +4,12 @@
 
 {% block content %}
 <header class="flex bg-white items-center justify-between py-3 font-bold border-b-2 border-solid px-4 fixed z-10 w-full">
-    <div>
+    <div class="flex items-center gap-x-4">
+        <div onclick="menuToggle()" class="relative top-1 cursor-pointer md:hidden">
+            <span class="material-symbols-outlined text-4xl">
+                menu
+            </span>
+        </div>
         {% if request.user.is_authenticated %}
             {% if request.user.is_farmer %}
             {% url 'farmer_dashboard' as home %}
@@ -54,6 +59,14 @@
     function profile() {
         document.getElementById('profile').classList.toggle('hidden');
       }
+
+    function menuToggle() {
+        let menubtn = document.getElementById('menu');
+        let sidebar = document.getElementById('sidebar');
+        sidebar.classList.toggle('max-md:hidden')
+        sidebar.classList.add('shadow-2xl')
+        
+    }
 </script>
 {% endblock content %}
 

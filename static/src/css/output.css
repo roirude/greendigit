@@ -8338,6 +8338,18 @@ html:has(.drawer-open.drawer-open) {
   top: 3.5rem;
 }
 
+.top-5 {
+  top: 1.25rem;
+}
+
+.top-2 {
+  top: 0.5rem;
+}
+
+.top-1 {
+  top: 0.25rem;
+}
+
 .isolate {
   isolation: isolate;
 }
@@ -8626,26 +8638,6 @@ html:has(.drawer-open.drawer-open) {
 
 .max-h-\[19rem\] {
   max-height: 19rem;
-}
-
-.max-h-96 {
-  max-height: 24rem;
-}
-
-.max-h-80 {
-  max-height: 20rem;
-}
-
-.max-h-\[20rem\] {
-  max-height: 20rem;
-}
-
-.max-h-\[22rem\] {
-  max-height: 22rem;
-}
-
-.max-h-\[23rem\] {
-  max-height: 23rem;
 }
 
 .max-h-\[22\.5rem\] {
@@ -11086,6 +11078,10 @@ html:has(.drawer-open.drawer-open) {
 }
 
 @media (min-width: 768px) {
+  .md\:hidden {
+    display: none;
+  }
+
   .md\:h-56 {
     height: 14rem;
   }
@@ -11148,14 +11144,6 @@ html:has(.drawer-open.drawer-open) {
 
   .lg\:grid-cols-4 {
     grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
-  .lg\:gap-2 {
-    gap: 0.5rem;
-  }
-
-  .lg\:gap-20 {
-    gap: 5rem;
   }
 
   .lg\:gap-40 {
