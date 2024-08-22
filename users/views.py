@@ -51,7 +51,7 @@ class SetUserTypeView(View):
             if  user_type == 'farmer':
                 return redirect('farmer_dashboard')
             elif user_type == 'consumer':
-                return redirect('consumer_dashboard')  
+                return redirect('store')  
  
         else: 
             

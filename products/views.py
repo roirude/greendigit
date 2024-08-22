@@ -7,13 +7,11 @@ from django.views import View
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-
-
 from products.models import Product, Category, SubCategory
 from users.models import CustomUser
 from users.mixins import GroupRequiredMixin
 from products.forms import ProductForm
-    
+
     
 class FarmerProductListView(GroupRequiredMixin, ListView):
     template_name = 'products/farmer/product_list.html'

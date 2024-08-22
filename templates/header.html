@@ -14,8 +14,10 @@
             {% if request.user.is_farmer %}
             {% url 'farmer_dashboard' as home %}
             {% elif request.user.is_consumer %}
-            {% url 'consumer_dashboard' as home %}
+            {% url 'store' as home %}
             {% endif %}
+        {% else %}
+            {% url 'index' as home %}
         {% endif %}
         <a href="{{ home }}" class="flex items-center text-2xl font-bold ">
             <img src="{% static 'src/images/logo.png' %}" alt="greendigit" class="w-12 h-12">
@@ -23,6 +25,7 @@
         </a>
     </div>
     {% block navbar %}{% endblock navbar %}
+    {% if request.user.is_authenticated %}
     <div class="flex items-center gap-x-3">
         <div>
             <span class="material-symbols-outlined text-2xl hover:cursor-pointer hover:bg-gray-300 p-2 rounded-md">
@@ -51,6 +54,11 @@
             {% endif %}
         </div>
     </div>
+    {% else %}
+    <div>
+        <a href="{% url 'account_login' %}" class="btn btn-primary">Sign In</a>
+    </div>
+    {% endif %}
 </header>
 <section class="pb-8 w-full min-h-full">
     {% block section %}{% endblock section %}

@@ -14,5 +14,5 @@ class GroupRequiredMixin(LoginRequiredMixin):
         if not request.user.is_authenticated:
             return redirect('index')
         if not Group.objects.get(name=self.group_required) in request.user.groups.all():
-            raise PermissionDenied
+            return redirect('index')
         return super().dispatch(request, *args, **kwargs)

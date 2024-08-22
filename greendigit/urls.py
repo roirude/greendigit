@@ -3,11 +3,12 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
-from greendigit.views import index
+from greendigit.views import index, StoreView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='index'),
+    path('store/', StoreView.as_view(), name='store'),
     path('accounts/', include('allauth.urls')),
     path('user/', include('users.urls')),
     path('products/', include('products.urls')),

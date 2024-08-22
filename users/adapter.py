@@ -15,7 +15,7 @@ class CustomAccountAdapter(DefaultAccountAdapter):
         if request.user.is_authenticated and request.user.is_farmer:
             return reverse_lazy('farmer_dashboard')
         elif request.user.is_authenticated and request.user.is_consumer:
-            return reverse_lazy('consumer_dashboard')
+            return reverse_lazy('store')
         else:
             return super().get_login_redirect_url(request)
         
@@ -25,7 +25,7 @@ class CustomSocialAccountAdapter(DefaultSocialAccountAdapter):
         if request.user.is_authenticated and request.user.is_farmer:
             return reverse('farmer_dashboard')
         elif request.user.is_authenticated and request.user.is_consumer:
-            return reverse('consumer_dashboard')
+            return reverse('store')
         else:
             return super().get_connect_redirect_url(request, socialaccount)
         
