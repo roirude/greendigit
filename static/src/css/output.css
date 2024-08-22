@@ -8326,6 +8326,10 @@ html:has(.drawer-open.drawer-open) {
   top: 0px;
 }
 
+.top-1 {
+  top: 0.25rem;
+}
+
 .top-1\/2 {
   top: 50%;
 }
@@ -8336,18 +8340,6 @@ html:has(.drawer-open.drawer-open) {
 
 .top-14 {
   top: 3.5rem;
-}
-
-.top-5 {
-  top: 1.25rem;
-}
-
-.top-2 {
-  top: 0.5rem;
-}
-
-.top-1 {
-  top: 0.25rem;
 }
 
 .isolate {
@@ -9284,6 +9276,10 @@ html:has(.drawer-open.drawer-open) {
   gap: 1.25rem;
 }
 
+.gap-10 {
+  gap: 2.5rem;
+}
+
 .gap-x-1 {
   -moz-column-gap: 0.25rem;
        column-gap: 0.25rem;
@@ -9848,6 +9844,11 @@ html:has(.drawer-open.drawer-open) {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
+.bg-yellow-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(234 179 8 / var(--tw-bg-opacity));
+}
+
 .bg-opacity-50 {
   --tw-bg-opacity: 0.5;
 }
@@ -10076,6 +10077,10 @@ html:has(.drawer-open.drawer-open) {
 
 .pt-\[4\.5rem\] {
   padding-top: 4.5rem;
+}
+
+.pt-3 {
+  padding-top: 0.75rem;
 }
 
 .text-left {

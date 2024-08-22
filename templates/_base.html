@@ -28,6 +28,22 @@
         {% block content %}
         {% endblock content %}
     </div>
+
+    <script>
+        function openPopup(productName, deleteUrl) {
+          document.getElementById('product_name').textContent = productName;
+          document.getElementById('product_delete_url').href = deleteUrl;
+          document.getElementById('deleteModal').classList.remove('hidden');
+        }
+        
+        function closePopup() {
+          document.getElementById('deleteModal').classList.add('hidden');
+        }
+    
+        function closeMessagePopUp() {
+          document.getElementById('message').classList.add('hidden');
+        }
+      </script>
 </body>
  
 </html>

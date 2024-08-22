@@ -16,10 +16,10 @@ from products.forms import ProductForm
     
 class FarmerProductListView(GroupRequiredMixin, ListView):
     template_name = 'products/farmer/product_list.html'
-    context_object_name = 'products'
+    # context_object_name = 'products'
     model = Product
     group_required = 'Farmers'
-    
+    paginate_by = 10 
     
     def get_queryset(self):
         user = self.request.user
@@ -74,7 +74,7 @@ class ProductUpdateView(GroupRequiredMixin, UpdateView):
     
 
 class ProductDeleteView(GroupRequiredMixin, RedirectView):
-    pattern_name = 'farmer_dashboard'
+    pattern_name = 'farmer_products'
     group_required = 'Farmers'
 
     def get_redirect_url(self, *args, **kwargs):
