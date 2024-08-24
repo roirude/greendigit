@@ -1,0 +1,68 @@
+{% extends "green_section.html" %}
+
+{% block green_section %}
+    <section class="bg-white shadow-md">
+        <div>
+            <div>
+                <img src="{{ product.image.url }}" alt="product.name" class="min-w-screen-md">
+            </div>
+            <div class="p-8">
+                <div class="flex items-center gap-4 pb-4">
+                    <h1 class="font-bold capitalize text-4xl">{{ product.name }}</h1>
+                    {% if product.quantity > 0 %}
+                    <p class="p-2 bg-primary-300 font-semibold text-primary-800 rounded-sm">In stock</p>
+                    {% else %}
+                    <p class="p-2 bg-red-300 font-semibold text-red-700 rounded-sm">Out of stock</p>
+                    {% endif %}
+                </div>
+                <div>
+                    <div class="">
+                        <a href="{% url 'detail_product' product.slug %}" class="flex items-center">
+                            <span class="material-symbols-outlined">
+                                grade
+                            </span>
+                            <span class="material-symbols-outlined">
+                                grade
+                            </span>
+                            <span class="material-symbols-outlined">
+                                grade
+                            </span>
+                            <span class="material-symbols-outlined">
+                                grade
+                            </span>
+                            <span class="material-symbols-outlined">
+                                grade
+                            </span>
+                            <span class="font-semibold ml-1 text-primary-800">(31)</span>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <span>XAF {{ product.price }}</span>
+                </div>
+                <div>
+                    divider
+                </div>
+                <div>
+                    <p>{{ product.description }}</p>
+                </div>
+                <div>divider</div>
+                <div>
+                    order btn
+                </div>
+                <div>divider</div>
+                <div>
+                    farmer card
+                </div>
+                <div>
+                    divider
+                </div>
+                <div>
+                    <p>
+                        <span>Category: </span><span>{{ product.sub_category.category }}</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock green_section %}

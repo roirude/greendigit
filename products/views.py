@@ -85,13 +85,13 @@ class ProductDeleteView(GroupRequiredMixin, RedirectView):
         return redirect_url
 
 
-# class ProductDetailView(DetailView):
-#     template_name = 'product/product_detail.html'
-#     context_object_name = 'product'
-#     model = Product
+class ProductDetailView(DetailView):
+    template_name = 'products/product_detail.html'
+    context_object_name = 'product'
+    model = Product
 
-#     def get_object(self, queryset=None):
-#         return get_object_or_404(Product, slug=self.kwargs['slug'])
+    def get_object(self, queryset=None):
+        return get_object_or_404(Product, slug=self.kwargs['slug'])
 
 
 # class SubCategoryProductListView(ListView):
