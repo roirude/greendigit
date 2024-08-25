@@ -8604,6 +8604,10 @@ html:has(.drawer-open.drawer-open) {
   height: 3rem;
 }
 
+.h-20 {
+  height: 5rem;
+}
+
 .h-24 {
   height: 6rem;
 }
@@ -8618,6 +8622,10 @@ html:has(.drawer-open.drawer-open) {
 
 .h-72 {
   height: 18rem;
+}
+
+.h-80 {
+  height: 20rem;
 }
 
 .h-96 {
@@ -8654,6 +8662,10 @@ html:has(.drawer-open.drawer-open) {
 
 .w-12 {
   width: 3rem;
+}
+
+.w-20 {
+  width: 5rem;
 }
 
 .w-24 {
@@ -8722,14 +8734,6 @@ html:has(.drawer-open.drawer-open) {
 
 .max-w-xs {
   max-width: 20rem;
-}
-
-.max-w-lg {
-  max-width: 32rem;
-}
-
-.max-w-screen-md {
-  max-width: 768px;
 }
 
 .flex-1 {
@@ -9300,10 +9304,6 @@ html:has(.drawer-open.drawer-open) {
   gap: 1.25rem;
 }
 
-.gap-6 {
-  gap: 1.5rem;
-}
-
 .gap-x-1 {
   -moz-column-gap: 0.25rem;
        column-gap: 0.25rem;
@@ -9706,6 +9706,11 @@ html:has(.drawer-open.drawer-open) {
   border-top-right-radius: 0.25rem;
 }
 
+.rounded-r-md {
+  border-top-right-radius: 0.375rem;
+  border-bottom-right-radius: 0.375rem;
+}
+
 .rounded-bl {
   border-bottom-left-radius: 0.25rem;
 }
@@ -9804,6 +9809,11 @@ html:has(.drawer-open.drawer-open) {
   border-style: none;
 }
 
+.border-primary-200 {
+  --tw-border-opacity: 1;
+  border-color: rgb(212 229 218 / var(--tw-border-opacity));
+}
+
 .bg-\[rgb\(255\2c 0\2c 0\)\] {
   --tw-bg-opacity: 1;
   background-color: rgb(255 0 0 / var(--tw-bg-opacity));
@@ -9839,6 +9849,16 @@ html:has(.drawer-open.drawer-open) {
   background-color: rgb(31 41 55 / var(--tw-bg-opacity));
 }
 
+.bg-primary-200 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(212 229 218 / var(--tw-bg-opacity));
+}
+
+.bg-primary-300 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(196 222 206 / var(--tw-bg-opacity));
+}
+
 .bg-primary-500 {
   --tw-bg-opacity: 1;
   background-color: rgb(154 201 173 / var(--tw-bg-opacity));
@@ -9859,6 +9879,11 @@ html:has(.drawer-open.drawer-open) {
   background-color: rgb(3 140 87 / var(--tw-bg-opacity));
 }
 
+.bg-red-300 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(252 165 165 / var(--tw-bg-opacity));
+}
+
 .bg-red-500 {
   --tw-bg-opacity: 1;
   background-color: rgb(239 68 68 / var(--tw-bg-opacity));
@@ -9867,21 +9892,6 @@ html:has(.drawer-open.drawer-open) {
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-
-.bg-primary-400 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(177 213 191 / var(--tw-bg-opacity));
-}
-
-.bg-primary-300 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(196 222 206 / var(--tw-bg-opacity));
-}
-
-.bg-red-300 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(252 165 165 / var(--tw-bg-opacity));
 }
 
 .bg-opacity-50 {

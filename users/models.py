@@ -47,7 +47,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         return self.email
 
     @property
-    def complete_username(self):
+    def fullname(self):
         return f'{self.first_name} {self.last_name}'
 
     def save(self, *args, **kwargs):

@@ -1,10 +1,10 @@
 {% extends "green_section.html" %}
 
 {% block green_section %}
-    <section class="bg-white shadow-md">
+    <section class="bg-white shadow-md rounded-md">
         <div>
             <div>
-                <img src="{{ product.image.url }}" alt="product.name" class="min-w-screen-md">
+                <img src="{{ product.image.url }}" alt="product.name" class="w-full h-80 object-cover">
             </div>
             <div class="p-8">
                 <div class="flex items-center gap-4 pb-4">
@@ -37,29 +37,47 @@
                         </a>
                     </div>
                 </div>
-                <div>
-                    <span>XAF {{ product.price }}</span>
+                <div class="py-4 font-bold text-2xl border-b-2 border-primary-200">
+                    <span class="text-primary-800">XAF {{ product.price }}</span>
                 </div>
-                <div>
-                    divider
+                <div class="py-4 border-b-2 border-primary-200">
+                    <h2 class="capitalize font-semibold text-xl pb-4">product description</h2>
+                    <p class="text-justify text-gray-600">{{ product.description }}</p>
                 </div>
-                <div>
-                    <p>{{ product.description }}</p>
+                <div class="py-4 flex items-center justify-between gap-5 border-b-2 border-primary-200">
+                    <div>
+                    </div>
+                    <div class="flex items-center btn btn-primary flex-1">
+                        Order
+                        <span class="material-symbols-outlined">
+                            shopping_bag
+                        </span>
+                    </div>
+                    <a href="#">
+                        <span class="material-symbols-outlined bg-primary-200 text-primary-800 p-3 rounded-full">
+                            favorite
+                        </span>
+                    </a>
                 </div>
-                <div>divider</div>
-                <div>
-                    order btn
+                <div class="py-4 border-b-2 border-primary-200">
+                    <h2 class="capitalize font-semibold text-xl pb-4">farmer</h2>
+                    <a href="#" class="flex gap-4 items-center hover:shadow-md transition-shadow ease-linear">
+                        {% if product.farmer.avatar %}
+                        <img src="{{ product.farmer.avatar.url }}" alt="{{ product.farmer.email }}" class="w-20 h-20 bg-primary-700 rounded-full object-cover">
+                        {% else %}
+                        <div class=" hover:cursor-pointer uppercase bg-primary-500 hover:bg-primary-400 w-20 h-20 flex items-center justify-center text-3xl rounded-full font-bold">
+                            {{ product.farmer.email|slice:"1" }}
+                        </div>
+                        {% endif %}
+                        <p class="flex flex-col">
+                            <span class="text-2xl font-semibold capitalize text-primary-800">{{ product.farmer.fullname }}</span>
+                            <span class="text-sm text-gray-500 italic">{{ product.farmer.description|slice:"50" }}</span>
+                        </p>
+                    </a>
                 </div>
-                <div>divider</div>
-                <div>
-                    farmer card
-                </div>
-                <div>
-                    divider
-                </div>
-                <div>
-                    <p>
-                        <span>Category: </span><span>{{ product.sub_category.category }}</span>
+                <div class="pt-4">
+                    <p class="font-semibold">
+                        <span class="">Category: </span><a href="#" class="text-gray-500 capitalize hover:text-primary-800">{{ product.sub_category.category }}</a>
                     </p>
                 </div>
             </div>
