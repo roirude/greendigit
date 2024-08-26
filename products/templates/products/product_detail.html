@@ -1,40 +1,42 @@
 {% extends "green_section.html" %}
 
 {% block green_section %}
-    <section class="bg-white shadow-md rounded-md">
-        <div>
-            <div>
-                <img src="{{ product.image.url }}" alt="product.name" class="w-full h-80 object-cover">
+    <section class="bg-white shadow-md rounded-md md:mx-32 lg:mt-2">
+        <div class="md:flex md:h-3/4">
+            <div class="md:flex-1">
+                <img src="{{ product.image.url }}" alt="product.name" class="w-full h-80 md:h-full object-cover">
             </div>
-            <div class="p-8">
-                <div class="flex items-center gap-4 pb-4">
-                    <h1 class="font-bold capitalize text-4xl">{{ product.name }}</h1>
-                    {% if product.quantity > 0 %}
-                    <p class="p-2 bg-primary-300 font-semibold text-primary-800 rounded-sm">In stock</p>
-                    {% else %}
-                    <p class="p-2 bg-red-300 font-semibold text-red-700 rounded-sm">Out of stock</p>
-                    {% endif %}
-                </div>
+            <div class="p-8 md:flex-1">
                 <div>
-                    <div class="">
-                        <a href="{% url 'detail_product' product.slug %}" class="flex items-center">
-                            <span class="material-symbols-outlined">
-                                grade
-                            </span>
-                            <span class="material-symbols-outlined">
-                                grade
-                            </span>
-                            <span class="material-symbols-outlined">
-                                grade
-                            </span>
-                            <span class="material-symbols-outlined">
-                                grade
-                            </span>
-                            <span class="material-symbols-outlined">
-                                grade
-                            </span>
-                            <span class="font-semibold ml-1 text-primary-800">(31)</span>
-                        </a>
+                    <div class="flex items-center md:justify-between gap-4 pb-4">
+                        <h1 class="font-bold capitalize text-4xl">{{ product.name }}</h1>
+                        {% if product.quantity > 0 %}
+                        <p class="p-2 bg-primary-300 font-semibold text-primary-800 rounded-sm">In stock</p>
+                        {% else %}
+                        <p class="p-2 bg-red-300 font-semibold text-red-700 rounded-sm">Out of stock</p>
+                        {% endif %}
+                    </div>
+                    <div>
+                        <div class="">
+                            <a href="{% url 'detail_product' product.slug %}" class="flex items-center">
+                                <span class="material-symbols-outlined">
+                                    grade
+                                </span>
+                                <span class="material-symbols-outlined">
+                                    grade
+                                </span>
+                                <span class="material-symbols-outlined">
+                                    grade
+                                </span>
+                                <span class="material-symbols-outlined">
+                                    grade
+                                </span>
+                                <span class="material-symbols-outlined">
+                                    grade
+                                </span>
+                                <span class="font-semibold ml-1 text-primary-800">(31)</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div class="py-4 font-bold text-2xl border-b-2 border-primary-200">
