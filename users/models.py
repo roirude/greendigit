@@ -21,6 +21,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     code = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     slug = models.SlugField(unique=True, editable=False)
     avatar = models.ImageField(upload_to="Users/avatars/", blank=True, null=True)
+    cover = models.ImageField(upload_to="Users/covers/", blank=True, null=True)
     first_name = models.CharField(max_length=100, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
     last_name = models.CharField(max_length=100, blank=True, null=True)

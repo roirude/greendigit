@@ -21,7 +21,7 @@ def index(request):
 class StoreView(ListView):
     model = Product
     template_name = 'greendigit/store.html'
-    paginate_by = 20
+    paginate_by = 50
     
     def get_queryset(self):
         products = Product.objects.filter(is_delete=False).order_by('-created_at')
