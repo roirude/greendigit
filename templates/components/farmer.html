@@ -1,0 +1,41 @@
+{% load static %}
+<div class="bg-white md:max-w-sm shadow-md hover:shadow-primary-800 transition-shadow ease-linear">
+    <div class="">
+        {% if farmer.cover %}
+        <img src="{{ farmer.cover.url }}" alt="{{ farmer.firstname }}" class="max-w-full object-cover">
+        {% else %}
+        <img src="{% static 'src/images/users/banner.png' %}" alt="user_banner" class="max-w-full object-cover">
+        {% endif %}
+    </div>
+    <div class="p-4">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <img src="{{ farmer.avatar.url }}" alt="{{farmer.firstname }}" class="w-12 h-12 rounded-full object-cover">
+                <h2 class="capitalize text-xl font-semibold ">
+                    {% if farmer.fullname %}
+                    {{ farmer.fullname }}
+                    {% else %}
+                    {{ farmer.email|slice:":5"}}
+                    {% endif %}
+                </h2>
+            </div>
+            <div class="font-bold uppercase bg-primary-800 p-2 text-white rounded-md">
+                pro
+            </div>
+        </div>
+        <div class="flex items-center text-xl pt-4 text-primary-800 gap-1">
+            <span class="material-symbols-outlined">
+                star
+            </span>
+            <p>
+                <span class="font-semibold">
+                    5.0
+                </span>
+                <span class="text-gray-600">(240)</span>
+            </p>
+        </div>
+        <div class="text-gray-500 font-medium pt-4">
+            {{ farmer.description|slice:":50"}}
+        </div>
+    </div>
+</div>

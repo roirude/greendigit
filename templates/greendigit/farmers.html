@@ -1,6 +1,13 @@
 {% extends 'green_section.html' %}
 {% load static %}
+{% load users %}
 
 {% block green_section %}
-bonjour
+<section>
+    <div>
+       {% for farmer in page_obj  %}
+        {% #farmer farmer=farmer %}{% /farmer %}
+       {% endfor %}
+    </div>
+</section>
 {% endblock green_section %}

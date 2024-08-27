@@ -105,7 +105,7 @@ def choose_user_type(request):
 class UserEditProfileView(UpdateView):
     template_name = 'users/edit_profile.html'
     model = CustomUser
-    fields = ['first_name','last_name', 'email', 'country', 'phone', 'address', 'city', 'state', 'date_of_birth', 'description', 'avatar']
+    fields = ['first_name','last_name', 'email', 'country', 'phone', 'address', 'city', 'state', 'date_of_birth', 'description', 'avatar', 'cover']
 
     def form_valid(self, form):
         messages.success(self.request, f"{self.request.user.email}'s profile updated succesfully!")
