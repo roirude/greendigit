@@ -1,6 +1,6 @@
 from typing import Any
 from django.shortcuts import render, redirect
-from django.views.generic import TemplateView, UpdateView
+from django.views.generic import TemplateView, UpdateView, DetailView
 from django.contrib.auth.models import Group
 from django.urls import reverse, reverse_lazy
 from django.views import View
@@ -121,3 +121,10 @@ class UserEditProfileView(UpdateView):
         user = CustomUser.objects.get(slug=self.kwargs['slug'])
         context['user']=user
         return context
+    
+
+class FarmerDetailView(DetailView):
+    model = CustomUser
+    template_name = 'users/farmers/profile_detail.html'
+    context_object_name = 'farmer'
+    

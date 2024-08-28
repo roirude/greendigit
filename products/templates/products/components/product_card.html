@@ -32,7 +32,7 @@
     </div>
     <p class="text-gray-500 mt-5 text-justify">{{ product.description|truncatechars:70 }}</p>
     <div class="flex items-center justify-between mt-5">
-        <a href="#" class="flex items-center gap-2">
+        <a href="{% url 'farmer_detail' product.farmer.slug %}" class="flex items-center gap-2">
             <div>
                 {% if product.farmer.avatar %}
                 <img src="{{ product.farmer.avatar.url }}" alt="{{ product.farmer.email }}" class="w-12 h-12 bg-primary-700 rounded-full object-cover">

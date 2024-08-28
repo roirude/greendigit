@@ -1,15 +1,15 @@
 {% load static %}
 <div class="bg-white md:max-w-sm shadow-md hover:shadow-primary-800 transition-shadow ease-linear">
-    <div class="">
+    <a href="{% url 'farmer_detail' farmer.slug %}" class="">
         {% if farmer.cover %}
         <img src="{{ farmer.cover.url }}" alt="{{ farmer.firstname }}" class="max-w-full object-cover">
         {% else %}
         <img src="{% static 'src/images/users/banner.png' %}" alt="user_banner" class="max-w-full object-cover">
         {% endif %}
-    </div>
+    </a>
     <div class="p-4">
         <div class="flex items-center justify-between">
-            <div class="flex items-center gap-2">
+            <a href="{% url 'farmer_detail' farmer.slug %}" class="flex items-center gap-2">
                 <img src="{{ farmer.avatar.url }}" alt="{{farmer.firstname }}" class="w-12 h-12 rounded-full object-cover">
                 <h2 class="capitalize text-xl font-semibold ">
                     {% if farmer.fullname %}
@@ -18,7 +18,7 @@
                     {{ farmer.email|slice:":5"}}
                     {% endif %}
                 </h2>
-            </div>
+            </a>
             <div class="font-bold uppercase bg-primary-800 p-2 text-white rounded-md">
                 pro
             </div>
