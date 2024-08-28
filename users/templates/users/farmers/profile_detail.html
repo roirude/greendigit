@@ -40,13 +40,40 @@
             </div>
         </div>
     </section>
-    <section class="">
+    {% if farmer_products %}
+    <section class="space-y-2">
         <h2 class="text-xl font-medium text-gray-500">
             Recents products
         </h2>
-        <div class="bg-white">
-
+        <div class="gap-5 grid md:grid-cols-2 lg:grid-cols-4 h-full">
+            {% for product in farmer_products %}
+            <div class=" bg-white p-5 rounded-md relative hover:shadow-md hover:shadow-primary-700 transition-shadow ease-linear">
+                <a href="" class="absolute bg-primary-800 p-2 text-sm font-semibold capitalize text-center rounded-sm text-white min-w-20 right-10 top-10 hover:bg-primary-700 transition-colors ease-linear ">
+                    {{ product.sub_category.category }}
+                </a>
+                <a href="{% url 'detail_product' product.slug %}">
+                    <img src="{% if product.image %}{{ product.image.url }}{% else %}{% endif %}" alt="{{ product.name }}" class="w-full h-60 object-cover rounded-lg">
+                </a>
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-lg font-semibold mt-4 capitalize"><a href="#">{{ product.name }}</a></h3>
+                        <div>
+                            <a href="{% url 'detail_product' product.slug %}" class="flex items-center text-primary-800">
+                                <span class="material-symbols-outlined">
+                                    grade
+                                </span>
+                                <span class="font-semibold">5.0</span>
+                                <span class="font-semibold ml-1 text-gray-500">(31)</span>
+                            </a>
+                        </div>
+                    </div>
+                    <p class="font-bold text-lg md:text-base text-primary-900">XAF/KG {{ product.price }}</p>
+                </div>
+                <p class="text-gray-500 mt-5 text-justify">{{ product.description|truncatechars:70 }}</p>
+            </div>
+            {% endfor %}
         </div>
     </section>
+    {% endif %}
 </div>
 {% endblock green_section %}

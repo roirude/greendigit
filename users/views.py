@@ -5,6 +5,7 @@ from django.contrib.auth.models import Group
 from django.urls import reverse, reverse_lazy
 from django.views import View
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from allauth.socialaccount.models import SocialLogin
 from allauth.socialaccount.helpers import complete_social_login
@@ -123,8 +124,14 @@ class UserEditProfileView(UpdateView):
         return context
     
 
-class FarmerDetailView(DetailView):
+class FarmerDetailView(LoginRequiredMixin, DetailView):
     model = CustomUser
     template_name = 'users/farmers/profile_detail.html'
     context_object_name = 'farmer'
+    
+    def get_context_data(self, **kwargs) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        farmer = CustomUser.objects.get(slug=self.kwargs['slug'])
+        context["farmer_products"] = Product.objects.filter(is_delete=False, farmer=farmer).order_by('-created_at')[:4]
+        return context
     

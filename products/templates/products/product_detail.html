@@ -63,7 +63,7 @@
                 </div>
                 <div class="py-4 border-b-2 border-primary-200">
                     <h2 class="capitalize font-semibold text-xl pb-4">farmer</h2>
-                    <a href="#" class="flex gap-4 items-center hover:shadow-md transition-shadow ease-linear">
+                    <a href="{% url 'farmer_detail' product.farmer.slug %}" class="flex gap-4 items-center hover:shadow-md transition-shadow ease-linear">
                         {% if product.farmer.avatar %}
                         <img src="{{ product.farmer.avatar.url }}" alt="{{ product.farmer.email }}" class="w-20 h-20 bg-primary-700 rounded-full object-cover">
                         {% else %}
