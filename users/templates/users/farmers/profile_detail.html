@@ -1,0 +1,52 @@
+{% extends 'green_section.html' %}
+{% load static %}
+
+{% block green_section %}
+<div class="space-y-8">
+    <section class="bg-white p-4 shadow-lg rounded-md">
+        <div class="space-y-4">
+            <div class="h-40">
+                {% if farmer.cover %}
+                <img src="{{ farmer.cover.url }}" alt="{{ farmer.firstname }}" class="w-full h-full object-cover rounded-xl shadow-xl">
+                {% else %}
+                <img src="{% static 'src/images/users/banner.png' %}" alt="user_banner" class="w-full h-full object-cover rounded-xl shadow-xl">
+                {% endif %}
+            </div>
+            <div class="w-full flex items-center justify-center flex-col space-y-2">
+                <div class="">
+                    {% if farmer.avatar %}
+                    <img src="{{ farmer.avatar.url }}" alt="{{ product.farmer.email }}" class="w-36 h-36 bg-primary-700 rounded-full object-cover">
+                    {% else %}
+                    <div class=" hover:cursor-pointer uppercase bg-primary-500 hover:bg-primary-400 w-36 h-36 flex items-center justify-center text-3xl rounded-full font-bold">
+                        {{ farmer.email|slice:"1" }}
+                    </div>
+                    {% endif %}
+                </div>
+                <h2 class="font-semibold text-xl">
+                    {{ farmer.email }}
+                </h2>
+                <div class="flex items-center text-primary-700 font-semibold">
+                    <span class="material-symbols-outlined">
+                        grade
+                    </span>
+                    <span>
+                        5.0
+                    </span>
+                    <span class="pl-1 text-gray-600">(4)</span>
+                </div>
+                <p class="text-gray-600 font-medium">
+                    {{ farmer.description }}
+                </p>
+            </div>
+        </div>
+    </section>
+    <section class="">
+        <h2 class="text-xl font-medium text-gray-500">
+            Recents products
+        </h2>
+        <div class="bg-white">
+
+        </div>
+    </section>
+</div>
+{% endblock green_section %}
