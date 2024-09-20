@@ -1,0 +1,9 @@
+<h1>Products to Compare</h1>
+
+<ul>
+    {% for product in comparison_products %}
+        <li>{{ product.name }}</li>
+    {% empty %}
+        <li>No products to compare.</li>
+    {% endfor %}
+</ul>

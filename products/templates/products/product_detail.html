@@ -2,6 +2,19 @@
 
 {% block green_section %}
     <section class="bg-white shadow-md rounded-md md:mx-32 lg:mt-2">
+        <div>
+            {% if messages %}
+              {% for message in messages %}
+                <div id="message" class="py-3 px-5 mb-4 text-gray-800 font-medium rounded-md flex items-center justify-between
+                    {% if message.tags == 'success' %}bg-primary-600{% endif %}
+                    {% if message.tags == 'error' %}bg-red-500{% endif %}
+                ">
+                  <p class="text-white">{{ message }}</p>
+                  <a href="" onclick="closeMessagePopUp()"><span class="material-symbols-outlined text-red-700 text-3xl font-bold">cancel</span></a>
+                </div>
+              {% endfor %}
+            {% endif %}
+          </div>
         <div class="md:flex md:h-3/4">
             <div class="md:flex-1">
                 <img src="{{ product.image.url }}" alt="product.name" class="w-full h-80 md:h-full object-cover">
@@ -47,8 +60,14 @@
                     <p class="text-justify text-gray-600">{{ product.description }}</p>
                 </div>
                 <div class="py-4 flex items-center justify-between gap-5 border-b-2 border-primary-200">
-                    <div>
-                    </div>
+                    <form action="{% url 'add_to_comparison' product.slug %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit">
+                            <span class="material-symbols-outlined bg-primary-200 text-primary-800 p-3 rounded-full">
+                                compare
+                            </span>
+                        </button>
+                    </form>
                     <div class="flex items-center btn btn-primary flex-1">
                         Order
                         <span class="material-symbols-outlined">

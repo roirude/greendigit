@@ -13,6 +13,7 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('user/', include('users.urls')),
     path('products/', include('products.urls')),
+    path('comparison/', include('comparison.urls')),
 ]
 
 if settings.DEBUG:
