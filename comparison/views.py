@@ -1,5 +1,6 @@
+from typing import Any
 from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import View, TemplateView
+from django.views.generic import View, TemplateView, RedirectView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.urls import reverse
@@ -32,3 +33,12 @@ class ProductComparisonListView(TemplateView):
         context["comparison_products"] = comparison.products.all() if comparison else []
         return context
     
+
+class ClearProductComparisonListView(LoginRequiredMixin, RedirectView):
+    pattern_name = 'product_comparison_list'
+    
+    def get_redirect_url(self, *args, **kwargs):
+        comparaison_products = ProductComparison.objects.filter(user=self.request.user)
+        comparaison_products.delete()
+        messages.success(self.request, f'The comparison list has been cleared.')
+        return reverse(self.pattern_name)

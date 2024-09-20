@@ -1,5 +1,9 @@
-<h1>Products to Compare</h1>
+{% load static %}
 
+<h1>Products to Compare</h1>
+<a href="{% url 'clear_product_comparison_list' %}">
+    Clear Comparaison List
+</a>
 <ul>
     {% for product in comparison_products %}
         <li>{{ product.name }}</li>
