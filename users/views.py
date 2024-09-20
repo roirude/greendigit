@@ -82,13 +82,11 @@ def choose_user_type(request):
     if request.method == 'POST':
         user_type = request.POST.get('user_type')
         
-        # Récupérer le sociallogin de la session
         sociallogin = SocialLogin.deserialize(request.session.pop('socialaccount_sociallogin'))
         user = sociallogin.user
-        user.user_type = user_type  # Mettre à jour le type d'utilisateur
+        user.user_type = user_type 
         user.save()
         
-        # Ajouter l'utilisateur au bon groupe
         if user_type == 'farmer':
             user.is_farmer = True
             user.groups.add(Group.objects.get(name='Farmers'))
@@ -96,9 +94,8 @@ def choose_user_type(request):
             user.is_consumer = True
             user.groups.add(Group.objects.get(name='Consumer'))
 
-        # Finaliser l'authentification
         sociallogin.save(request)
-        return redirect(reverse('account_login'))  # Redirigez vers la page souhaitée
+        return redirect(reverse('account_login'))
 
     return render(request, 'choose_user_social_type.html')
 
