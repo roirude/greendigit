@@ -7,7 +7,10 @@
     <div>
       {% if messages %}
         {% for message in messages %}
-          <div id="message" class="bg-primary-600 py-3 px-5 mb-4 text-gray-800 font-medium rounded-md flex items-center justify-between">
+          <div id="message" class="py-3 px-5 mb-4 text-gray-800 font-medium rounded-md flex items-center justify-between
+            {% if message.tags == 'success' %}bg-primary-600{% endif %}
+            {% if message.tags == 'error' %}bg-red-500{% endif %}
+          ">
             <p class="text-white">{{ message }}</p>
             <a href="" onclick="closeMessagePopUp()"><span class="material-symbols-outlined text-red-700 text-3xl font-bold">cancel</span></a>
           </div>
@@ -15,11 +18,14 @@
       {% endif %}
     </div>
     <div class="flex justify-center items-center gap-4">
-      <div class="flex flex-1 items-center justify-center gap-2 bg-white rounded-md py-1 px-2 max-w-md">
-        <div class="w-full">
-          <input type="search" name="search" id="search" placeholder="search" class="bg-white max-w-72 input input-bordered min-w-full" />
-        </div>
-        <button type="submit"><span class="material-symbols-outlined text-white bg-primary-700 font-bold p-2 rounded-md hover:bg-primary-990 transition-colors ease-linear">search</span></button>
+      <div class="">
+        <form action="" method="get" class="flex flex-1 items-center justify-center gap-2 bg-white rounded-md py-1 px-2 max-w-md">
+          <div class="w-full">
+              {% csrf_token %}
+              <input type="search" name="search" id="search" placeholder="search" class="bg-white max-w-72 input input-bordered min-w-full" />
+          </div>
+          <button type="submit"><span class="material-symbols-outlined text-white bg-primary-700 font-bold p-2 rounded-md hover:bg-primary-990 transition-colors ease-linear">search</span></button>
+        </form>
       </div>
       <a href="#" class=""><span class="material-symbols-outlined font-bold text-3xl bg-primary-500 rounded-md p-2 hover:bg-primary-700 hover:text-white transition-all ease-linear">Tune</span></a>
     </div>

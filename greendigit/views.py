@@ -3,6 +3,7 @@ from django.db.models.query import QuerySet
 from django.shortcuts import render, redirect
 from django.views.generic import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
 
 from users.mixins import GroupRequiredMixin
 from products.models import Product
@@ -25,6 +26,11 @@ class StoreView(ListView):
     
     def get_queryset(self):
         products = Product.objects.filter(is_delete=False).order_by('-created_at')
+        search_query = self.request.GET.get('search')
+        if search_query:
+            products = Product.objects.filter(is_delete=False, name__icontains=search_query)
+            if not products:
+                products = Product.objects.filter(is_delete=False).order_by('-created_at')
         return products
     
 
