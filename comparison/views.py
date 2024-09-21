@@ -24,7 +24,7 @@ class AddToComparisonView(LoginRequiredMixin, View):
         return redirect(reverse('store'))
     
 
-class ProductComparisonListView(TemplateView):
+class ProductComparisonListView(LoginRequiredMixin, TemplateView):
     template_name = 'comparison/products/comparison_list.html'
     
     def get_context_data(self, **kwargs):
