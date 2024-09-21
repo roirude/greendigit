@@ -1,16 +1,22 @@
 {% load static %}
-<div class="bg-white md:max-w-sm shadow-md hover:shadow-primary-800 transition-shadow ease-linear">
+<div class="bg-white md:max-w-sm shadow-md hover:shadow-primary-800 transition-shadow ease-linear w-96">
     <a href="{% url 'farmer_detail' farmer.slug %}" class="">
         {% if farmer.cover %}
-        <img src="{{ farmer.cover.url }}" alt="{{ farmer.firstname }}" class="max-w-full object-cover">
+        <img src="{{ farmer.cover.url }}" alt="{{ farmer.firstname }}" class="min-w-full h-56 object-cover">
         {% else %}
-        <img src="{% static 'src/images/users/banner.png' %}" alt="user_banner" class="max-w-full object-cover">
+        <img src="{% static 'src/images/users/banner.png' %}" alt="user_banner" class="min-w-full h-56 object-cover">
         {% endif %}
     </a>
     <div class="p-4">
         <div class="flex items-center justify-between">
             <a href="{% url 'farmer_detail' farmer.slug %}" class="flex items-center gap-2">
-                <img src="{{ farmer.avatar.url }}" alt="{{farmer.firstname }}" class="w-12 h-12 rounded-full object-cover">
+                {% if farmer.avatar %}
+                    <img src="{{ farmer.avatar.url }}" alt="{{farmer.firstname }}" class="w-12 h-12 rounded-full object-cover">
+                {% else %}
+                    <div class=" hover:cursor-pointer uppercase bg-primary-500 hover:bg-primary-400 w-12 h-12 flex items-center justify-center text-3xl rounded-full font-bold">
+                        {{ farmer.email|slice:"1" }}
+                    </div>
+                {% endif %}
                 <h2 class="capitalize text-xl font-semibold ">
                     {% if farmer.fullname %}
                     {{ farmer.fullname }}

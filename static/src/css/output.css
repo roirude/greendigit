@@ -8653,6 +8653,10 @@ html:has(.drawer-open.drawer-open) {
   height: 100vh;
 }
 
+.h-56 {
+  height: 14rem;
+}
+
 .max-h-\[19rem\] {
   max-height: 19rem;
 }
@@ -8719,6 +8723,10 @@ html:has(.drawer-open.drawer-open) {
 
 .w-screen {
   width: 100vw;
+}
+
+.w-96 {
+  width: 24rem;
 }
 
 .min-w-20 {

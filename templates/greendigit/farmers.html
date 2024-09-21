@@ -4,7 +4,19 @@
 
 {% block green_section %}
 <section>
-    <div>
+    <div class="flex justify-center items-center gap-4">
+        <div class="">
+          <form action="" method="get" class="flex flex-1 items-center justify-center gap-2 bg-white rounded-md py-1 px-2 max-w-md">
+            <div class="w-full">
+                {% csrf_token %}
+                <input type="search" name="search" id="search" placeholder="search" class="bg-white max-w-72 input input-bordered min-w-full" />
+            </div>
+            <button type="submit"><span class="material-symbols-outlined text-white bg-primary-700 font-bold p-2 rounded-md hover:bg-primary-990 transition-colors ease-linear">search</span></button>
+          </form>
+        </div>
+        <a href="#" class=""><span class="material-symbols-outlined font-bold text-3xl bg-primary-500 rounded-md p-2 hover:bg-primary-700 hover:text-white transition-all ease-linear">Tune</span></a>
+    </div>
+    <div class="flex gap-5 mt-5">
        {% for farmer in page_obj  %}
         {% #farmer farmer=farmer %}{% /farmer %}
        {% endfor %}

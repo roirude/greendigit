@@ -41,5 +41,10 @@ class FarmerStoreView(LoginRequiredMixin, ListView):
     
     def get_queryset(self):
         farmers = CustomUser.objects.filter(is_farmer=True)
+        search_query = self.request.GET.get('search')
+        if search_query:
+            farmers = CustomUser.objects.filter(is_farmer=True, first_name__icontains=search_query)
+            if not farmers:
+                farmers = CustomUser.objects.filter(is_farmer=True)
         return farmers
     
