@@ -21,7 +21,7 @@ class AddToComparisonView(LoginRequiredMixin, View):
         else:
             messages.error(self.request, f'Error: You can only compare 2 products at a time.')
             
-        return redirect(reverse('detail_product', kwargs={'slug': product.slug}))
+        return redirect(reverse('store'))
     
 
 class ProductComparisonListView(TemplateView):

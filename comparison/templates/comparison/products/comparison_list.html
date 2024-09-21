@@ -1,13 +1,74 @@
+{% extends "green_section.html" %}
 {% load static %}
-
-<h1>Products to Compare</h1>
-<a href="{% url 'clear_product_comparison_list' %}">
-    Clear Comparaison List
-</a>
-<ul>
-    {% for product in comparison_products %}
-        <li>{{ product.name }}</li>
-    {% empty %}
-        <li>No products to compare.</li>
-    {% endfor %}
-</ul>
+{% block green_section %}
+<section class="bg-white p-5">
+        {% if comparison_products %}
+        <h1 class="font-bold text-7xl text-center mb-5 text-primary-900">Versus</h1>
+        <div class="flex items-center justify-between mx-5">
+            <a href="{% url 'clear_product_comparison_list' %}" class="btn btn-error text-white">
+                Clear Comparaison List
+            </a>
+            {% if comparison_products.count == 1 %}
+            <a href="{% url 'clear_product_comparison_list' %}" class="btn btn-primary text-white">
+                Add product
+            </a>
+            {% endif %}
+        </div>
+        {% endif %}
+        <div class="md:flex md:flex-row">
+        {% for product in comparison_products %}
+            <div class="m-5 md:flex-1">
+                <div>
+                    <img src="{% if product.image %}{{ product.image.url }}{% else %}{% endif %}" alt="{{ product.name }}" class="w-full h-80 object-cover rounded-lg">
+                </div>
+                <div>
+                    <h3 class="text-3xl font-semibold mt-4 capitalize"><a href="#">{{ product.name }}</a></h3>
+                    <div>
+                        <a href="{% url 'detail_product' product.slug %}" class="flex items-center text-primary-800">
+                            <span class="material-symbols-outlined">
+                                grade
+                            </span>
+                            <span class="font-semibold">5.0</span>
+                            <span class="font-semibold ml-1 text-gray-500">(31)</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="pt-4">
+                    <p class="font-semibold">
+                        <span class="">Category: </span><a href="#" class="text-gray-500 capitalize hover:text-primary-800">{{ product.sub_category.category }}</a>
+                    </p>
+                </div>
+                <div class="py-4 border-b-2 border-primary-200">
+                    <a href="{% url 'farmer_detail' product.farmer.slug %}" class="flex gap-4 items-center hover:shadow-md transition-shadow ease-linear">
+                        {% if product.farmer.avatar %}
+                        <img src="{{ product.farmer.avatar.url }}" alt="{{ product.farmer.email }}" class="w-20 h-20 bg-primary-700 rounded-full object-cover">
+                        {% else %}
+                        <div class=" hover:cursor-pointer uppercase bg-primary-500 hover:bg-primary-400 w-20 h-20 flex items-center justify-center text-3xl rounded-full font-bold">
+                            {{ product.farmer.email|slice:"1" }}
+                        </div>
+                        {% endif %}
+                        <p class="flex flex-col">
+                            <span class="text-2xl font-semibold capitalize text-primary-800">{{ product.farmer.fullname }}</span>
+                            <span class="text-sm text-gray-500 italic">{{ product.farmer.description|slice:"50" }}</span>
+                        </p>
+                    </a>
+                </div>
+                <div class="py-4 font-bold text-5xl text-center border-b-2 border-primary-200">
+                    <span class="text-primary-800">XAF/KG {{ product.price }}</span>
+                </div>
+                <div class="text-center mt-4">
+                    <a href="{% url "detail_product" slug=product.slug %}" class="btn btn-primary w-full">Show Details</a>
+                </div>
+            </div>
+        {% empty %}
+            <div class="px-10 py-44 md:py-56 w-full">
+                <h1 class="text-7xl font-bold text-center">Compare all <span>Products</span></h1>
+                <div class="text-center mt-5">
+                    <p class="mb-3">No products to compare.</p>
+                    <a href="{% url 'store' %}" class="btn btn-primary">Add Products</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock green_section %}
