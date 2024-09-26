@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 
+import os
+from dotenv import load_dotenv
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -227,3 +230,11 @@ ALLAUTH_UI_THEME = "light"
 # Mediafiles
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+
+# Mesomb API payment Serive
+load_dotenv()
+
+MESOMB_ACCESS_KEY = os.getenv('MESOMB_ACCESS_KEY')
+MESOMB_SECRET_KEY = os.getenv('MESOMB_SECRET_KEY')
+MESOMB_APPLICATION_KEY = os.getenv('MESOMB_APPLICATION_KEY')

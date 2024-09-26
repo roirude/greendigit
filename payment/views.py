@@ -1,3 +1,82 @@
-from django.shortcuts import render
+from datetime import datetime
 
-# Create your views here.
+from django.shortcuts import get_object_or_404, render
+from django.views.generic import CreateView, DetailView
+from django.conf import settings
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
+from django.urls import reverse, reverse_lazy
+
+from pymesomb.operations import PaymentOperation
+from pymesomb.utils import RandomGenerator
+
+from payment.models import Transaction, Invoice, Refund
+from products.models import Product
+from users.models import CustomUser
+from payment.forms import TransactionForm
+
+
+class OrderView(LoginRequiredMixin, CreateView):
+    template_name = 'payment/checkout.html'
+    form_class = TransactionForm
+    
+    def form_valid(self, form):
+        product = get_object_or_404(Product, slug=self.kwargs['slug'])
+        amount = int(product.price * form.cleaned_data.get('product_quantity'))
+        transaction_id = f"transaction_{product.code}_{datetime.now().timestamp()}"
+        consumer = self.request.user
+        farmer = product.farmer.phone
+        
+        form.instance.product = product
+        form.instance.consumer = consumer
+        form.instance.amount = amount
+        form.instance.transaction_id = transaction_id
+        form.save()
+        
+        operation = PaymentOperation(settings.MESOMB_APPLICATION_KEY, settings.MESOMB_ACCESS_KEY, settings.MESOMB_SECRET_KEY)
+        response = operation.make_collect({
+            'amount': amount,
+            'service' : 'MTN',
+            'payer' : consumer.phone,
+            'date' : datetime.now(),
+            'nonce': RandomGenerator.nonce(),
+            'trxID' : transaction_id
+        })
+        
+        if response.is_operation_success():
+            form.instance.status = 'suspend'
+            form.save()
+            deposit_response = operation.make_deposit({
+                'amount' : amount,
+                'service' : 'MTN',
+                'receiver' : farmer,
+                'date' : datetime.now(),
+                'nonce' : RandomGenerator.nonce(),
+                'trxID' : f'deposit-{transaction_id}'
+            })
+            
+            if deposit_response.is_operation_success():
+                form.instance.status = 'success'
+                form.save()
+                messages.success(self.request, f"Payment successfully completed")
+            else:
+                form.instance.status = 'failed'
+                form.save()
+                messages.error(self.request, f"Payment failed: {deposit_response.message}")
+        else:
+            messages.error(self.request, f"order payment error: {response}")
+        return super(OrderView, self).form_valid(form)
+    
+    def get_success_url(self):
+        product = get_object_or_404(Product, slug=self.kwargs['slug'])
+        redirect_url = reverse('detail_product', kwargs={'slug':product.slug})
+        return redirect_url
+    
+    def get_context_data(self, **kwargs):
+        product = get_object_or_404(Product, slug=self.kwargs['slug'])
+        
+        context = super().get_context_data(**kwargs)
+        context["product"] = product
+        return context
+    
+    
