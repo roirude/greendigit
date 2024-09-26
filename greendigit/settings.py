@@ -50,6 +50,8 @@ INSTALLED_APPS = [
     "widget_tweaks",
     "slippers",
     
+    'pymesomb',
+    
     'users',
     'products',
     'comparison',
