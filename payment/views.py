@@ -44,27 +44,14 @@ class OrderView(LoginRequiredMixin, CreateView):
         })
         
         if response.is_operation_success():
-            form.instance.status = 'suspend'
+            form.instance.status = 'success'
             form.save()
-            deposit_response = operation.make_deposit({
-                'amount' : amount,
-                'service' : 'MTN',
-                'receiver' : farmer,
-                'date' : datetime.now(),
-                'nonce' : RandomGenerator.nonce(),
-                'trxID' : f'deposit-{transaction_id}'
-            })
-            
-            if deposit_response.is_operation_success():
-                form.instance.status = 'success'
-                form.save()
-                messages.success(self.request, f"Payment successfully completed")
-            else:
-                form.instance.status = 'failed'
-                form.save()
-                messages.error(self.request, f"Payment failed: {deposit_response.message}")
+            messages.success(self.request, f"Payment successfully completed")
         else:
-            messages.error(self.request, f"order payment error: {response}")
+            form.instance.status = 'failed'
+            form.save()
+            messages.error(self.request, f"Payment failed: {response.message}")
+            
         return super(OrderView, self).form_valid(form)
     
     def get_success_url(self):
