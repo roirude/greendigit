@@ -74,3 +74,6 @@ class Consumer(models.Model):
 class FarmerAndConsumerLink(models.Model):
     farmer = models.ForeignKey(Farmer, on_delete=models.CASCADE)
     consumer = models.ForeignKey(Consumer, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return f"Link between {self.farmer} - {self.consumer}"

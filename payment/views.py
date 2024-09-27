@@ -26,6 +26,7 @@ class OrderView(LoginRequiredMixin, CreateView):
         transaction_id = f"transaction_{product.code}_{datetime.now().timestamp()}"
         consumer = Consumer.objects.get(user=self.request.user)
         farmer = Farmer.objects.get(user=product.farmer)
+        payment_number = form.cleaned_data.get('payment_number')
         
         form.instance.product = product
         form.instance.consumer = consumer.user
@@ -37,7 +38,7 @@ class OrderView(LoginRequiredMixin, CreateView):
         response = operation.make_collect({
             'amount': amount,
             'service' : 'MTN',
-            'payer' : consumer.user.phone,
+            'payer' : payment_number,
             'date' : datetime.now(),
             'nonce': RandomGenerator.nonce(),
             'trxID' : transaction_id

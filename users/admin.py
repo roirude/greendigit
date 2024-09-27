@@ -3,7 +3,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import Group
 from django.utils.translation import gettext_lazy as _
 
-from users.models import CustomUser, Farmer, Consumer
+from users.models import CustomUser, Farmer, Consumer, FarmerAndConsumerLink
 
 class UserAdmin(BaseUserAdmin):
     ordering = ('email',)
@@ -59,4 +59,5 @@ class FarmerAdmin(admin.ModelAdmin):
 admin.site.register(Farmer, FarmerAdmin)  
 admin.site.register(CustomUser, UserAdmin)
 admin.site.register(Consumer)
+admin.site.register(FarmerAndConsumerLink)
 
