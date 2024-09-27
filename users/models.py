@@ -17,7 +17,7 @@ def create_user_groups(sender, **kwargs):
     Group.objects.get_or_create(name='Consumers')
 
 
-class CustomUser(AbstractBaseUser, PermissionsMixin):
+class CustomUser(PermissionsMixin, AbstractBaseUser):
     code = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     slug = models.SlugField(unique=True, editable=False)
     avatar = models.ImageField(upload_to="Users/avatars/", blank=True, null=True)
@@ -54,3 +54,18 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.code)
         return super(CustomUser, self).save(*args, **kwargs)
+    
+
+class Farmer(models.Model):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    revenue = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    
+    
+class Consumer(models.Model):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    
+    
+class FarmerAndConsumerLink(models.Model):
+    farmer = models.ForeignKey(Farmer, on_delete=models.CASCADE)
+    consumer = models.ForeignKey(Consumer, on_delete=models.CASCADE)
+    

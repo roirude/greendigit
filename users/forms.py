@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from allauth.account.forms import SignupForm
 from allauth.socialaccount.forms import SignupForm as SocialSignupForm
 
-from users.models import CustomUser
+from users.models import CustomUser, Farmer, Consumer
 
 
 USER_COUNTRY_CHOICES = [
@@ -30,10 +30,12 @@ class CustomSignupForm(SignupForm):
             user.is_farmer = True
             user.is_consumer = False
             group = Group.objects.get(name='Farmers')
+            farmer = Farmer.objects.create(user)
         elif user_type == 'consumer':
             user.is_farmer = False
             user.is_consumer = True
             group = Group.objects.get(name='Consumers')
+            consumer = Consumer.objects.create(user)
         
         if 'user_type' in request.session:
             del request.session['user_type']
