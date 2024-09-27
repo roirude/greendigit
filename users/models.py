@@ -60,12 +60,17 @@ class Farmer(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     revenue = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     
+    def __str__(self):
+        return f"{self.user}"
+    
     
 class Consumer(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return f"{self.user}"
     
     
 class FarmerAndConsumerLink(models.Model):
     farmer = models.ForeignKey(Farmer, on_delete=models.CASCADE)
     consumer = models.ForeignKey(Consumer, on_delete=models.CASCADE)
-    

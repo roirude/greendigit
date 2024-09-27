@@ -12,7 +12,7 @@ from pymesomb.utils import RandomGenerator
 
 from payment.models import Transaction, Invoice, Refund
 from products.models import Product
-from users.models import CustomUser
+from users.models import CustomUser, Farmer, FarmerAndConsumerLink, Consumer
 from payment.forms import TransactionForm
 
 
@@ -24,11 +24,11 @@ class OrderView(LoginRequiredMixin, CreateView):
         product = get_object_or_404(Product, slug=self.kwargs['slug'])
         amount = int(product.price * form.cleaned_data.get('product_quantity'))
         transaction_id = f"transaction_{product.code}_{datetime.now().timestamp()}"
-        consumer = self.request.user
-        farmer = product.farmer.phone
+        consumer = Consumer.objects.get(user=self.request.user)
+        farmer = Farmer.objects.get(user=product.farmer)
         
         form.instance.product = product
-        form.instance.consumer = consumer
+        form.instance.consumer = consumer.user
         form.instance.amount = amount
         form.instance.transaction_id = transaction_id
         form.save()
@@ -37,7 +37,7 @@ class OrderView(LoginRequiredMixin, CreateView):
         response = operation.make_collect({
             'amount': amount,
             'service' : 'MTN',
-            'payer' : consumer.phone,
+            'payer' : consumer.user.phone,
             'date' : datetime.now(),
             'nonce': RandomGenerator.nonce(),
             'trxID' : transaction_id
@@ -46,10 +46,17 @@ class OrderView(LoginRequiredMixin, CreateView):
         if response.is_operation_success():
             form.instance.status = 'success'
             form.save()
+            
+            FarmerAndConsumerLink.objects.create(farmer=farmer, consumer=consumer)
+            
+            farmer.revenue += amount 
+            farmer.save()
+            
             messages.success(self.request, f"Payment successfully completed")
         else:
             form.instance.status = 'failed'
             form.save()
+            
             messages.error(self.request, f"Payment failed: {response.message}")
             
         return super(OrderView, self).form_valid(form)
@@ -61,9 +68,9 @@ class OrderView(LoginRequiredMixin, CreateView):
     
     def get_context_data(self, **kwargs):
         product = get_object_or_404(Product, slug=self.kwargs['slug'])
-        
         context = super().get_context_data(**kwargs)
         context["product"] = product
+        
         return context
     
     
