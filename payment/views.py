@@ -10,7 +10,7 @@ from django.urls import reverse, reverse_lazy
 from pymesomb.operations import PaymentOperation
 from pymesomb.utils import RandomGenerator
 
-from payment.models import Transaction, Invoice, Refund
+from payment.models import Transaction, Refund, Receipt
 from products.models import Product
 from users.models import CustomUser, Farmer, FarmerAndConsumerLink, Consumer
 from payment.forms import TransactionForm
@@ -52,6 +52,9 @@ class OrderView(LoginRequiredMixin, CreateView):
             
             farmer.revenue += amount 
             farmer.save()
+            
+            transaction = get_object_or_404(Transaction, transaction_id=transaction_id)
+            Receipt.objects.create(transaction=transaction)
             
             messages.success(self.request, f"Payment successfully completed")
         else:

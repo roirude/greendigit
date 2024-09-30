@@ -1,7 +1,10 @@
+from datetime import datetime
+
 from django.db import models
 
 from products.models import Product
 from users.models import CustomUser
+from payment.utils import generate_receipt_id
 
 
 class Transaction(models.Model):
@@ -46,12 +49,17 @@ class Refund(models.Model):
     
     def __str__(self):
         return f"Refund for {self.transaction.transaction_id} - {self.status}"
-    
 
-class Invoice(models.Model):
-    transaction = models.ForeignKey(Transaction, on_delete=models.CASCADE),
-    invoice_number = models.CharField(max_length=100, unique=True)
+
+class Receipt(models.Model):
+    receipt_id = models.CharField(max_length=100, unique=True, blank=True, null=True)
+    transaction = models.ForeignKey(Transaction, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
-        return f"Invoice {self.invoice_number} for {self.transaction}"
+        return f"Receipt {self.receipt_id} for {self.transaction}"
+    
+    def save(self, *args, **kwargs):
+         if not self.receipt_id:
+             self.receipt_id = generate_receipt_id(Receipt)
+         super(Receipt, self).save(*args, **kwargs)
