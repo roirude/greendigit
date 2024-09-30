@@ -8,4 +8,4 @@ class TransactionForm(ModelForm):
     
     class Meta:
         model = Transaction
-        fields = ('product_quantity', 'payment_method', 'payment_number')
+        fields = ('product_quantity', 'payment_number')

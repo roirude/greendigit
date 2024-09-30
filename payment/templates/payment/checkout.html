@@ -1,7 +1,202 @@
-<h1>Payment of {{ product.name }} </h1>
+{% extends 'green_section.html' %}
+{% load static %}
+{% load widget_tweaks %}
 
-<form action="" method="post">
-    {% csrf_token %}
-    {{form.as_p}}
-    <input type="submit" value="Continue">
-</form>
+{% block green_section %}
+<section class="space-y-6 md:space-y-0 md:flex md:gap-4 md:items-start md:justify-between">
+    <div class="bg-white p-5 rounded-md md:flex-1">
+        <h3 class="font-bold text-xl mb-5">
+            Billing Information
+        </h3>
+        <div class="">
+            <div class="space-y-6 md:space-y-0 md:grid md:grid-cols-2 md:gap-3 ">
+                <div class="space-y-2">
+                    <p>
+                        First Name
+                    </p>
+                    <div class="border-solid border-2 p-2 capitalize rounded-md border-primary-200 text-primary-800 font-bold">
+                        {{ user.first_name }}
+                    </div>
+                </div>
+                <div class="space-y-2" >
+                    <p>
+                        Last Name
+                    </p>
+                    <div class="border-solid border-2 p-2 uppercase rounded-md border-primary-200 text-primary-800 font-bold">
+                        {{ user.last_name }}
+                    </div>
+                </div>
+            </div>
+            <div class="space-y-6 md:space-y-0 md:grid md:grid-cols-2 md:gap-3 mt-6">
+                <div class="space-y-2">
+                    <p>
+                        Email
+                    </p>
+                    <div class="border-solid border-2 p-2 rounded-md border-primary-200 text-primary-800 font-bold">
+                        {{ user.email }}
+                    </div>
+                </div>
+                <div class="space-y-2">
+                    <p>
+                        Phone Number
+                    </p>
+                    <div class="border-solid border-2 p-2 capitalize rounded-md border-primary-200 text-primary-800 font-bold">
+                        {{ user.phone }}
+                    </div>
+                </div>
+            </div>
+            <div class="space-y-6 md:space-y-0 md:grid md:grid-cols-2 md:gap-3 mt-6">
+                <div class="space-y-2">
+                    <p>
+                        Country
+                    </p>
+                    <div class="border-solid border-2 p-2 capitalize rounded-md border-primary-200 text-primary-800 font-bold">
+                        {{ user.country }}
+                    </div>
+                </div>
+                <div class="space-y-2" >
+                    <p>
+                        State
+                    </p>
+                    <div class="border-solid border-2 p-2 capitalize rounded-md border-primary-200 text-primary-800 font-bold">
+                        {{ user.state }}
+                    </div>
+                </div>
+            </div>
+            <div class="space-y-6 md:space-y-0 md:grid md:grid-cols-2 md:gap-3 mt-6">
+                <div class="space-y-2">
+                    <p>
+                        City
+                    </p>
+                    <div class="border-solid border-2 p-2 capitalize rounded-md border-primary-200 text-primary-800 font-bold">
+                        {{ user.city }}
+                    </div>
+                </div>
+                <div class="space-y-2" >
+                    <p>
+                        ZIP Code
+                    </p>
+                    <div class="border-solid border-2 p-2 capitalize rounded-md border-primary-200 text-primary-800 font-bold">
+                        {{ user.address }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="space-y-5 bg-white p-5 rounded-md">
+        <h3 class="font-bold text-xl mb-5 capitalize">
+            Order Summary
+        </h3>
+        <div class="space-y-7">
+            <div class="flex items-center justify-between">
+                <div class="flex gap-3 items-center ">
+                    <div>
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="w-20 h-20 object-cover">
+                    </div>
+                    <div class="capitalize">
+                        <h4 class="pb-2">
+                            {{ product.name }}
+                        </h4>
+                        <p class="text-sm text-primary-600 italic">
+                            {{ product.sub_category.category }}
+                        </p>
+                    </div>
+                </div>
+                <div class="font-bold">
+                   XAF/KG <span id="product_price" data-price="{{ product.price }}">{{ product.price|floatformat:0 }}</span>
+                </div>
+            </div>
+            <form method="post">
+                {% csrf_token %}
+                <div class="border-t-2 pt-4">
+                    <label for="quantity" class="flex justify-between items-center">
+                        <p>Quantity (KG):</p>
+                        {% render_field form.product_quantity class+="input input-bordered text-right pr-5" min="1" value="1" id="quantity" %}
+                    </label>
+                </div>
+                <div class="flex items-center justify-between text-xl border-y-2 my-4 py-4">
+                    <p>
+                        Total:
+                    </p>
+                    <p class="font-bold text-primary-800">
+                        XAF <span id="total_price">{{ product.price|floatformat:0 }}</span>
+                    </p>
+                </div>
+                <div class=" pb-5">
+                    <h4 class="capitalize font-bold text-xl mb-3">
+                        Payment method
+                    </h4>
+                    <div class="grid grid-cols-2 gap-4">
+                        <label onclick="SelectPaymentMethod(this)" class="payment_method border-4 border-primary-800 hover:border-primary-800 transition-all ease-linear  rounded-md border-solid">
+                            <input type="radio" name="payment_method" value="ORANGE" class="hidden" checked>
+                            <img src="{% static 'src/images/payments/orange_money.png' %}" alt="Orange Money" class="w-full h-32 cursor-pointer object-cover">
+                        </label>
+                
+                        <label onclick="SelectPaymentMethod(this)" class="payment_method border-4 hover:border-primary-800 transition-all ease-linear rounded-md border-solid">
+                            <input type="radio" name="payment_method" value="MTN" class="hidden">
+                            <img src="{% static 'src/images/payments/mtn_momo.jpg' %}" alt="MTN Mobile Money" class="w-full h-32 cursor-pointer object-cover">
+                        </label>
+                    </div>
+                </div>
+                <div class="border-y-2 py-4">
+                    <label for="tel" class="flex justify-between items-center gap-4">
+                        <p>Payment Number:</p>
+                        {% render_field form.payment_number type="tel" class+="input input-bordered flex-1" placeholder="OM or MTN MOMO Number" id="tel" %}
+                    </label>
+                </div>
+                <button id="pay_button" onclick="ActivePayAnimation()" type="submit" class="pt-4 btn btn-primary w-full">
+                    <span class="material-symbols-outlined">
+                        payments
+                    </span>
+                    Pay
+                </button>
+                <div id="pay_animation" class="hidden flex-col items-center justify-center">
+                    <iframe src="https://lottie.host/embed/a20c7e21-a25f-4b0b-80ae-228df2830f94/jDJWeKYev2.json"></iframe>
+                    <small>payment process...</small>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<script>
+    const quantityInput = document.getElementById('quantity');
+    const totalPriceElement = document.getElementById('total_price');
+    const product_price = document.getElementById('product_price');
+    const tel = document.getElementById('tel');
+
+    const unitPrice = parseFloat(product_price.getAttribute('data-price'));
+    
+    function updateTotalPrice() {
+        const quantity = parseInt(quantityInput.value);
+        const totalPrice = unitPrice * quantity;
+
+        totalPriceElement.textContent = totalPrice;
+    }
+
+    function SelectPaymentMethod(imageElement) {
+        let payment_method = document.querySelectorAll('.payment_method');
+        payment_method.forEach(function(method){
+            method.classList.remove('border-primary-800');
+        })
+
+        imageElement.classList.add('border-primary-800');
+    }
+
+    function ActivePayAnimation(){
+        const pay_button = document.getElementById('pay_button');
+        const pay_animation = document.getElementById('pay_animation');
+
+        telValue = tel.value.trim();
+
+        if (telValue !== '') {
+            pay_button.classList.add('hidden');
+
+            pay_animation.classList.remove('hidden');
+            pay_animation.classList.add('flex')
+        }
+    }
+
+    quantityInput.addEventListener('input', updateTotalPrice);
+</script>
+{% endblock green_section %}

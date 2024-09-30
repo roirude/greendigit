@@ -13,8 +13,8 @@ class Transaction(models.Model):
     ]
     
     PAYMENT_METHOD_CHOICES = [
-        ('mtn', 'MTN Mobile Money'),
-        ('orange', 'Orange Money'),
+        ('MTN', 'MTN Mobile Money'),
+        ('ORANGE', 'Orange Money'),
     ]
     
     transaction_id = models.CharField(max_length=100, unique=True)
@@ -23,7 +23,7 @@ class Transaction(models.Model):
     product_quantity = models.PositiveIntegerField()
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
-    payment_method = models.CharField(max_length=100, choices=PAYMENT_METHOD_CHOICES, default='orange')
+    payment_method = models.CharField(max_length=100, choices=PAYMENT_METHOD_CHOICES, default='MTN')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
