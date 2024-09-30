@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from django.shortcuts import get_object_or_404, render
-from django.views.generic import CreateView, DetailView
+from django.views.generic import CreateView, DetailView, ListView
 from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
@@ -78,3 +78,20 @@ class OrderView(LoginRequiredMixin, CreateView):
         return context
     
     
+class ReceiptDetailView(DetailView):
+    template_name = 'payment/receipt.html'
+    model = Receipt
+    context_object_name = 'receipt'
+        
+        
+class ReceiptListView(ListView):
+    template_name = 'payment/receipt_list.html'
+    model = Receipt
+    context_object_name = 'receipts'
+    
+    def get_queryset(self):
+        user = self.request.user
+        receipts = Receipt.objects.filter(transaction__consumer=user)
+        return receipts
+    
+        

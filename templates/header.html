@@ -37,6 +37,9 @@
                 <div class="border-b-2 pb-3 mb-3">
                     <a href="{% url 'edit_profile' request.user.slug %}">Green<span class="text-primary-800">Profile</span></a>
                 </div>
+                <div class="border-b-2 pb-3 mb-3">
+                    <a href="{% url 'receipt_list' %}">Orders</a>
+                </div>
                 <div class="text-red-500 text-center">
                     <a href="{% url 'account_logout' %}" class="hover:underline">Logout</a>
                 </div>

@@ -1,0 +1,32 @@
+{% extends "green_section.html" %}
+
+{% block green_section %}
+    <section>
+        <h1 class="uppercase font-bold text-2xl text-center pb-2 border-b-2">Your Order List</h1>
+        <div class="grid gap-7 md:grid-cols-2 lg:grid-cols-3">
+            {% for receipt in receipts %}
+                <div class="bg-white">
+                    <div class="flex items-center">
+                        <div>
+                            <span class="material-symbols-outlined text-9xl text-primary-600">
+                                inventory
+                            </span>
+                        </div>
+                        <div class="flex flex-col justify-between gap-2 h-full w-full">
+                            <p class="capitalize">
+                                receipt ID: <span class="font-semibold">{{ receipt.receipt_id }}</span>
+                            </p>
+                            <p class="capitalize">
+                                product: <span class="font-semibold">{{ receipt.transaction.product.name }}</span>
+                            </p>
+                            <p>
+                                Order date: <span class="font-semibold">{{ receipt.created_at }}</span>
+                            </p>
+                        </div>
+                    </div>
+                    <a href="" class="btn btn-primary w-full">Show Receipt</a>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock green_section %}
