@@ -82,6 +82,13 @@ class ReceiptDetailView(DetailView):
     template_name = 'payment/receipt.html'
     model = Receipt
     context_object_name = 'receipt'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        receipt = get_object_or_404(Receipt,pk=self.kwargs['pk'])
+        context["product"] = receipt.transaction.product
+        context['transaction'] = receipt.transaction
+        return context
         
         
 class ReceiptListView(ListView):
@@ -93,5 +100,6 @@ class ReceiptListView(ListView):
         user = self.request.user
         receipts = Receipt.objects.filter(transaction__consumer=user)
         return receipts
+    
     
         

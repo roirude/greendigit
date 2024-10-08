@@ -1,0 +1,154 @@
+{% extends "_base.html" %}
+{% load static %}
+
+{% block content %}
+<section class="p-5 space-y-4">
+    <header class="flex items-center justify-between bg-white px-2 rounded-sm">
+        <div>
+            <h1>
+                Receipt N° <span class="font-bold">{{ receipt.receipt_id }}</span>
+            </h1>
+        </div>
+        <div>
+            <a href="{% url 'index' %}" class="flex items-center text-2xl font-bold ">
+                <img src="{% static 'src/images/logo.png' %}" alt="greendigit" class="w-12 h-12">
+                Green<span class="text-primary-900">Digit</span>
+            </a>
+        </div>
+    </header>
+    <div class="p-2 bg-white">
+        <div>
+            <h2 class="font-bold text-xl mb-5">
+                Billing Information
+            </h2>
+            <div class="">
+                <div class="space-y-6 md:space-y-0 md:grid md:grid-cols-2 md:gap-3 ">
+                    <div class="space-y-2">
+                        <p>
+                            First Name
+                        </p>
+                        <div class="border-solid border-2 p-2 capitalize rounded-md border-primary-200 text-primary-800 font-bold">
+                            {{ user.first_name }}
+                        </div>
+                    </div>
+                    <div class="space-y-2" >
+                        <p>
+                            Last Name
+                        </p>
+                        <div class="border-solid border-2 p-2 uppercase rounded-md border-primary-200 text-primary-800 font-bold">
+                            {{ user.last_name }}
+                        </div>
+                    </div>
+                </div>
+                <div class="space-y-6 md:space-y-0 md:grid md:grid-cols-2 md:gap-3 mt-6">
+                    <div class="space-y-2">
+                        <p>
+                            Email
+                        </p>
+                        <div class="border-solid border-2 p-2 rounded-md border-primary-200 text-primary-800 font-bold">
+                            {{ user.email }}
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <p>
+                            Phone Number
+                        </p>
+                        <div class="border-solid border-2 p-2 capitalize rounded-md border-primary-200 text-primary-800 font-bold">
+                            {{ user.phone }}
+                        </div>
+                    </div>
+                </div>
+                <div class="space-y-6 md:space-y-0 md:grid md:grid-cols-2 md:gap-3 mt-6">
+                    <div class="space-y-2">
+                        <p>
+                            Country
+                        </p>
+                        <div class="border-solid border-2 p-2 capitalize rounded-md border-primary-200 text-primary-800 font-bold">
+                            {{ user.country }}
+                        </div>
+                    </div>
+                    <div class="space-y-2" >
+                        <p>
+                            State
+                        </p>
+                        <div class="border-solid border-2 p-2 capitalize rounded-md border-primary-200 text-primary-800 font-bold">
+                            {{ user.state }}
+                        </div>
+                    </div>
+                </div>
+                <div class="space-y-6 md:space-y-0 md:grid md:grid-cols-2 md:gap-3 mt-6">
+                    <div class="space-y-2">
+                        <p>
+                            City
+                        </p>
+                        <div class="border-solid border-2 p-2 capitalize rounded-md border-primary-200 text-primary-800 font-bold">
+                            {{ user.city }}
+                        </div>
+                    </div>
+                    <div class="space-y-2" >
+                        <p>
+                            ZIP Code
+                        </p>
+                        <div class="border-solid border-2 p-2 capitalize rounded-md border-primary-200 text-primary-800 font-bold">
+                            {{ user.address }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2 class="font-bold text-xl mb-5">
+                Payment Summary
+            </h2>
+            <div class="space-y-7">
+                <div class="flex items-center justify-between">
+                    <div class="flex gap-3 items-center ">
+                        <div>
+                            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="w-20 h-20 object-cover">
+                        </div>
+                        <div class="capitalize">
+                            <h4 class="pb-2">
+                                {{ product.name }}
+                            </h4>
+                            <p class="text-sm text-primary-600 italic">
+                                {{ product.sub_category.category }}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="font-bold">
+                       XAF/KG <span id="product_price" data-price="{{ product.price }}">{{ product.price|floatformat:0 }}</span>
+                    </div>
+                </div>
+                    <div class="border-t-2 pt-4">
+                        <label for="quantity" class="flex justify-between items-center">
+                            <p>Quantity (KG):</p>
+                            <p class="font-bold text-lg">
+                                {{ transaction.product_quantity}}
+                            </p>
+                        </label>
+                    </div>
+                    <div class="flex items-center justify-between text-xl border-y-2 my-4 py-4">
+                        <p>
+                            Total:
+                        </p>
+                        <p class="font-bold text-primary-800">
+                            XAF <span id="total_price">{{ product.price|floatformat:0 }}</span>
+                        </p>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <p>Payment method: </p>
+                        <p class="font-bold text-lg">
+                            {{ transaction.payment_method}}
+                        </p>
+                    </div>
+                    <div class="border-y-2 py-4 flex justify-between items-center gap-4">
+                        <p>Payment Number:</p>
+                        <p class="font-bold text-lg">
+                            {{ transaction.payment_method}}
+                        </p>
+                    </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
