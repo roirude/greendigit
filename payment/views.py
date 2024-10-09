@@ -85,7 +85,7 @@ class ReceiptDetailView(DetailView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        receipt = get_object_or_404(Receipt,pk=self.kwargs['pk'])
+        receipt = get_object_or_404(Receipt,slug=self.kwargs['slug'])
         context["product"] = receipt.transaction.product
         context['transaction'] = receipt.transaction
         return context
