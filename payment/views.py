@@ -32,6 +32,7 @@ class OrderView(LoginRequiredMixin, CreateView):
         form.instance.consumer = consumer.user
         form.instance.amount = amount
         form.instance.transaction_id = transaction_id
+        form.instance.payment_number = payment_number
         form.save()
         
         operation = PaymentOperation(settings.MESOMB_APPLICATION_KEY, settings.MESOMB_ACCESS_KEY, settings.MESOMB_SECRET_KEY)

@@ -8666,6 +8666,14 @@ html:has(.drawer-open.drawer-open) {
   height: 100vh;
 }
 
+.h-\[\] {
+  height: ;
+}
+
+.h-\[100\%\] {
+  height: 100%;
+}
+
 .max-h-\[19rem\] {
   max-height: 19rem;
 }
@@ -8768,6 +8776,10 @@ html:has(.drawer-open.drawer-open) {
 
 .flex-1 {
   flex: 1 1 0%;
+}
+
+.flex-\[2\] {
+  flex: 2;
 }
 
 .flex-shrink {
@@ -10537,9 +10549,19 @@ html:has(.drawer-open.drawer-open) {
   color: rgb(185 28 28 / var(--tw-text-opacity));
 }
 
+.text-success {
+  --tw-text-opacity: 1;
+  color: var(--fallback-su,oklch(var(--su)/var(--tw-text-opacity)));
+}
+
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.text-primary-300 {
+  --tw-text-opacity: 1;
+  color: rgb(196 222 206 / var(--tw-text-opacity));
 }
 
 .underline {
@@ -11217,6 +11239,11 @@ html:has(.drawer-open.drawer-open) {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+.hover\:text-primary-700:hover {
+  --tw-text-opacity: 1;
+  color: rgb(75 163 116 / var(--tw-text-opacity));
+}
+
 .hover\:underline:hover {
   text-decoration-line: underline;
 }
@@ -11352,6 +11379,10 @@ html:has(.drawer-open.drawer-open) {
 
   .md\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .md\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   .md\:flex-row {
