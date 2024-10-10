@@ -1,36 +1,61 @@
-{% extends "_base.html" %} {% load static %} {% block content %}
-<section class="px-5  bg-white divide-y-2 h-screen">
+{% load compress %}
+{% load static %}
+ 
+<!DOCTYPE html>
+<html lang="en" class="min-h-full w-full">
+ 
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{% static 'src/images/favicon.png' %}" type="image/x-icon">
+    <title>{% block title %}Greendigit{% endblock title %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        
+    {% compress css %}
+    <link rel="stylesheet"
+        href="{% static 'src/css/invoice.css' %}">
+    {% endcompress %}
+ 
+</head>
+ 
+<body class="font-body text-[#000000] min-h-full w-full">
+<section id="invoice" class="px-5  bg-[#FFFFFF] divide-y-2 h-screen">
   <header class="flex items-center justify-between p-2 rounded-sm">
     <div>
       <h1 class="flex items-center gap-2">
-        <p>Receipt N° <span class="font-bold">{{ receipt.receipt_id }}</span></p>
-        <a href="" class="hover:text-primary-700 transition-all ease-linear">
+        <p>Receipt N° <span class="receipt_id font-bold">{{ receipt.receipt_id }}</span></p>
+        <button onclick="exportToPDF()" class="hover:text-[#4BA374] transition-all ease-linear download">
             <span class="material-symbols-outlined text-2xl">
                 download
             </span>
-        </a>
+        </button>
       </h1>
     </div>
     <div>
-      <a href="{% url 'index' %}" class="flex items-center text-2xl font-bold">
+      <a href="{% url 'index' %}" class="logo flex items-center text-2xl font-bold">
         <img
           src="{% static 'src/images/logo.png' %}"
           alt="greendigit"
           class="w-12 h-12"
         />
-        Green<span class="text-primary-900">Digit</span>
+        Green<span class="text-[#007D4C]">Digit</span>
       </a>
     </div>
   </header>
-  <div class="px-2 pt-5 bg-white flex items-start justify-between gap-10">
-    <div class="flex-[2]">
-      <h2 class="font-bold text-xl mb-5">Billing Information</h2>
+  <div class="contain px-2 pt-5 bg-[#FFFFFF] flex items-start justify-between gap-10">
+    <div class="flex-[2] billing">
+      <h2 class="font-bold text-xl mb-5 title">Billing Information</h2>
       <div class="">
-        <div class="space-y-6 md:space-y-0 md:grid md:grid-cols-2 md:gap-3">
+        <div class="space-y-6 md:space-y-0 md:grid md:grid-cols-2 md:gap-3 user_info">
           <div class="space-y-2">
             <p>First Name</p>
             <div
-              class="border-solid border-2 p-2 capitalize rounded-md border-primary-200 text-primary-800 font-bold"
+              class="info border-solid border-2 p-2 capitalize rounded-md border-[#D4E5DA] text-[#038C57] font-bold"
             >
               {{ user.first_name }}
             </div>
@@ -38,19 +63,19 @@
           <div class="space-y-2">
             <p>Last Name</p>
             <div
-              class="border-solid border-2 p-2 uppercase rounded-md border-primary-200 text-primary-800 font-bold"
+              class="info border-solid border-2 p-2 uppercase rounded-md border-[#D4E5DA] text-[#038C57] font-bold"
             >
               {{ user.last_name }}
             </div>
           </div>
         </div>
         <div
-          class="space-y-6 md:space-y-0 md:grid md:grid-cols-2 md:gap-3 mt-6"
+          class="space-y-6 md:space-y-0 md:grid md:grid-cols-2 md:gap-3 mt-6 user_info"
         >
           <div class="space-y-2">
             <p>Email</p>
             <div
-              class="border-solid border-2 p-2 rounded-md border-primary-200 text-primary-800 font-bold"
+              class="info border-solid border-2 p-2 rounded-md border-[#D4E5DA] text-[#038C57] font-bold"
             >
               {{ user.email }}
             </div>
@@ -58,19 +83,19 @@
           <div class="space-y-2">
             <p>Phone Number</p>
             <div
-              class="border-solid border-2 p-2 capitalize rounded-md border-primary-200 text-primary-800 font-bold"
+              class="info border-solid border-2 p-2 capitalize rounded-md border-[#D4E5DA] text-[#038C57] font-bold"
             >
               {{ user.phone }}
             </div>
           </div>
         </div>
         <div
-          class="space-y-6 md:space-y-0 md:grid md:grid-cols-2 md:gap-3 mt-6"
+          class="space-y-6 md:space-y-0 md:grid md:grid-cols-2 md:gap-3 mt-6 user_info"
         >
           <div class="space-y-2">
             <p>Country</p>
             <div
-              class="border-solid border-2 p-2 capitalize rounded-md border-primary-200 text-primary-800 font-bold"
+              class="info border-solid border-2 p-2 capitalize rounded-md border-[#D4E5DA] text-[#038C57] font-bold"
             >
               {{ user.country }}
             </div>
@@ -78,19 +103,19 @@
           <div class="space-y-2">
             <p>State</p>
             <div
-              class="border-solid border-2 p-2 capitalize rounded-md border-primary-200 text-primary-800 font-bold"
+              class="info border-solid border-2 p-2 capitalize rounded-md border-[#D4E5DA] text-[#038C57] font-bold"
             >
               {{ user.state }}
             </div>
           </div>
         </div>
         <div
-          class="space-y-6 md:space-y-0 md:grid md:grid-cols-2 md:gap-3 mt-6"
+          class="user_info space-y-6 md:space-y-0 md:grid md:grid-cols-2 md:gap-3 mt-6"
         >
           <div class="space-y-2">
             <p>City</p>
             <div
-              class="border-solid border-2 p-2 capitalize rounded-md border-primary-200 text-primary-800 font-bold"
+              class="info border-solid border-2 p-2 capitalize rounded-md border-[#D4E5DA] text-[#038C57] font-bold"
             >
               {{ user.city }}
             </div>
@@ -98,7 +123,7 @@
           <div class="space-y-2">
             <p>ZIP Code</p>
             <div
-              class="border-solid border-2 p-2 capitalize rounded-md border-primary-200 text-primary-800 font-bold"
+              class="info border-solid border-2 p-2 capitalize rounded-md border-[#D4E5DA] text-[#038C57] font-bold"
             >
               {{ user.address }}
             </div>
@@ -107,20 +132,20 @@
       </div>
     </div>
     <div class="flex-1">
-      <h2 class="font-bold text-xl mb-5">Payment Summary</h2>
+      <h2 class="font-bold text-xl mb-5 pay-title">Payment Summary</h2>
       <div class="divide-y-2">
-        <div class="flex items-center justify-between py-4">
-          <div class="flex gap-3 items-center">
+        <div class="flex items-center justify-between py-4 product">
+          <div class="flex gap-3 items-center product-info">
             <div>
               <img
                 src="{{ product.image.url }}"
                 alt="{{ product.name }}"
-                class="w-20 h-20 object-cover rounded-md"
+                class="w-20 h-20 object-cover rounded-md product-img"
               />
             </div>
             <div class="capitalize">
               <h4 class="pb-2">{{ product.name }}</h4>
-              <p class="text-sm text-primary-600 italic">
+              <p class="text-sm text-[#7BB995] italic category">
                 {{ product.sub_category.category }}
               </p>
             </div>
@@ -132,27 +157,27 @@
             >
           </div>
         </div>
-        <div class="flex justify-between items-center py-4">
+        <div class="flex justify-between items-center py-4 quantity">
             <p>Quantity (KG):</p>
             <p class="font-bold text-lg">{{ transaction.product_quantity}}</p>
         </div>
-        <div class="flex items-center justify-between text-xl py-4">
+        <div class="flex items-center justify-between text-xl py-4 total">
           <p>Total:</p>
-          <p class="font-bold text-primary-800">
+          <p class="font-bold text-[#038C57] total-price">
             XAF <span id="total_price">{{ product.price|floatformat:0 }}</span>
           </p>
         </div>
-        <div class="flex justify-between items-center py-4">
+        <div class="flex justify-between items-center py-4 method">
           <p>Payment method:</p>
           <p class="font-bold text-lg">{{ transaction.payment_method}}</p>
         </div>
-        <div class="flex justify-between items-center gap-4 py-4">
+        <div class="flex justify-between items-center gap-4 py-4 method">
           <p>Payment Number:</p>
           <p class="font-bold text-lg">{{ transaction.payment_number}}</p>
         </div>
-        <div class="flex justify-between items-center py-4">
+        <div class="flex justify-between items-center py-4 method">
           <p>Status:</p>
-          <p class="font-bold text-lg text-success flex items-center gap-2">
+          <p class="font-bold text-lg text-success flex items-center gap-2 status">
             {{ transaction.status}}
             <span class="material-symbols-outlined"> check_box </span>
           </p>
@@ -161,19 +186,19 @@
     </div>
   </div>
   <div class="py-4">
-    <h2 class="font-bold text-xl mb-5">Farmer Information</h2>
+    <h2 class="font-bold text-xl mb-5 pay-title">Farmer Information</h2>
     <div>
-        <div class="space-y-6 md:space-y-0 md:grid md:grid-cols-4 md:gap-3">
+        <div class="space-y-6 md:space-y-0 md:grid md:grid-cols-4 md:gap-3 farmer_info">
             <div class="space-y-2">
               <p>First Name</p>
-              <div class="border-solid border-2 p-2 capitalize rounded-md border-primary-200 text-primary-800 font-bold" >
+              <div class="info border-solid border-2 p-2 capitalize rounded-md border-[#D4E5DA] text-[#038C57] font-bold" >
                 {{ product.farmer.first_name }}
               </div>
             </div>
             <div class="space-y-2">
               <p>Last Name</p>
               <div
-                class="border-solid border-2 p-2 uppercase rounded-md border-primary-200 text-primary-800 font-bold"
+                class="info border-solid border-2 p-2 uppercase rounded-md border-[#D4E5DA] text-[#038C57] font-bold"
               >
                 {{ product.farmer.last_name }}
               </div>
@@ -181,7 +206,7 @@
             <div class="space-y-2">
                 <p>Email</p>
                 <div
-                  class="border-solid border-2 p-2 rounded-md border-primary-200 text-primary-800 font-bold"
+                  class="info border-solid border-2 p-2 rounded-md border-[#D4E5DA] text-[#038C57] font-bold"
                 >
                   {{ product.farmer.email }}
                 </div>
@@ -189,7 +214,7 @@
             <div class="space-y-2">
                 <p>Country</p>
                 <div
-                  class="border-solid border-2 p-2 rounded-md border-primary-200 text-primary-800 font-bold"
+                  class="info border-solid border-2 p-2 rounded-md border-[#D4E5DA] text-[#038C57] font-bold"
                 >
                   {{ product.farmer.country }}
                 </div>
@@ -199,8 +224,30 @@
   </div>
   <footer class="pt-4 text-center">
     <p>
-        If you have any questions concerning this invoice contact <span class="text-primary-700">Greendigit | +237 656 484 013 | contact@greendigit.com</span>
+        If you have any questions concerning this invoice contact <span class="text-[#4BA374]">Greendigit | +237 656 484 013 | contact@greendigit.com</span>
     </p>
   </footer>
 </section>
-{% endblock content %}
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.2/html2pdf.bundle.min.js"
+	integrity="sha512-MpDFIChbcXl2QgipQrt1VcPHMldRILetapBl5MPCA9Y8r7qvlwx1/Mc9hNTzY+kS5kX6PdoDq41ws1HiVNLdZA=="
+	crossorigin="anonymous"
+	referrerpolicy="no-referrer"
+></script>
+<script>
+  function exportToPDF(){
+    const opt = {
+      margin: 0,
+      filename: 'invoice.pdf',
+      image: { type: 'jpeg', quality: 1 },
+      html2canvas: { scale: 4 },
+      jsPDF: { unit: 'mm', format: [270,190], orientation: 'landscape' },
+    };
+
+    const response = html2pdf().from(document.getElementById('invoice')).set(opt).save();
+    console.log(response);
+  }
+</script>
+</body>
+ 
+</html>
