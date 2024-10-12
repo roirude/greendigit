@@ -57,26 +57,21 @@ class PaiementTest(TestCase):
         self.order_url = reverse('checkout_payment', kwargs={'slug': self.product.slug})
     
     def test_successful_order_as_authenticated_consumer(self):
-        # Authentifier l'utilisateur consommateur
         self.client.login(email='consumer@test.com', password='securepwd')
 
-        # Effectuer la commande
         response = self.client.post(self.order_url, {
             'product_quantity': 2,
             'payment_number': '237400001019'
         })
 
-        # Vérifier que la commande est redirigée correctement après la réussite
         self.assertEqual(response.status_code, 302)
 
-        # Vérifier que la transaction a été créée
         transaction = Transaction.objects.last()
         self.assertIsNotNone(transaction)
         self.assertEqual(transaction.product, self.product)
         self.assertEqual(transaction.consumer, self.consumer)
-        self.assertEqual(transaction.amount, 200.00)  # 100 * 2
-        
-        # Vérifier les messages flash pour succès du paiement
+        self.assertEqual(transaction.amount, 200.00)
+
         messages = list(get_messages(response.wsgi_request))
         self.assertTrue(any("Payment successfully completed" in str(message) for message in messages))
         
