@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('payment', '0002_create_model_receipt'),
+        ('payment', '0001_initial'),
     ]
 
     operations = [
