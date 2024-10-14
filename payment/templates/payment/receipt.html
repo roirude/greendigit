@@ -46,6 +46,19 @@
       </a>
     </div>
   </header>
+  <div>
+    {% if messages %}
+      {% for message in messages %}
+        <div id="message" class="message
+          {% if message.tags == 'success' %}success{% endif %}
+          {% if message.tags == 'error' %}error{% endif %}
+        ">
+          <p style="color:white;">{{ message }}</p>
+          <a href="" onclick="closeMessagePopUp()"><span class="material-symbols-outlined cancel">cancel</span></a>
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
   <div class="contain">
     <div class="billing">
       <h2 class="title">Billing Information</h2>
@@ -143,7 +156,7 @@
               />
             </div>
             <div class="capitalize">
-              <h4 class="pb-2">{{ product.name }}</h4>
+              <h4 class="font-bold">{{ product.name }}</h4>
               <p class="category">
                 {{ product.sub_category.category }}
               </p>

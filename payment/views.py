@@ -67,8 +67,8 @@ class OrderView(LoginRequiredMixin, CreateView):
         return super(OrderView, self).form_valid(form)
     
     def get_success_url(self):
-        product = get_object_or_404(Product, slug=self.kwargs['slug'])
-        redirect_url = reverse('detail_product', kwargs={'slug':product.slug})
+        receipt = Receipt.objects.filter(transaction__consumer=self.request.user).latest('created_at')
+        redirect_url = reverse('receipt', kwargs={'slug':receipt.slug})
         return redirect_url
     
     def get_context_data(self, **kwargs):
