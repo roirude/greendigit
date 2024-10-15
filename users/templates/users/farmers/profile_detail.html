@@ -49,7 +49,7 @@
             {% for product in farmer_products %}
             <div class=" bg-white p-5 rounded-md relative hover:shadow-md hover:shadow-primary-700 transition-shadow ease-linear">
                 <a href="" class="absolute bg-primary-800 p-2 text-sm font-semibold capitalize text-center rounded-sm text-white min-w-20 right-10 top-10 hover:bg-primary-700 transition-colors ease-linear ">
-                    {{ product.sub_category.category }}
+                    {{ product.sub_category }}
                 </a>
                 <a href="{% url 'detail_product' product.slug %}">
                     <img src="{% if product.image %}{{ product.image.url }}{% else %}{% endif %}" alt="{{ product.name }}" class="w-full h-60 object-cover rounded-lg">

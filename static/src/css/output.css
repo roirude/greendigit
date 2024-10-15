@@ -8770,10 +8770,6 @@ html:has(.drawer-open.drawer-open) {
   flex: 1 1 0%;
 }
 
-.flex-\[2\] {
-  flex: 2;
-}
-
 .flex-shrink {
   flex-shrink: 1;
 }
@@ -9899,11 +9895,6 @@ html:has(.drawer-open.drawer-open) {
   border-style: none;
 }
 
-.border-\[\#D4E5DA\] {
-  --tw-border-opacity: 1;
-  border-color: rgb(212 229 218 / var(--tw-border-opacity));
-}
-
 .border-primary-200 {
   --tw-border-opacity: 1;
   border-color: rgb(212 229 218 / var(--tw-border-opacity));
@@ -9912,11 +9903,6 @@ html:has(.drawer-open.drawer-open) {
 .border-primary-800 {
   --tw-border-opacity: 1;
   border-color: rgb(3 140 87 / var(--tw-border-opacity));
-}
-
-.bg-\[\#FFFFFF\] {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
 .bg-\[rgb\(255\2c 0\2c 0\)\] {
@@ -10477,33 +10463,8 @@ html:has(.drawer-open.drawer-open) {
   letter-spacing: 0.025em;
 }
 
-.text-\[\#000000\] {
-  --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity));
-}
-
-.text-\[\#007D4C\] {
-  --tw-text-opacity: 1;
-  color: rgb(0 125 76 / var(--tw-text-opacity));
-}
-
-.text-\[\#038C57\] {
-  --tw-text-opacity: 1;
-  color: rgb(3 140 87 / var(--tw-text-opacity));
-}
-
 .text-\[\#336699\]\/\[\.35\] {
   color: rgb(51 102 153 / .35);
-}
-
-.text-\[\#4BA374\] {
-  --tw-text-opacity: 1;
-  color: rgb(75 163 116 / var(--tw-text-opacity));
-}
-
-.text-\[\#7BB995\] {
-  --tw-text-opacity: 1;
-  color: rgb(123 185 149 / var(--tw-text-opacity));
 }
 
 .text-black {
@@ -10574,11 +10535,6 @@ html:has(.drawer-open.drawer-open) {
 .text-red-700 {
   --tw-text-opacity: 1;
   color: rgb(185 28 28 / var(--tw-text-opacity));
-}
-
-.text-success {
-  --tw-text-opacity: 1;
-  color: var(--fallback-su,oklch(var(--su)/var(--tw-text-opacity)));
 }
 
 .text-white {
@@ -11246,11 +11202,6 @@ html:has(.drawer-open.drawer-open) {
   font-weight: 700;
 }
 
-.hover\:text-\[\#4BA374\]:hover {
-  --tw-text-opacity: 1;
-  color: rgb(75 163 116 / var(--tw-text-opacity));
-}
-
 .hover\:text-gray-800:hover {
   --tw-text-opacity: 1;
   color: rgb(31 41 55 / var(--tw-text-opacity));
@@ -11401,10 +11352,6 @@ html:has(.drawer-open.drawer-open) {
 
   .md\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .md\:grid-cols-4 {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   .md\:flex-row {

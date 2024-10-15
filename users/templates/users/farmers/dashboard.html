@@ -26,7 +26,7 @@
         <div class="bg-white p-5 flex justify-between w-full rounded-lg shadow-lg">
           <div class="">
             <h3 class="text-sm mb-5">Revenue</h3>
-            <p class="font-semibold text-2xl">XAF 350K</p>
+            <p class="font-semibold text-2xl">XAF {{ farmer.revenue }} </p>
           </div>
           <div>
             <span class="material-symbols-outlined bg-gray-300 p-2 rounded-lg">payments</span>
@@ -35,7 +35,7 @@
         <div class="bg-white p-5 flex justify-between w-full rounded-lg shadow-lg">
           <div class="">
             <h3 class="text-sm mb-5">Orders</h3>
-            <p class="font-semibold text-2xl">300</p>
+            <p class="font-semibold text-2xl">{{ order_count }}</p>
           </div>
           <div>
             <span class="material-symbols-outlined bg-gray-300 p-2 rounded-lg">storefront</span>
@@ -44,7 +44,7 @@
         <div class="bg-white p-5 flex justify-between w-full rounded-lg shadow-lg">
           <div class="">
             <h3 class="text-sm mb-5">Customers</h3>
-            <p class="font-semibold text-2xl">10</p>
+            <p class="font-semibold text-2xl">{{ consumer_of_this_farmer_count }}</p>
           </div>
           <div class="">
             <span class="material-symbols-outlined bg-gray-300 p-2 rounded-lg">group_add</span>
@@ -53,7 +53,7 @@
         <div class="bg-white p-5 flex justify-between w-full rounded-lg shadow-lg">
           <div class="">
             <h3 class="text-sm mb-5">Products</h3>
-            <p class="font-semibold text-2xl">100</p>
+            <p class="font-semibold text-2xl">{{ product_count }}</p>
           </div>
           <div>
             <span class="material-symbols-outlined bg-gray-300 p-2 rounded-lg">inventory</span>
@@ -98,7 +98,7 @@
                     <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'src/images/products/product_icon.svg' %}{% endif %}" alt="{{ product.name }}" class="w-12 h-12 bg-primary-700 object-cover rounded-full">
                     <span class="capitalize">{{ product.name }}</span>
                   </p>
-                  <p class="w-36"> {{ product.sub_category.category }} </p>
+                  <p class="w-36"> {{ product.sub_category }} </p>
                   <p class="w-24"> {{ product.quantity }} </p>
                   <p class="w-40">XAF {{ product.price }} </p>
                   <p class="w-44"> {{ product.update_at.date }} </p>

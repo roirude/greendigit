@@ -11,7 +11,7 @@ from allauth.socialaccount.models import SocialLogin
 from allauth.socialaccount.helpers import complete_social_login
 
 from users.mixins import GroupRequiredMixin
-from users.models import CustomUser
+from users.models import CustomUser, FarmerAndConsumerLink, Farmer, Consumer
 from products.models import Product
 
 
@@ -74,7 +74,16 @@ class FarmerDashboardView(GroupRequiredMixin, TemplateView):
     
     def get_context_data(self, **kwargs) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
+        farmer = Farmer.objects.get(user=self.request.user)
         context["last_products"] = Product.objects.filter(is_delete=False, farmer=self.request.user).order_by('-created_at')[:5]
+        context["product_count"] = Product.objects.filter(is_delete=False, farmer=self.request.user).count()
+        context['farmer'] = farmer
+        
+        context["order_count"] = FarmerAndConsumerLink.objects.filter(farmer=farmer).count() or 0
+        context['consumer_of_this_farmer_count'] = Consumer.objects.filter(farmerandconsumerlink__farmer=farmer).distinct().count() or 0
+
+            
+        
         return context
     
     

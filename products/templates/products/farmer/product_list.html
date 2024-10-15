@@ -60,7 +60,7 @@
                     <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'src/images/products/product_icon.svg' %}{% endif %}" alt="{{ product.name }}" class="w-12 h-12 bg-primary-700 object-cover rounded-full">
                     <span class="capitalize">{{ product.name }}</span>
                   </p>
-                  <p class="w-36"> {{ product.sub_category.category }} </p>
+                  <p class="w-36"> {{ product.sub_category }} </p>
                   <p class="w-24"> {{ product.quantity }} </p>
                   <p class="w-40">XAF {{ product.price }} </p>
                   <p class="w-44"> {{ product.update_at.date }} </p>
