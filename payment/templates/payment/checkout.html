@@ -98,7 +98,7 @@
                             {{ product.name }}
                         </h4>
                         <p class="text-sm text-primary-600 italic">
-                            {{ product.sub_category.category }}
+                            {{ product.sub_category }}
                         </p>
                     </div>
                 </div>
@@ -128,12 +128,12 @@
                     </h4>
                     <div class="grid grid-cols-2 gap-4">
                         <label onclick="SelectPaymentMethod(this)" class="payment_method border-4 border-primary-800 hover:border-primary-800 transition-all ease-linear  rounded-md border-solid">
-                            <input type="radio" name="payment_method" value="ORANGE" class="hidden" checked>
+                            <input type="radio" name="pay_method" value="ORANGE" class="hidden" checked>
                             <img src="{% static 'src/images/payments/orange_money.png' %}" alt="Orange Money" class="w-full h-32 cursor-pointer object-cover">
                         </label>
                 
                         <label onclick="SelectPaymentMethod(this)" class="payment_method border-4 hover:border-primary-800 transition-all ease-linear rounded-md border-solid">
-                            <input type="radio" name="payment_method" value="MTN" class="hidden">
+                            <input type="radio" name="pay_method" value="MTN" class="hidden">
                             <img src="{% static 'src/images/payments/mtn_momo.jpg' %}" alt="MTN Mobile Money" class="w-full h-32 cursor-pointer object-cover">
                         </label>
                     </div>

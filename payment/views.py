@@ -22,23 +22,25 @@ class OrderView(LoginRequiredMixin, CreateView):
     
     def form_valid(self, form):
         product = get_object_or_404(Product, slug=self.kwargs['slug'])
-        amount = int(product.price * form.cleaned_data.get('product_quantity'))
+        amount = int(product.price * form.instance.product_quantity)
         transaction_id = f"transaction_{product.code}_{datetime.now().timestamp()}"
         consumer = Consumer.objects.get(user=self.request.user)
         farmer = Farmer.objects.get(user=product.farmer)
         payment_number = form.cleaned_data.get('payment_number')
+        payment_method = self.request.POST.get('pay_method')
         
         form.instance.product = product
         form.instance.consumer = consumer.user
         form.instance.amount = amount
         form.instance.transaction_id = transaction_id
         form.instance.payment_number = payment_number
+        form.instance.payment_method = payment_method
         form.save()
         
         operation = PaymentOperation(settings.MESOMB_APPLICATION_KEY, settings.MESOMB_ACCESS_KEY, settings.MESOMB_SECRET_KEY)
         response = operation.make_collect({
             'amount': amount,
-            'service' : 'MTN',
+            'service' : payment_method,
             'payer' : payment_number,
             'date' : datetime.now(),
             'nonce': RandomGenerator.nonce(),

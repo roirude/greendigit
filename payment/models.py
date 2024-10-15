@@ -17,11 +17,6 @@ class Transaction(models.Model):
         ('suspend', 'Suspend'),
     ]
     
-    PAYMENT_METHOD_CHOICES = [
-        ('MTN', 'MTN Mobile Money'),
-        ('ORANGE', 'Orange Money'),
-    ]
-    
     transaction_id = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(unique=True, editable=False, null=True, blank=True)
     product = models.ForeignKey(Product, on_delete=models.DO_NOTHING)
@@ -29,7 +24,7 @@ class Transaction(models.Model):
     product_quantity = models.PositiveIntegerField()
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
-    payment_method = models.CharField(max_length=100, choices=PAYMENT_METHOD_CHOICES, default='MTN')
+    payment_method = models.CharField(max_length=100, default='MTN')
     payment_number = models.CharField(max_length=100, default="237400001019")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
