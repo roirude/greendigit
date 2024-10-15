@@ -8,4 +8,5 @@ urlpatterns = [
     path('fm/products/update/<slug:slug>/', views.ProductUpdateView.as_view(), name='update_product'),
     path('fm/products/delete/<slug:slug>/', views.ProductDeleteView.as_view(), name='delete_product'),
     path('<slug:slug>/', views.ProductDetailView.as_view(), name='detail_product'),
+    path('categories/<slug:slug>/', views.SubCategoryProductListView.as_view(), name='sub_category_detail'),
 ]

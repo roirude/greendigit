@@ -8,6 +8,7 @@ register_components(
     {
         "product_card": "products/components/product_card.html",
         "delete_confirmation" : "products/components/delete_form.html",
+        "category_card" : "products/components/category_card.html",
     },
     register,
 )

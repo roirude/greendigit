@@ -94,20 +94,20 @@ class ProductDetailView(DetailView):
         return get_object_or_404(Product, slug=self.kwargs['slug'])
 
 
-# class SubCategoryProductListView(ListView):
-#     template_name = 'product/sub_category_product_list.html'
-#     context_object_name = 'sub_category_products'
-#     model = Product
+class SubCategoryProductListView(ListView):
+    template_name = 'products/categories/sub_categorie_detail.html'
+    context_object_name = 'sub_category_products'
+    model = Product
     
-#     def get_queryset(self):
-#         sub_category = SubCategory.objects.get(slug=self.kwargs['slug'])
-#         product = Product.objects.filter(is_delete=False, sub_category=sub_category).order_by('-created_at')
-#         return product
+    def get_queryset(self):
+        sub_category = SubCategory.objects.get(slug=self.kwargs['slug'])
+        product = Product.objects.filter(is_delete=False, sub_category=sub_category).order_by('-created_at')
+        return product
     
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['sub_category'] = SubCategory.objects.get(slug=self.kwargs['slug'])
-#         return context
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['sub_category'] = SubCategory.objects.get(slug=self.kwargs['slug'])
+        return context
     
     
 # class FarmerProductListView(ListView):

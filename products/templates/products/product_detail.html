@@ -98,7 +98,7 @@
                 </div>
                 <div class="pt-4">
                     <p class="font-semibold">
-                        <span class="">Category: </span><a href="#" class="text-gray-500 capitalize hover:text-primary-800">{{ product.sub_category }}</a>
+                        <span class="">Category: </span><a href="{% url 'sub_category_detail' product.sub_category.slug %}" class="text-gray-500 capitalize hover:text-primary-800">{{ product.sub_category }}</a>
                     </p>
                 </div>
             </div>

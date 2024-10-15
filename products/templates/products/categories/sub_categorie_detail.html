@@ -31,27 +31,14 @@
     </div>
     <div class="mt-5">
       <div class="mb-10">
-        <h2 class="capitalize font-semibold text-2xl text-gray-600 mb-3">
-          Top products
-        </h2>
+        <h1 class="capitalize font-semibold text-2xl text-gray-600 mb-3">
+          {{ sub_category.name }}
+        </h1>
         <div class="gap-5 grid md:grid-cols-2 lg:grid-cols-4 h-full">
-          {% for product in top_products %}
+          {% for product in sub_category_products %}
             <div class="">
               {% #product_card product=product%}
               {% /product_card %}
-            </div>
-          {% endfor %}
-        </div>
-      </div>
-      <div class="mb-10">
-        <h2 class="capitalize font-semibold text-2xl text-gray-600 mb-3">
-          Top Categories
-        </h2>
-        <div class="gap-5 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
-          {% for sub_category in sub_categories %}
-            <div>
-              {% #category_card sub_category=sub_category%}
-              {% /category_card %}
             </div>
           {% endfor %}
         </div>

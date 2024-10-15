@@ -1,0 +1,10 @@
+{% load static %}
+
+<div class=" bg-white p-5 rounded-md relative hover:shadow-md hover:shadow-primary-700 transition-shadow ease-linear">
+    <a href="{% url 'sub_category_detail' sub_category.slug %}">
+        <img src="{% if sub_category.image %}{{ sub_category.image.url }}{% else %}{% endif %}" alt="{{ sub_category.name }}" class="w-full h-40 object-cover rounded-lg">
+    </a>
+    <div>
+        <h3 class="text-lg font-semibold mt-4 capitalize"><a href="{% url 'sub_category_detail' sub_category.slug %}">{{ sub_category.name }}</a></h3>
+    </div>
+</div>
