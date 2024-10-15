@@ -1,5 +1,5 @@
 {% load static %}
-<div class="bg-white md:max-w-sm shadow-md hover:shadow-primary-800 transition-shadow ease-linear w-96">
+<div class="bg-white shadow-md hover:shadow-primary-800 transition-shadow ease-linear ">
     <a href="{% url 'farmer_detail' farmer.slug %}" class="">
         {% if farmer.cover %}
         <img src="{{ farmer.cover.url }}" alt="{{ farmer.firstname }}" class="min-w-full h-56 object-cover">

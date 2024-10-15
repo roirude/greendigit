@@ -23,16 +23,6 @@ def index(request):
 class StoreView(ListView):
     model = Product
     template_name = 'greendigit/store.html'
-    paginate_by = 50
-    
-    def get_queryset(self):
-        products = Product.objects.filter(is_delete=False).order_by('-created_at')
-        search_query = self.request.GET.get('search')
-        if search_query:
-            products = Product.objects.filter(is_delete=False, name__icontains=search_query)
-            if not products:
-                products = Product.objects.filter(is_delete=False).order_by('-created_at')
-        return products
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -41,6 +31,12 @@ class StoreView(ListView):
         context['top_products'] = Product.objects.filter(id__in=Subquery(subquery)).distinct()[:8]
         
         context['sub_categories'] = SubCategory.objects.annotate(product_count=Count('product')).filter(product_count__gt=0)
+        
+        search_query = self.request.GET.get('search')
+        if search_query:
+            context['product_search'] = Product.objects.filter(is_delete=False, name__icontains=search_query)
+        
+        context['products'] = Product.objects.filter(is_delete=False).order_by('?')[:20]
 
         return context
     
@@ -51,11 +47,11 @@ class FarmerStoreView(LoginRequiredMixin, ListView):
     paginate_by = 60
     
     def get_queryset(self):
-        farmers = CustomUser.objects.filter(is_farmer=True)
+        farmers = CustomUser.objects.filter(is_farmer=True).order_by('?')
         search_query = self.request.GET.get('search')
         if search_query:
             farmers = CustomUser.objects.filter(is_farmer=True, first_name__icontains=search_query)
             if not farmers:
-                farmers = CustomUser.objects.filter(is_farmer=True)
+                farmers = CustomUser.objects.filter(is_farmer=True).order_by('?')
         return farmers
     

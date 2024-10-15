@@ -16,7 +16,7 @@
         </div>
         <a href="#" class=""><span class="material-symbols-outlined font-bold text-3xl bg-primary-500 rounded-md p-2 hover:bg-primary-700 hover:text-white transition-all ease-linear">Tune</span></a>
     </div>
-    <div class="flex gap-5 mt-5">
+    <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-5 mt-5">
        {% for farmer in page_obj  %}
         {% #farmer farmer=farmer %}{% /farmer %}
        {% endfor %}

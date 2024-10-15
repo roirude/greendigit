@@ -30,7 +30,7 @@
       <a href="#" class=""><span class="material-symbols-outlined font-bold text-3xl bg-primary-500 rounded-md p-2 hover:bg-primary-700 hover:text-white transition-all ease-linear">Tune</span></a>
     </div>
     <div class="mt-5">
-      <div class="mb-10">
+      <div class="mb-16">
         <h2 class="capitalize font-semibold text-2xl text-gray-600 mb-3">
           Top products
         </h2>
@@ -43,7 +43,7 @@
           {% endfor %}
         </div>
       </div>
-      <div class="mb-10">
+      <div class="mb-16">
         <h2 class="capitalize font-semibold text-2xl text-gray-600 mb-3">
           Top Categories
         </h2>
@@ -56,6 +56,18 @@
           {% endfor %}
         </div>
       </div>
+      <div class="mb-16">
+        <h2 class="capitalize font-semibold text-2xl text-gray-600 mb-3">
+          Recents products
+        </h2>
+        <div class="gap-5 grid md:grid-cols-2 lg:grid-cols-4 h-full">
+          {% for product in products %}
+            <div>
+              {% #product_card product=product%}
+              {% /product_card %}
+            </div>
+          {% endfor %}
+        </div>
       {% comment %} {% if page_obj.has_previous or page_obj.has_next %}
       <div class="flex bg-white mt-3 p-3 items-center justify-center rounded-lg shadow-lg">
         <div class="">
