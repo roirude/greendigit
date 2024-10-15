@@ -8459,6 +8459,10 @@ html:has(.drawer-open.drawer-open) {
   margin-bottom: 2.5rem;
 }
 
+.mb-16 {
+  margin-bottom: 4rem;
+}
+
 .mb-2 {
   margin-bottom: 0.5rem;
 }
@@ -8513,14 +8517,6 @@ html:has(.drawer-open.drawer-open) {
 
 .mt-8 {
   margin-top: 2rem;
-}
-
-.mb-1 {
-  margin-bottom: 0.25rem;
-}
-
-.mb-16 {
-  margin-bottom: 4rem;
 }
 
 .box-border {
@@ -8720,10 +8716,6 @@ html:has(.drawer-open.drawer-open) {
 
 .w-72 {
   width: 18rem;
-}
-
-.w-96 {
-  width: 24rem;
 }
 
 .w-\[this-is\\\\\] {
@@ -11348,10 +11340,6 @@ html:has(.drawer-open.drawer-open) {
 
   .md\:w-full {
     width: 100%;
-  }
-
-  .md\:max-w-sm {
-    max-width: 24rem;
   }
 
   .md\:flex-1 {
