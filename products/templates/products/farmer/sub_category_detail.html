@@ -1,0 +1,132 @@
+{% extends 'users/farmers/farmer_pannel_base.html' %}
+{% load static %}
+{% load products %}
+
+{% block pannel_section %}
+
+<div class="mb-5 flex justify-between items-center gap-4 lg:gap-40 flex-col md:flex-row">
+    <div class="flex flex-1 items-center justify-between gap-2 bg-white rounded-md py-1 px-2 w-full">
+        <div class="w-full"><input type="search" name="search" id="search" placeholder="search" class="bg-white  max-w-72 input input-bordered min-w-full"></div>
+        <button type="submit">
+            <span class="material-symbols-outlined text-white bg-primary-700 font-bold p-2 rounded-md hover:bg-primary-990 transition-colors ease-linear">
+                search
+            </span>
+        </button>
+    </div>
+    <a href="{% url 'add_product' %}" class="btn btn-primary w-full md:w-auto">
+        <span class="material-symbols-outlined">add_box</span>
+        <span>Add products</span>
+    </a>
+</div>
+{% if messages %}
+{% for message in messages %}
+<div id="message" class="bg-primary-600 py-3 px-5 mb-4 text-gray-800 font-medium rounded-md flex items-center justify-between">
+  <p class="text-white">{{ message }}</p>
+  
+  <a href="" onclick="closeMessagePopUp()">
+    <span class="material-symbols-outlined text-red-700 text-3xl font-bold">
+      cancel
+    </span>
+  </a>
+</div>
+{% endfor %}
+{% endif %}
+  <div class="mt-8 bg-white shadow-lg p-5 rounded-lg">
+    {% if farmer_sub_category_products %}
+        <div class="pt-1 overflow-x-auto max-h-[22.5rem] ">
+            <div class="inline-block min-w-full pr-5">
+              <div class="border-b-2 py-5 flex justify-between font-bold">
+                <p class="w-72">Product</p>
+                <p class="w-36">Category</p>
+                <p class="w-24">Quantity</p>
+                <p class="w-40">Price</p>
+                <p class="w-44">Last Update</p>
+                <ul class="flex gap-x-3">
+                  Actions
+                </ul>
+              </div>
+            </div>
+            <div class="">
+              {% for product in farmer_sub_category_products %}
+              {% comment %} Delete form {% endcomment %}
+              <div id="deleteModal" class="hidden">
+                {% comment %} {% url 'delete_product' product.slug as delete_product_url %} {% endcomment %}
+                {% #delete_confirmation name=product.name delete_url=delete_product_url %}
+                {% /delete_confirmation %}
+              </div>
+              <div class="inline-block min-w-full pr-5 ">
+                <div class="border-b-2 py-5 flex justify-between">
+                  <p class="w-72 flex items-center gap-x-4">
+                    <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'src/images/products/product_icon.svg' %}{% endif %}" alt="{{ product.name }}" class="w-12 h-12 bg-primary-700 object-cover rounded-full">
+                    <span class="capitalize">{{ product.name }}</span>
+                  </p>
+                  <p class="w-36"> {{ product.sub_category }} </p>
+                  <p class="w-24"> {{ product.quantity }} </p>
+                  <p class="w-40">XAF {{ product.price }} </p>
+                  <p class="w-44"> {{ product.update_at.date }} </p>
+                  <ul class="flex gap-x-3">
+                    <li>
+                      <a href="{% url 'update_product' product.slug %}"><span class="material-symbols-outlined text-blue-500 font-light">update</span></a>
+                    </li>
+                    <li>
+                      <a href="#" onclick="openPopup('{{ product.name }}', '{% url 'delete_product' product.slug %}')"><span class="material-symbols-outlined text-red-500 font-light">delete</span></a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        {% else %}
+        <div class="flex flex-col items-center justify-center h-72">
+          <div class="text-center">
+            <h4>You haven't added any products yet.</h4>
+            <div class="mt-4">
+              <a href="{% url 'add_product' %}" class="btn btn-primary">Add products</a>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+  </div>
+  <div class="flex bg-white mt-3 p-3 items-center justify-center rounded-lg shadow-lg">
+    <div class="">
+        {% if page_obj.has_previous %}
+        <div class="flex items-center justify-center gap-10">
+          <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-primary">
+            <span class="material-symbols-outlined">
+              arrow_back_ios_new
+            </span>
+          </a>
+          <p class="btn btn-disabled">
+            {{ page_obj.number }}
+          </p>
+          <a href="?page={{ page_obj.paginator.num_pages }}" class="btn">{{ page_obj.paginator.num_pages }}</a>
+          <a href="" class="btn btn-primary">
+              <span class="material-symbols-outlined">
+                arrow_forward_ios
+                </span>
+          </a>
+        </div>
+        {% endif %}
+        {% if page_obj.has_next %}
+        <div class="flex items-center justify-center gap-10">
+          <a class="btn btn-primary">
+            <span class="material-symbols-outlined">
+              arrow_back_ios_new
+            </span>
+          </a>
+          <p class="btn btn-disabled">
+            {{ page_obj.number }}
+          </p>
+          <a href="?page={{ page_obj.paginator.num_pages }}" class="btn">{{ page_obj.paginator.num_pages }}</a>
+          <a href="?page={{ page_obj.next_page_number }}" class="btn btn-primary">
+              <span class="material-symbols-outlined">
+                arrow_forward_ios
+                </span>
+          </a>
+        </div>
+        {% endif %}
+      </span>
+    </div>
+  </div>
+{% endblock pannel_section %}

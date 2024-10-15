@@ -1,0 +1,35 @@
+{% extends 'users/farmers/farmer_pannel_base.html' %}
+{% load static %}
+{% load products %}
+
+{% block pannel_section %}
+
+{% if messages %}
+{% for message in messages %}
+<div id="message" class="bg-primary-600 py-3 px-5 mb-4 text-gray-800 font-medium rounded-md flex items-center justify-between">
+  <p class="text-white">{{ message }}</p>
+  <a href="" onclick="closeMessagePopUp()">
+    <span class="material-symbols-outlined text-red-700 text-3xl font-bold">
+      cancel
+    </span>
+  </a>
+</div>
+{% endfor %}
+{% endif %}
+<div class="mt-8 p-5">
+    <div class="gap-5 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+        {% for sub_category in sub_categories %}
+          <div>
+            <div class=" bg-white p-5 rounded-md relative hover:shadow-md hover:shadow-primary-700 transition-shadow ease-linear">
+                <a href="{% url 'farmer_sub_category_detail' fm_slug=request.user.slug slug=sub_category.slug %}">
+                    <img src="{% if sub_category.image %}{{ sub_category.image.url }}{% else %}{% endif %}" alt="{{ sub_category.name }}" class="w-full h-40 object-cover rounded-lg">
+                </a>
+                <div>
+                    <h3 class="text-lg font-semibold mt-4 capitalize"><a href="{% url 'farmer_sub_category_detail' fm_slug=request.user.slug slug=sub_category.slug %}">{{ sub_category.name }}</a></h3>
+                </div>
+            </div>
+          </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock pannel_section %}

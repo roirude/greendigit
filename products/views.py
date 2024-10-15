@@ -6,6 +6,7 @@ from django.http import JsonResponse
 from django.views import View
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.db.models import Count
 
 from products.models import Product, Category, SubCategory
 from users.models import CustomUser
@@ -81,7 +82,7 @@ class ProductDeleteView(GroupRequiredMixin, RedirectView):
         product.save()
         messages.success(self.request, f"Product '{product.name}' deleted succesfully!")
         slug = self.request.user.slug
-        redirect_url = reverse(self.pattern_name)
+        redirect_url = reverse(self.pattern_name, kwargs={'slug':slug})
         return redirect_url
 
 
@@ -110,18 +111,30 @@ class SubCategoryProductListView(ListView):
         return context
     
     
-# class FarmerProductListView(ListView):
-#     template_name = 'product/farmer_product_list.html'
-#     context_object_name = 'farmer_product_list'
-#     model = Product
-#     paginator_class = Paginator
-#     paginate_by = 9
+class FarmerSubCategoryListView(GroupRequiredMixin, ListView):
+    template_name = 'products/farmer/sub_category_list.html'
+    context_object_name = 'sub_categories'
+    model = SubCategory
+    group_required = 'Farmers'
     
-#     def get_queryset(self):
-#         products = super().get_queryset()
-#         farmer = User.objects.get(slug=self.kwargs['slug'])
-#         products = Product.objects.filter(is_delete=False, farmer=farmer).order_by('-created_at')
-#         return products
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['sub_categories'] = SubCategory.objects.annotate(product_count=Count('product')).filter(product_count__gt=0, product__farmer=self.request.user)
+        return context
+    
+
+class FarmerSubCategoryProductListView(GroupRequiredMixin, ListView):
+    template_name = 'products/farmer/sub_category_detail.html'
+    model = Product
+    context_object_name = 'farmer_sub_category_products'
+    group_required = 'Farmers'
+    
+    def get_queryset(self):
+        sub_category = SubCategory.objects.get(slug=self.kwargs['slug'])
+        products = Product.objects.filter(is_delete=False, sub_category=sub_category, farmer=self.request.user).order_by('-created_at')
+        return products
+    
+
 
 
 # class GetSubcategoriesView(View):
