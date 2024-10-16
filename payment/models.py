@@ -86,3 +86,11 @@ class Delivery(models.Model):
     delivry_code = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     status = models.CharField(max_length=50, default='pending')
     created_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return f"Delivery for {self.receipt_id}"
+    
+    def save(self, *args, **kwargs):
+        delivery_slug = 'GREEN-DVR-' + str(self.receipt_id)
+        self.slug = slugify(delivery_slug)
+        super(Delivery, self).save(*args, **kwargs)

@@ -10,7 +10,7 @@ from django.urls import reverse, reverse_lazy
 from pymesomb.operations import PaymentOperation
 from pymesomb.utils import RandomGenerator
 
-from payment.models import Transaction, Refund, Receipt
+from payment.models import Transaction, Refund, Receipt, Delivery
 from products.models import Product
 from users.models import CustomUser, Farmer, FarmerAndConsumerLink, Consumer
 from payment.forms import TransactionForm
@@ -57,7 +57,9 @@ class OrderView(LoginRequiredMixin, CreateView):
             farmer.save()
             
             transaction = get_object_or_404(Transaction, transaction_id=transaction_id)
-            Receipt.objects.create(transaction=transaction)
+            receipt = Receipt.objects.create(transaction=transaction)
+            
+            Delivery.objects.create(receipt_id=receipt)
             
             messages.success(self.request, f"Payment successfully completed")
         else:
@@ -89,6 +91,8 @@ class ReceiptDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         receipt = get_object_or_404(Receipt,slug=self.kwargs['slug'])
+        delivry = Delivery.objects.get(receipt_id=receipt)
+        context['delivery_code'] = delivry.delivry_code
         context["product"] = receipt.transaction.product
         context['transaction'] = receipt.transaction
         return context
