@@ -19,7 +19,7 @@
             <span class="material-symbols-outlined">category</span>
             <p class="">Categories</p>
           </a>
-          <a href="#" class="flex items-center gap-x-2 py-4 px-2 rounded-lg hover:bg-primary-800 font-bold hover:text-white transition-all ease-in-out delay-100">
+          <a href="{% url 'farmer_orders' request.user.slug %}" class="flex items-center gap-x-2 py-4 px-2 rounded-lg hover:bg-primary-800 font-bold hover:text-white transition-all ease-in-out delay-100">
             <span class="material-symbols-outlined">sell</span>
             <p class="">Sell</p>
           </a>

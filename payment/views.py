@@ -11,9 +11,13 @@ from pymesomb.operations import PaymentOperation
 from pymesomb.utils import RandomGenerator
 
 from payment.models import Transaction, Refund, Receipt, Delivery
-from products.models import Product
-from users.models import CustomUser, Farmer, FarmerAndConsumerLink, Consumer
 from payment.forms import TransactionForm
+
+from products.models import Product
+
+from users.models import CustomUser, Farmer, FarmerAndConsumerLink, Consumer
+from users.mixins import GroupRequiredMixin
+
 
 
 class OrderView(LoginRequiredMixin, CreateView):
@@ -108,5 +112,9 @@ class ReceiptListView(ListView):
         receipts = Receipt.objects.filter(transaction__consumer=user)
         return receipts
     
-    
-        
+
+class FarmerDeliveryListView(GroupRequiredMixin, ListView):
+    group_required = 'Farmers'
+    template_name = 'payment/farmer/delivery_list.html'
+    model = Delivery
+    context_object_name = 'deliveries'
