@@ -78,3 +78,11 @@ class Receipt(models.Model):
             
         self.slug = slugify(self.receipt_id)
         super(Receipt, self).save(*args, **kwargs)
+        
+
+class Delivery(models.Model):
+    slug = models.SlugField(unique=True, editable=False)
+    receipt_id = models.ForeignKey(Receipt, on_delete=models.CASCADE)
+    delivry_code = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    status = models.CharField(max_length=50, default='pending')
+    created_at = models.DateTimeField(auto_now_add=True)

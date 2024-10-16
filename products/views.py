@@ -133,20 +133,6 @@ class FarmerSubCategoryProductListView(GroupRequiredMixin, ListView):
         sub_category = SubCategory.objects.get(slug=self.kwargs['slug'])
         products = Product.objects.filter(is_delete=False, sub_category=sub_category, farmer=self.request.user).order_by('-created_at')
         return products
-    
 
 
 
-# class GetSubcategoriesView(View):
-#     def get(self, request, *args, **kwargs):
-#         if request.is_ajax():
-#             category_id = request.GET.get('category_id')
-#             if category_id:
-#                 try:
-#                     subcategories = SubCategory.objects.filter(category_id=category_id)
-#                     data = [{'id': subcategory.id, 'name': subcategory.name} for subcategory in subcategories]
-#                     return JsonResponse(data, safe=False)
-#                 except SubCategory.DoesNotExist:
-#                     return JsonResponse({'error': 'Subcategories not found for the given category id.'}, status=404)
-#         return JsonResponse({'error': 'Invalid request.'}, status=400)
-    
