@@ -10,6 +10,8 @@ from django.urls import reverse, reverse_lazy
 from pymesomb.operations import PaymentOperation
 from pymesomb.utils import RandomGenerator
 
+from twilio.rest import Client
+
 from payment.models import Transaction, Refund, Receipt, Delivery
 from payment.forms import TransactionForm
 
@@ -65,6 +67,15 @@ class OrderView(LoginRequiredMixin, CreateView):
             
             Delivery.objects.create(receipt_id=receipt)
             
+            account_sid = settings.ACCOUNT_SID
+            auth_token = settings.AUTH_TOKEN
+            client = Client(account_sid, auth_token)
+            message = client.messages.create(
+                 from_=settings.SENDER_NUMBER,
+                 body=f'New Order: {receipt.receipt_id}\nConsumer: {consumer.user.fullname}\n Product: {product.name}\nQuantity: {form.instance.product_quantity}\nAmout: XAF {amount}\nLog in to your account for more details: http://127.0.0.1:8000',
+                to='+237656484013',
+             )
+            
             messages.success(self.request, f"Payment successfully completed")
         else:
             form.instance.status = 'failed'
@@ -118,3 +129,4 @@ class FarmerDeliveryListView(GroupRequiredMixin, ListView):
     template_name = 'payment/farmer/delivery_list.html'
     model = Delivery
     context_object_name = 'deliveries'
+    

@@ -238,3 +238,9 @@ load_dotenv()
 MESOMB_ACCESS_KEY = os.getenv('MESOMB_ACCESS_KEY')
 MESOMB_SECRET_KEY = os.getenv('MESOMB_SECRET_KEY')
 MESOMB_APPLICATION_KEY = os.getenv('MESOMB_APPLICATION_KEY')
+
+
+# Twilio API Messaging Service
+ACCOUNT_SID = os.getenv('ACCOUNT_SID')
+AUTH_TOKEN = os.getenv('AUTH_TOKEN')
+SENDER_NUMBER = os.getenv('SENDER_NUMBER')
