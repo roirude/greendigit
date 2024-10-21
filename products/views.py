@@ -8,10 +8,10 @@ from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Count
 
-from products.models import Product, Category, SubCategory
+from products.models import Product, Category, SubCategory, Review
 from users.models import CustomUser
 from users.mixins import GroupRequiredMixin
-from products.forms import ProductForm
+from products.forms import ProductForm, ProductReviewForm
 
     
 class FarmerProductListView(GroupRequiredMixin, ListView):
@@ -94,6 +94,28 @@ class ProductDetailView(DetailView):
     def get_object(self, queryset=None):
         return get_object_or_404(Product, slug=self.kwargs['slug'])
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['reviews'] = Review.objects.filter(product=self.get_object())
+        context['review_form'] = ProductReviewForm()
+        return context
+    
+    def post(self, request, *args, **kwargs):
+        product = self.get_object()
+        form = ProductReviewForm(request.POST)
+        
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.consumer = request.user
+            review.product = product
+            review.save()
+            messages.success(request, f"Thanks for your review!")
+            return redirect(reverse('detail_product', kwargs={'slug':product.slug}))
+        
+        context = self.get_context_data()
+        context['review_form'] = form
+        return self.render_to_response(context)
+        
 
 class SubCategoryProductListView(ListView):
     template_name = 'products/categories/sub_categorie_detail.html'
@@ -133,6 +155,7 @@ class FarmerSubCategoryProductListView(GroupRequiredMixin, ListView):
         sub_category = SubCategory.objects.get(slug=self.kwargs['slug'])
         products = Product.objects.filter(is_delete=False, sub_category=sub_category, farmer=self.request.user).order_by('-created_at')
         return products
+    
 
 
 

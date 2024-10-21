@@ -8,3 +8,9 @@ class ProductForm(ModelForm):
         model = models.Product
         fields = '__all__'
         exclude = ['slug', 'is_stock', 'is_delete', 'farmer', 'created_at', 'update_at']
+
+
+class ProductReviewForm(ModelForm):
+    class Meta:
+        model = models.Review
+        fields = ['message',]

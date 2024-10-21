@@ -4,6 +4,7 @@ from django.db import models
 from django.utils.text import slugify
 
 from users.models import CustomUser as Farmer
+from users.models import CustomUser as Consumer
 
 
 class Category(models.Model):
@@ -62,3 +63,19 @@ class Product(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.code)
         return super(Product, self).save(*args, **kwargs)
+    
+
+class Review(models.Model):
+    code = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    slug = models.SlugField(unique=True)
+    message = models.TextField()
+    consumer = models.ForeignKey(Consumer, on_delete=models.DO_NOTHING)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return self.code
+    
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.code)
+        return super(Review, self).save(*args, **kwargs)
