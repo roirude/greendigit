@@ -57,7 +57,7 @@
               <div class="inline-block min-w-full pr-5 ">
                 <div class="border-b-2 py-5 flex justify-between">
                   <p class="w-72 flex items-center gap-x-4">
-                    <span class="capitalize">{{ delivery.receipt_id.receipt_id }}</span>
+                    <a class="capitalize hover:underline" href="{% url 'receipt' delivery.receipt_id.slug %}">{{ delivery.receipt_id.receipt_id }}</a>
                   </p>
                   <p class="w-36"> {{ delivery.receipt_id.transaction.product.name }} </p>
                   <p class="w-24"> {{ delivery.receipt_id.transaction.product_quantity }} </p>

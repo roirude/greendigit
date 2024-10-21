@@ -36,9 +36,11 @@
         </button>
       </h1>
     </div>
+    {% if user.is_farmer == False %}
     <div>
       Delivery Code : <span><strong><small>{{ delivery_code }}</small></strong></span>
     </div>
+    {% endif %}
     <div>
       <a href="{% url 'index' %}" class="logo">
         <img
