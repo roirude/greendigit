@@ -1,0 +1,57 @@
+{% extends 'green_section.html' %}
+{% load static %}
+{% load i18n %}
+{% load allauth_ui %}
+{% load widget_tweaks %}
+
+{% block green_section %}
+<div class="">
+    {% if messages %}
+      {% for message in messages %}
+      <div id="message" class="bg-primary-600 py-3 px-5 mb-4 text-gray-800 font-medium rounded-md flex items-center justify-between">
+        <p class="text-white">{{ message }}</p>
+        <a href="" onclick="closeMessagePopUp()">
+          <span class="material-symbols-outlined text-red-700 text-3xl font-bold">
+            cancel
+          </span>
+        </a>
+      </div>
+      {% endfor %}
+    {% endif %}
+    <div class="bg-white rounded-lg text-center">
+        <div class="w-full h-40 md:h-56 lg:h-64 rounded-lg">
+            <img src="{% static 'src/images/users/cover.jpg' %}" alt="" class="w-full h-full object-cover rounded-lg">
+        </div>
+        <div class="py-4">
+            <div class="flex flex-col items-center justify-center">
+                {% if user.avatar %}
+                <img src="{{ user.avatar.url }}" alt="user.avatar.email" class="w-24 h-24 rounded-full object-cover">
+                {% else %}
+                <div class=" hover:cursor-pointer uppercase font-bold bg-primary-500 hover:bg-primary-400 w-24 h-24 flex items-center justify-center text-5xl rounded-full">
+                    {{ user.email|slice:"1" }}
+                </div>
+                {% endif %}
+                <div class="pt-4">
+                    <h3 class="font-semibold">{{ user.email }}</h3>
+                    <p class="text-center text-sm">{{ user.description }}</p>
+                    <div class="pt-4">
+                        <a href="{% url 'account_change_password' %}" class="btn btn-warning">change Password</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="">
+       
+        <div class="w-full">
+            {% trans "Edit Profile" as heading %}
+            {% #container heading=heading  %}
+                {% #form form=form url="" button_text=heading %}
+                {{ redirect_field }}
+                {% csrf_token %}
+                {% /form %}
+            {% /container %}
+        </div>
+    </div>
+</div>
+{% endblock green_section %}

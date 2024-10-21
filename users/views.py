@@ -129,6 +129,12 @@ class UserEditProfileView(UpdateView):
         context['user']=user
         return context
     
+    def get_template_names(self):
+        template_name = super().get_template_names()
+        if self.request.user.is_farmer == False:
+            template_name = 'users/consumer_edit_profile.html'
+        return template_name
+    
 
 class FarmerDetailView(LoginRequiredMixin, DetailView):
     model = CustomUser
