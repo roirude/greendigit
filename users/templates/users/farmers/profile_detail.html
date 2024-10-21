@@ -1,5 +1,6 @@
 {% extends 'green_section.html' %}
 {% load static %}
+{% load users %}
 
 {% block green_section %}
 <div class="space-y-8">
@@ -23,7 +24,7 @@
                     {% endif %}
                 </div>
                 <h2 class="font-semibold text-xl">
-                    {{ farmer.email }}
+                    {{ farmer.email|mask_email }}
                 </h2>
                 <div class="flex items-center text-primary-700 font-semibold">
                     <span class="material-symbols-outlined">

@@ -1,5 +1,6 @@
 {% load compress %}
 {% load static %}
+{% load users %}
  
 <!DOCTYPE html>
 <html lang="en">
@@ -94,7 +95,7 @@
             <div
               class="info"
             >
-              {{ user.email }}
+              {{ user.email|mask_email }}
             </div>
           </div>
           <div>
@@ -225,7 +226,7 @@
                 <div
                   class="info"
                 >
-                  {{ product.farmer.email }}
+                  {{ product.farmer.email|mask_email }}
                 </div>
             </div>
             <div>
