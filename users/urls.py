@@ -10,4 +10,5 @@ urlpatterns = [
     path("choose_your_profile/", views.choose_user_type, name="choose_your_social_profile"),
     path('account/<slug:slug>/edit/', views.UserEditProfileView.as_view(), name='edit_profile'),
     path('farmers/<slug:slug>/', views.FarmerDetailView.as_view(), name='farmer_detail'),
+    path('fm/consumers', views.FarmerConsumerListView.as_view(), name='famer_consumer_list'),
 ]

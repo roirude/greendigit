@@ -1,6 +1,6 @@
 from typing import Any
 from django.shortcuts import render, redirect
-from django.views.generic import TemplateView, UpdateView, DetailView
+from django.views.generic import TemplateView, UpdateView, DetailView, ListView
 from django.contrib.auth.models import Group
 from django.urls import reverse, reverse_lazy
 from django.views import View
@@ -146,4 +146,18 @@ class FarmerDetailView(LoginRequiredMixin, DetailView):
         farmer = CustomUser.objects.get(slug=self.kwargs['slug'])
         context["farmer_products"] = Product.objects.filter(is_delete=False, farmer=farmer).order_by('-created_at')[:4]
         return context
+    
+
+class FarmerConsumerListView(GroupRequiredMixin, ListView):
+    group_required = 'Farmers'
+    template_name = 'users/farmers/consumer_list.html'
+    model = Consumer
+    
+    def get_context_data(self, **kwargs) -> dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        farmer = Farmer.objects.get(user=self.request.user)
+        context['consumers'] = Consumer.objects.filter(farmerandconsumerlink__farmer=farmer).distinct()
+        return context
+    
+    
     
