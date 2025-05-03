@@ -8491,6 +8491,10 @@ html:has(.drawer-open.drawer-open) {
   margin-left: 0.5rem;
 }
 
+.mr-2 {
+  margin-right: 0.5rem;
+}
+
 .mr-4 {
   margin-right: 1rem;
 }
@@ -8525,14 +8529,6 @@ html:has(.drawer-open.drawer-open) {
 
 .mt-8 {
   margin-top: 2rem;
-}
-
-.mr-6 {
-  margin-right: 1.5rem;
-}
-
-.mr-2 {
-  margin-right: 0.5rem;
 }
 
 .box-border {
@@ -9350,12 +9346,12 @@ html:has(.drawer-open.drawer-open) {
   gap: 1.25rem;
 }
 
-.gap-7 {
-  gap: 1.75rem;
-}
-
 .gap-6 {
   gap: 1.5rem;
+}
+
+.gap-7 {
+  gap: 1.75rem;
 }
 
 .gap-x-1 {
@@ -9458,12 +9454,6 @@ html:has(.drawer-open.drawer-open) {
   --tw-divide-y-reverse: 0;
   border-top-width: calc(2px * calc(1 - var(--tw-divide-y-reverse)));
   border-bottom-width: calc(2px * var(--tw-divide-y-reverse));
-}
-
-.divide-x-2 > :not([hidden]) ~ :not([hidden]) {
-  --tw-divide-x-reverse: 0;
-  border-right-width: calc(2px * var(--tw-divide-x-reverse));
-  border-left-width: calc(2px * calc(1 - var(--tw-divide-x-reverse)));
 }
 
 .divide-y-reverse > :not([hidden]) ~ :not([hidden]) {
